@@ -139,10 +139,11 @@
       <file leaf-file-name="docker.go" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/cmd/docker/docker.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="49" column="8" selection-start-line="49" selection-start-column="8" selection-end-line="49" selection-end-column="8" />
+            <state relative-caret-position="171">
+              <caret line="48" column="9" selection-start-line="48" selection-start-column="9" selection-end-line="48" selection-end-column="9" />
               <folding>
                 <element signature="e#14#439#0" expanded="true" />
+                <marker date="1475656491938" expanded="true" signature="646:1335" placeholder="{...}" />
               </folding>
             </state>
           </provider>
@@ -1349,10 +1350,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/cmd/docker/docker.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="49" column="8" selection-start-line="49" selection-start-column="8" selection-end-line="49" selection-end-column="8" />
+        <state relative-caret-position="171">
+          <caret line="48" column="9" selection-start-line="48" selection-start-column="9" selection-end-line="48" selection-end-column="9" />
           <folding>
             <element signature="e#14#439#0" expanded="true" />
+            <marker date="1475656491938" expanded="true" signature="646:1335" placeholder="{...}" />
           </folding>
         </state>
       </provider>
