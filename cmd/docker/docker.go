@@ -47,6 +47,7 @@ func newDockerCommand(dockerCli *command.DockerCli) *cobra.Command {
 			return dockerCli.Initialize(opts)
 		},
 	}
+	
 	//设置默认的处理方式
 	cli.SetupRootCommand(cmd)
         //为主命令添加选项
