@@ -18,9 +18,11 @@ import (
 )
 
 func newDockerCommand(dockerCli *command.DockerCli) *cobra.Command {
+	//选项结构对象，之后通过传入的选项选项参数进行填充
 	opts := cliflags.NewClientOptions()
+	//选项集合
 	var flags *pflag.FlagSet
-
+       //定义主命令
 	cmd := &cobra.Command{
 		Use:              "docker [OPTIONS] COMMAND [arg...]",
 		Short:            "A self-sufficient runtime for containers.",
@@ -36,22 +38,29 @@ func newDockerCommand(dockerCli *command.DockerCli) *cobra.Command {
 			fmt.Fprintf(dockerCli.Err(), "\n"+cmd.UsageString())
 			return nil
 		},
+		//在run之前执行
 		PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
 			// flags must be the top-level command flags, not cmd.Flags()
 			opts.Common.SetDefaultOptions(flags)
 			dockerPreRun(opts)
+			//初始化一个client
 			return dockerCli.Initialize(opts)
 		},
 	}
+	//设置默认的处理方式
 	cli.SetupRootCommand(cmd)
-
+        //为主命令添加选项
 	flags = cmd.Flags()
 	flags.BoolVarP(&opts.Version, "version", "v", false, "Print version information and quit")
 	flags.StringVar(&opts.ConfigDir, "config", cliconfig.ConfigDir(), "Location of client config files")
+	//为主命令添加公共选项
 	opts.Common.InstallFlags(flags)
-
+        //设置命令的输入
 	cmd.SetOutput(dockerCli.Out())
+	//添加daemon选项，其实已经作废了，应为新代码已经将客户端和服务端守护进程命令分开了，不需要这个选项区分启动客户端还是服务端
 	cmd.AddCommand(newDaemonCommand())
+	// AddCommands adds all the commands from cli/command to the root command
+	//添加子命令及子命令的选项
 	commands.AddCommands(cmd, dockerCli)
 
 	return cmd
@@ -71,8 +80,9 @@ func main() {
 	logrus.SetOutput(stderr)
 
 	dockerCli := command.NewDockerCli(stdin, stdout, stderr)
+	//主命令
 	cmd := newDockerCommand(dockerCli)
-
+       //执行命令
 	if err := cmd.Execute(); err != nil {
 		if sterr, ok := err.(cli.StatusError); ok {
 			if sterr.Status != "" {
@@ -104,7 +114,7 @@ func dockerPreRun(opts *cliflags.ClientOptions) {
 	if opts.ConfigDir != "" {
 		cliconfig.SetConfigDir(opts.ConfigDir)
 	}
-
+        // 调试选项
 	if opts.Common.Debug {
 		utils.EnableDebug()
 	}

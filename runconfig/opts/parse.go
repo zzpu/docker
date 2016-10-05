@@ -559,7 +559,7 @@ func Parse(flags *pflag.FlagSet, copts *ContainerOptions) (*container.Config, *c
 
 	hostConfig := &container.HostConfig{
 		Binds:           binds,
-		ContainerIDFile: copts.containerIDFile,
+		ContainerIDFile: copts.containerIDFile,//IDFile
 		OomScoreAdj:     copts.oomScoreAdj,
 		AutoRemove:      copts.autoRemove,
 		Privileged:      copts.privileged,

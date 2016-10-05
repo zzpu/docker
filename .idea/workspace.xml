@@ -1,0 +1,1364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="6d223c18-03be-4f0c-8706-6c7900cfc78a" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/GOPATH__docker_.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cli/command/cli.go" afterPath="$PROJECT_DIR$/cli/command/cli.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cli/command/container/create.go" afterPath="$PROJECT_DIR$/cli/command/container/create.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cli/command/container/run.go" afterPath="$PROJECT_DIR$/cli/command/container/run.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cli/command/image/list.go" afterPath="$PROJECT_DIR$/cli/command/image/list.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmd/docker/docker.go" afterPath="$PROJECT_DIR$/cmd/docker/docker.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contrib/builder/deb/amd64/build.sh" afterPath="$PROJECT_DIR$/contrib/builder/deb/amd64/build.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contrib/builder/deb/amd64/generate.sh" afterPath="$PROJECT_DIR$/contrib/builder/deb/amd64/generate.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contrib/builder/deb/ppc64le/build.sh" afterPath="$PROJECT_DIR$/contrib/builder/deb/ppc64le/build.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contrib/builder/deb/ppc64le/generate.sh" afterPath="$PROJECT_DIR$/contrib/builder/deb/ppc64le/generate.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contrib/builder/deb/s390x/build.sh" afterPath="$PROJECT_DIR$/contrib/builder/deb/s390x/build.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contrib/builder/deb/s390x/generate.sh" afterPath="$PROJECT_DIR$/contrib/builder/deb/s390x/generate.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contrib/builder/rpm/amd64/build.sh" afterPath="$PROJECT_DIR$/contrib/builder/rpm/amd64/build.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contrib/builder/rpm/amd64/generate.sh" afterPath="$PROJECT_DIR$/contrib/builder/rpm/amd64/generate.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contrib/check-config.sh" afterPath="$PROJECT_DIR$/contrib/check-config.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contrib/dockerize-disk.sh" afterPath="$PROJECT_DIR$/contrib/dockerize-disk.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contrib/download-frozen-image-v1.sh" afterPath="$PROJECT_DIR$/contrib/download-frozen-image-v1.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contrib/download-frozen-image-v2.sh" afterPath="$PROJECT_DIR$/contrib/download-frozen-image-v2.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contrib/gitdm/generate_aliases.sh" afterPath="$PROJECT_DIR$/contrib/gitdm/generate_aliases.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contrib/init/sysvinit-debian/docker" afterPath="$PROJECT_DIR$/contrib/init/sysvinit-debian/docker" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contrib/init/sysvinit-redhat/docker" afterPath="$PROJECT_DIR$/contrib/init/sysvinit-redhat/docker" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contrib/mkimage-alpine.sh" afterPath="$PROJECT_DIR$/contrib/mkimage-alpine.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contrib/mkimage-arch.sh" afterPath="$PROJECT_DIR$/contrib/mkimage-arch.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contrib/mkimage-busybox.sh" afterPath="$PROJECT_DIR$/contrib/mkimage-busybox.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contrib/mkimage-crux.sh" afterPath="$PROJECT_DIR$/contrib/mkimage-crux.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contrib/mkimage-debootstrap.sh" afterPath="$PROJECT_DIR$/contrib/mkimage-debootstrap.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contrib/mkimage-pld.sh" afterPath="$PROJECT_DIR$/contrib/mkimage-pld.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contrib/mkimage-rinse.sh" afterPath="$PROJECT_DIR$/contrib/mkimage-rinse.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contrib/mkimage-yum.sh" afterPath="$PROJECT_DIR$/contrib/mkimage-yum.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contrib/mkimage.sh" afterPath="$PROJECT_DIR$/contrib/mkimage.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contrib/mkimage/.febootstrap-minimize" afterPath="$PROJECT_DIR$/contrib/mkimage/.febootstrap-minimize" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contrib/mkimage/busybox-static" afterPath="$PROJECT_DIR$/contrib/mkimage/busybox-static" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contrib/mkimage/debootstrap" afterPath="$PROJECT_DIR$/contrib/mkimage/debootstrap" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contrib/mkimage/mageia-urpmi" afterPath="$PROJECT_DIR$/contrib/mkimage/mageia-urpmi" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contrib/mkimage/rinse" afterPath="$PROJECT_DIR$/contrib/mkimage/rinse" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contrib/nuke-graph-directory.sh" afterPath="$PROJECT_DIR$/contrib/nuke-graph-directory.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contrib/project-stats.sh" afterPath="$PROJECT_DIR$/contrib/project-stats.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contrib/report-issue.sh" afterPath="$PROJECT_DIR$/contrib/report-issue.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contrib/reprepro/suites.sh" afterPath="$PROJECT_DIR$/contrib/reprepro/suites.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/reference/commandline/plugin_inspect.md" afterPath="$PROJECT_DIR$/docs/reference/commandline/plugin_inspect.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/security/https/make_certs.sh" afterPath="$PROJECT_DIR$/docs/security/https/make_certs.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/security/https/parsedocs.sh" afterPath="$PROJECT_DIR$/docs/security/https/parsedocs.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/touch-up.sh" afterPath="$PROJECT_DIR$/docs/touch-up.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hack/.vendor-helpers.sh" afterPath="$PROJECT_DIR$/hack/.vendor-helpers.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hack/dind" afterPath="$PROJECT_DIR$/hack/dind" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hack/generate-authors.sh" afterPath="$PROJECT_DIR$/hack/generate-authors.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hack/make.sh" afterPath="$PROJECT_DIR$/hack/make.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hack/make/.build-deb/docker-engine.docker.default" afterPath="$PROJECT_DIR$/hack/make/.build-deb/docker-engine.docker.default" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hack/make/.build-deb/docker-engine.docker.init" afterPath="$PROJECT_DIR$/hack/make/.build-deb/docker-engine.docker.init" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hack/make/.build-deb/docker-engine.docker.upstart" afterPath="$PROJECT_DIR$/hack/make/.build-deb/docker-engine.docker.upstart" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hack/make/.build-deb/docker-engine.udev" afterPath="$PROJECT_DIR$/hack/make/.build-deb/docker-engine.udev" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hack/make/.build-deb/rules" afterPath="$PROJECT_DIR$/hack/make/.build-deb/rules" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hack/make/clean-apt-repo" afterPath="$PROJECT_DIR$/hack/make/clean-apt-repo" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hack/make/clean-yum-repo" afterPath="$PROJECT_DIR$/hack/make/clean-yum-repo" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hack/make/generate-index-listing" afterPath="$PROJECT_DIR$/hack/make/generate-index-listing" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hack/make/release-deb" afterPath="$PROJECT_DIR$/hack/make/release-deb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hack/make/release-rpm" afterPath="$PROJECT_DIR$/hack/make/release-rpm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hack/make/sign-repos" afterPath="$PROJECT_DIR$/hack/make/sign-repos" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hack/make/test-deb-install" afterPath="$PROJECT_DIR$/hack/make/test-deb-install" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hack/make/test-install-script" afterPath="$PROJECT_DIR$/hack/make/test-install-script" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hack/make/test-integration-cli" afterPath="$PROJECT_DIR$/hack/make/test-integration-cli" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hack/make/test-old-apt-repo" afterPath="$PROJECT_DIR$/hack/make/test-old-apt-repo" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hack/make/update-apt-repo" afterPath="$PROJECT_DIR$/hack/make/update-apt-repo" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hack/release.sh" afterPath="$PROJECT_DIR$/hack/release.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hack/vendor.sh" afterPath="$PROJECT_DIR$/hack/vendor.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/integration-cli/fixtures/auth/docker-credential-shell-test" afterPath="$PROJECT_DIR$/integration-cli/fixtures/auth/docker-credential-shell-test" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/man/generate.sh" afterPath="$PROJECT_DIR$/man/generate.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/man/md2man-all.sh" afterPath="$PROJECT_DIR$/man/md2man-all.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/profiles/seccomp/default.json" afterPath="$PROJECT_DIR$/profiles/seccomp/default.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/profiles/seccomp/fixtures/example.json" afterPath="$PROJECT_DIR$/profiles/seccomp/fixtures/example.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/CONTRIBUTORS.md" afterPath="$PROJECT_DIR$/project/CONTRIBUTORS.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/runconfig/opts/parse.go" afterPath="$PROJECT_DIR$/runconfig/opts/parse.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/src/github.com/armon/go-metrics/.gitignore" afterPath="$PROJECT_DIR$/vendor/src/github.com/armon/go-metrics/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/src/github.com/armon/go-metrics/metrics.go" afterPath="$PROJECT_DIR$/vendor/src/github.com/armon/go-metrics/metrics.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/src/github.com/armon/go-metrics/sink.go" afterPath="$PROJECT_DIR$/vendor/src/github.com/armon/go-metrics/sink.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/src/github.com/armon/go-metrics/start.go" afterPath="$PROJECT_DIR$/vendor/src/github.com/armon/go-metrics/start.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/src/github.com/armon/go-metrics/statsite.go" afterPath="$PROJECT_DIR$/vendor/src/github.com/armon/go-metrics/statsite.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/src/github.com/docker/distribution/coverpkg.sh" afterPath="$PROJECT_DIR$/vendor/src/github.com/docker/distribution/coverpkg.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/src/github.com/docker/libnetwork/machines" afterPath="$PROJECT_DIR$/vendor/src/github.com/docker/libnetwork/machines" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/src/github.com/docker/libnetwork/support.sh" afterPath="$PROJECT_DIR$/vendor/src/github.com/docker/libnetwork/support.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/src/github.com/docker/libnetwork/wrapmake.sh" afterPath="$PROJECT_DIR$/vendor/src/github.com/docker/libnetwork/wrapmake.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/src/github.com/docker/notary/coverpkg.sh" afterPath="$PROJECT_DIR$/vendor/src/github.com/docker/notary/coverpkg.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/src/github.com/golang/protobuf/ptypes/regen.sh" afterPath="$PROJECT_DIR$/vendor/src/github.com/golang/protobuf/ptypes/regen.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/src/github.com/google/certificate-transparency/go/asn1/asn1.go" afterPath="$PROJECT_DIR$/vendor/src/github.com/google/certificate-transparency/go/asn1/asn1.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/src/github.com/google/certificate-transparency/go/asn1/common.go" afterPath="$PROJECT_DIR$/vendor/src/github.com/google/certificate-transparency/go/asn1/common.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/src/github.com/google/certificate-transparency/go/asn1/marshal.go" afterPath="$PROJECT_DIR$/vendor/src/github.com/google/certificate-transparency/go/asn1/marshal.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/src/github.com/google/certificate-transparency/go/x509/cert_pool.go" afterPath="$PROJECT_DIR$/vendor/src/github.com/google/certificate-transparency/go/x509/cert_pool.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/src/github.com/google/certificate-transparency/go/x509/pem_decrypt.go" afterPath="$PROJECT_DIR$/vendor/src/github.com/google/certificate-transparency/go/x509/pem_decrypt.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/src/github.com/google/certificate-transparency/go/x509/pkcs1.go" afterPath="$PROJECT_DIR$/vendor/src/github.com/google/certificate-transparency/go/x509/pkcs1.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/src/github.com/google/certificate-transparency/go/x509/pkcs8.go" afterPath="$PROJECT_DIR$/vendor/src/github.com/google/certificate-transparency/go/x509/pkcs8.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/src/github.com/google/certificate-transparency/go/x509/pkix/pkix.go" afterPath="$PROJECT_DIR$/vendor/src/github.com/google/certificate-transparency/go/x509/pkix/pkix.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/src/github.com/google/certificate-transparency/go/x509/root.go" afterPath="$PROJECT_DIR$/vendor/src/github.com/google/certificate-transparency/go/x509/root.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/src/github.com/google/certificate-transparency/go/x509/root_darwin.go" afterPath="$PROJECT_DIR$/vendor/src/github.com/google/certificate-transparency/go/x509/root_darwin.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/src/github.com/google/certificate-transparency/go/x509/root_plan9.go" afterPath="$PROJECT_DIR$/vendor/src/github.com/google/certificate-transparency/go/x509/root_plan9.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/src/github.com/google/certificate-transparency/go/x509/root_stub.go" afterPath="$PROJECT_DIR$/vendor/src/github.com/google/certificate-transparency/go/x509/root_stub.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/src/github.com/google/certificate-transparency/go/x509/root_unix.go" afterPath="$PROJECT_DIR$/vendor/src/github.com/google/certificate-transparency/go/x509/root_unix.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/src/github.com/google/certificate-transparency/go/x509/root_windows.go" afterPath="$PROJECT_DIR$/vendor/src/github.com/google/certificate-transparency/go/x509/root_windows.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/src/github.com/google/certificate-transparency/go/x509/sec1.go" afterPath="$PROJECT_DIR$/vendor/src/github.com/google/certificate-transparency/go/x509/sec1.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/src/github.com/google/certificate-transparency/go/x509/verify.go" afterPath="$PROJECT_DIR$/vendor/src/github.com/google/certificate-transparency/go/x509/verify.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/src/github.com/google/certificate-transparency/go/x509/x509.go" afterPath="$PROJECT_DIR$/vendor/src/github.com/google/certificate-transparency/go/x509/x509.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/src/github.com/hashicorp/go-msgpack/codec/msgpack_test.py" afterPath="$PROJECT_DIR$/vendor/src/github.com/hashicorp/go-msgpack/codec/msgpack_test.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/src/github.com/kr/pty/mktypes.bash" afterPath="$PROJECT_DIR$/vendor/src/github.com/kr/pty/mktypes.bash" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/src/github.com/pborman/uuid/dce.go" afterPath="$PROJECT_DIR$/vendor/src/github.com/pborman/uuid/dce.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/src/github.com/pborman/uuid/doc.go" afterPath="$PROJECT_DIR$/vendor/src/github.com/pborman/uuid/doc.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/src/github.com/pborman/uuid/node.go" afterPath="$PROJECT_DIR$/vendor/src/github.com/pborman/uuid/node.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/src/github.com/pborman/uuid/time.go" afterPath="$PROJECT_DIR$/vendor/src/github.com/pborman/uuid/time.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/src/github.com/ugorji/go/codec/prebuild.sh" afterPath="$PROJECT_DIR$/vendor/src/github.com/ugorji/go/codec/prebuild.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/src/github.com/ugorji/go/codec/test.py" afterPath="$PROJECT_DIR$/vendor/src/github.com/ugorji/go/codec/test.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/src/github.com/ugorji/go/codec/tests.sh" afterPath="$PROJECT_DIR$/vendor/src/github.com/ugorji/go/codec/tests.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/src/google.golang.org/grpc/codegen.sh" afterPath="$PROJECT_DIR$/vendor/src/google.golang.org/grpc/codegen.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/src/google.golang.org/grpc/coverage.sh" afterPath="$PROJECT_DIR$/vendor/src/google.golang.org/grpc/coverage.sh" />
+    </list>
+    <ignored path="docker.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <ignored path="$PROJECT_DIR$/out/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="CLEAR_OUTPUT_DIRECTORY" value="false" />
+  </component>
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="docker" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="docker.go" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/cmd/docker/docker.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="228">
+              <caret line="75" column="0" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
+              <folding>
+                <element signature="e#14#439#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="command.go" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/src/github.com/spf13/cobra/command.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="139">
+              <caret line="54" column="8" selection-start-line="54" selection-start-column="8" selection-end-line="54" selection-end-column="8" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="run.go" pinned="false" current-in-tab="false">
+        <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/command/container/run.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2356">
+              <caret line="147" column="9" selection-start-line="147" selection-start-column="9" selection-end-line="147" selection-end-column="9" />
+              <folding>
+                <marker date="1475638509331" expanded="false" signature="26:549" placeholder="..." />
+                <marker date="1475638509331" expanded="true" signature="574:649" placeholder="{...}" />
+                <marker date="1475638509331" expanded="true" signature="766:1965" placeholder="{...}" />
+                <marker date="1475638509331" expanded="true" signature="855:1251" placeholder="{...}" />
+                <marker date="1475638509331" expanded="true" signature="1109:1247" placeholder="{...}" />
+                <marker date="1475638509331" expanded="true" signature="1156:1188" placeholder="{...}" />
+                <marker date="1475638509331" expanded="true" signature="2094:7649" placeholder="{...}" />
+                <marker date="1475638509331" expanded="true" signature="2260:2506" placeholder="(...)" />
+                <marker date="1475638509331" expanded="true" signature="2645:2741" placeholder="{...}" />
+                <marker date="1475638509331" expanded="true" signature="2952:3087" placeholder="{...}" />
+                <marker date="1475638509331" expanded="true" signature="3117:3457" placeholder="{...}" />
+                <marker date="1475638509331" expanded="true" signature="3301:3454" placeholder="{...}" />
+                <marker date="1475638509331" expanded="true" signature="3332:3450" placeholder="{...}" />
+                <marker date="1475638509331" expanded="true" signature="3505:3609" placeholder="{...}" />
+                <marker date="1475638509331" expanded="true" signature="3615:3899" placeholder="{...}" />
+                <marker date="1475638509331" expanded="true" signature="3662:3779" placeholder="{...}" />
+                <marker date="1475638509331" expanded="true" signature="3734:3775" placeholder="{...}" />
+                <marker date="1475638509331" expanded="true" signature="3954:3982" placeholder="{...}" />
+                <marker date="1475638509331" expanded="true" signature="4200:4290" placeholder="{...}" />
+                <marker date="1475638509331" expanded="true" signature="4563:4652" placeholder="{...}" />
+                <marker date="1475638509331" expanded="true" signature="4671:4769" placeholder="{...}" />
+                <marker date="1475638509331" expanded="true" signature="4775:4836" placeholder="(...)" />
+                <marker date="1475638509331" expanded="true" signature="4886:5123" placeholder="{...}" />
+                <marker date="1475638509331" expanded="true" signature="5033:5118" placeholder="{...}" />
+                <marker date="1475638509331" expanded="true" signature="5211:6390" placeholder="{...}" />
+                <marker date="1475638509331" expanded="true" signature="5219:5274" placeholder="(...)" />
+                <marker date="1475638509331" expanded="true" signature="5391:5468" placeholder="{...}" />
+                <marker date="1475638509331" expanded="true" signature="5410:5434" placeholder="{...}" />
+                <marker date="1475638509331" expanded="true" signature="5440:5464" placeholder="{...}" />
+                <marker date="1475638509331" expanded="true" signature="5497:5557" placeholder="{...}" />
+                <marker date="1475638509331" expanded="true" signature="5600:5783" placeholder="{...}" />
+                <marker date="1475638509331" expanded="true" signature="5923:6165" placeholder="{...}" />
+                <marker date="1475638509331" expanded="true" signature="6222:6386" placeholder="{...}" />
+                <marker date="1475638509331" expanded="true" signature="6335:6362" placeholder="{...}" />
+                <marker date="1475638509331" expanded="true" signature="6607:6986" placeholder="{...}" />
+                <marker date="1475638509331" expanded="true" signature="6781:6812" placeholder="{...}" />
+                <marker date="1475638509331" expanded="true" signature="6892:6948" placeholder="{...}" />
+                <marker date="1475638509331" expanded="true" signature="7105:7259" placeholder="{...}" />
+                <marker date="1475638509331" expanded="true" signature="7278:7376" placeholder="{...}" />
+                <marker date="1475638509331" expanded="true" signature="7312:7373" placeholder="{...}" />
+                <marker date="1475638509331" expanded="true" signature="7490:7544" placeholder="{...}" />
+                <marker date="1475638509331" expanded="true" signature="7586:7635" placeholder="{...}" />
+                <marker date="1475638509331" expanded="true" signature="7879:8010" placeholder="{...}" />
+                <marker date="1475638509331" expanded="true" signature="7894:7957" placeholder="{...}" />
+                <marker date="1475638509331" expanded="true" signature="8578:8631" placeholder="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="container_create.go" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/container_create.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="570">
+              <caret line="39" column="36" selection-start-line="39" selection-start-column="16" selection-end-line="39" selection-end-column="36" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="create.go" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cli/command/container/create.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="227">
+              <caret line="164" column="41" selection-start-line="164" selection-start-column="41" selection-end-line="164" selection-end-column="41" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="reference.go" pinned="false" current-in-tab="false">
+        <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/reference/reference.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="139">
+              <caret line="159" column="5" selection-start-line="159" selection-start-column="5" selection-end-line="159" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="run.go" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cli/command/container/run.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="114">
+              <caret line="142" column="38" selection-start-line="142" selection-start-column="38" selection-end-line="142" selection-end-column="38" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="parse.go" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/runconfig/opts/parse.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="5899">
+              <caret line="561" column="63" selection-start-line="561" selection-start-column="63" selection-end-line="561" selection-end-column="63" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="parse.go" pinned="false" current-in-tab="false">
+        <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/runconfig/opts/parse.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1338">
+              <caret line="257" column="0" selection-start-line="257" selection-start-column="0" selection-end-line="257" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="context.go" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/src/golang.org/x/net/context/context.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="229">
+              <caret line="186" column="5" selection-start-line="186" selection-start-column="5" selection-end-line="186" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GradleLocalSettings">
+    <option name="externalProjectsViewState">
+      <projects_view />
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/cmd/docker/daemon_none.go" />
+        <option value="Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/command/node/cmd.go" />
+        <option value="Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/command/image/list.go" />
+        <option value="Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/command/cli.go" />
+        <option value="Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/command/container/run.go" />
+        <option value="$PROJECT_DIR$/cli/command/container/run.go" />
+        <option value="$PROJECT_DIR$/runconfig/opts/parse.go" />
+        <option value="$PROJECT_DIR$/cli/command/container/create.go" />
+        <option value="$PROJECT_DIR$/cmd/docker/docker.go" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1382" />
+    <option name="height" value="754" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="docker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GOPATH &lt;docker&gt;" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="docker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GOPATH &lt;docker&gt;" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="github.com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="docker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GOPATH &lt;docker&gt;" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="github.com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="docker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="docker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GOPATH &lt;docker&gt;" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="github.com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="docker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cli" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="docker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GOPATH &lt;docker&gt;" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="github.com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="docker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cli" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="command" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="docker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GOPATH &lt;docker&gt;" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="github.com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="docker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cli" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="command" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="system" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="docker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GOPATH &lt;docker&gt;" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="github.com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="docker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cli" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="command" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="image" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="docker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="docker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="docker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="docker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="docker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cmd" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dockerd" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="docker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="docker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cmd" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="docker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="settings.editor.selected.configurable" value="editor.preferences.appearance" />
+    <property name="configurable.Global.libraries.is.expanded" value="true" />
+    <property name="settings.editor.splitter.proportion" value="0.2" />
+    <property name="go.libraries.notification.had.been.shown" value="true" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
+      <module name="" />
+      <option name="DEPLOY" value="true" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
+      <module name="" />
+      <option name="TESTING_TYPE" value="0" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="EXTRA_OPTIONS" value="" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <module />
+      <method />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
+      <module name="docker" />
+      <working_directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <kind value="FILE" />
+      <method />
+    </configuration>
+    <configuration default="true" type="GoRunFileConfiguration" factoryName="Go Single File">
+      <module name="docker" />
+      <working_directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <method />
+    </configuration>
+    <configuration default="true" type="GoTestRunConfiguration" factoryName="Go Test">
+      <module name="docker" />
+      <working_directory value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <kind value="DIRECTORY" />
+      <method />
+    </configuration>
+    <configuration default="true" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list />
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="true" type="JUnitTestDiscovery" factoryName="JUnit Test Discovery" changeList="All">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="true" type="JarApplication" factoryName="JAR Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="Java Scratch" factoryName="Java Scratch">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="SCRATCH_FILE_ID" value="0" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType" factoryName="Kotlin">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="docker" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType" factoryName="Kotlin script">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="filePath" />
+      <option name="vmParameters" />
+      <option name="alternativeJrePath" />
+      <option name="programParameters" />
+      <option name="passParentEnvs" value="true" />
+      <option name="workingDirectory" />
+      <option name="isAlternativeJrePathEnabled" value="false" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+      <method />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="TestNGTestDiscovery" factoryName="TestNG Test Discovery" changeList="All">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6d223c18-03be-4f0c-8706-6c7900cfc78a" name="Default" comment="" />
+      <created>1475481986425</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1475481986425</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32905295" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1709531" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28410915" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/cobra.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="10" column="5" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/flags/client.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="10" column="5" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/flags/common.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="741">
+          <caret line="49" column="33" selection-start-line="49" selection-start-column="33" selection-end-line="49" selection-end-column="33" />
+          <folding>
+            <element signature="e#15#229#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/src/github.com/spf13/pflag/flag.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11685">
+          <caret line="623" column="18" selection-start-line="623" selection-start-column="18" selection-end-line="623" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/src/github.com/spf13/cobra/command.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/src/github.com/spf13/pflag/string.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="37" column="18" selection-start-line="37" selection-start-column="18" selection-end-line="37" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/command/service/create.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="12" column="5" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/command/service/cmd.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="12" column="5" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/flags/client.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="10" column="5" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/src/github.com/spf13/pflag/bool.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="56" column="18" selection-start-line="56" selection-start-column="18" selection-end-line="56" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/command/node/demote.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" column="5" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/src/github.com/spf13/pflag/flag.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="130" column="5" selection-start-line="130" selection-start-column="5" selection-end-line="130" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cmd/docker/daemon_none.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="14" column="26" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/command/system/cmd.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="12" column="5" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cli/command/commands/commands.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="65" column="29" selection-start-line="65" selection-start-column="29" selection-end-line="65" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/command/image/list.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="798">
+          <caret line="51" column="1" selection-start-line="51" selection-start-column="1" selection-end-line="51" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/command/node/cmd.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="13" column="5" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/cobra.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="10" column="5" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/command/image/cmd.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="14" column="24" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/command/trust.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="15" column="5" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/command/container/tty.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="18" column="70" selection-start-line="18" selection-start-column="52" selection-end-line="18" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cli/command/container/exec.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="78">
+          <caret line="157" column="38" selection-start-line="157" selection-start-column="38" selection-end-line="157" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/client/interface_experimental.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="36" column="15" selection-start-line="36" selection-start-column="6" selection-end-line="36" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/command/container/exec.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="156" column="59" selection-start-line="156" selection-start-column="59" selection-end-line="156" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cli/command/registry.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="101">
+          <caret line="161" column="58" selection-start-line="161" selection-start-column="58" selection-end-line="161" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cli/command/cli.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="158">
+          <caret line="44" column="1" selection-start-line="44" selection-start-column="1" selection-end-line="44" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/client/interface_stable.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="10" column="21" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/client/client.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1214">
+          <caret line="25" column="19" selection-start-line="25" selection-start-column="19" selection-end-line="25" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/command/cli.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="97">
+          <caret line="77" column="22" selection-start-line="77" selection-start-column="22" selection-end-line="77" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Go/src/os/env.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="78" column="5" selection-start-line="78" selection-start-column="5" selection-end-line="78" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/pkg/homedir/homedir.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="22" column="23" selection-start-line="22" selection-start-column="23" selection-end-line="22" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cliconfig/config.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="31" column="5" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/spf13/pflag/bool.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="53" column="18" selection-start-line="53" selection-start-column="18" selection-end-line="53" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/flags/common.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="40">
+          <caret line="49" column="33" selection-start-line="49" selection-start-column="33" selection-end-line="49" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/command/commands/commands.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="32" column="31" selection-start-line="32" selection-start-column="31" selection-end-line="32" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/required.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="29" column="5" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/client/interface.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="35" column="8" selection-start-line="35" selection-start-column="8" selection-end-line="35" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/request.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="39" column="25" selection-start-line="39" selection-start-column="25" selection-end-line="39" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/client.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="25" column="19" selection-start-line="25" selection-start-column="19" selection-end-line="25" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/command/container/create.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3059">
+          <caret line="184" column="43" selection-start-line="184" selection-start-column="43" selection-end-line="184" selection-end-column="43" />
+          <folding>
+            <marker date="1475639560287" expanded="false" signature="26:665" placeholder="..." />
+            <marker date="1475639560287" expanded="true" signature="846:1617" placeholder="{...}" />
+            <marker date="1475639560287" expanded="true" signature="938:1261" placeholder="{...}" />
+            <marker date="1475639560287" expanded="true" signature="1116:1257" placeholder="{...}" />
+            <marker date="1475639560287" expanded="true" signature="1163:1195" placeholder="{...}" />
+            <marker date="1475639560287" expanded="true" signature="1752:2197" placeholder="{...}" />
+            <marker date="1475639560287" expanded="true" signature="1849:1955" placeholder="{...}" />
+            <marker date="1475639560287" expanded="true" signature="2115:2132" placeholder="{...}" />
+            <marker date="1475639560287" expanded="true" signature="2300:3030" placeholder="{...}" />
+            <marker date="1475639560287" expanded="true" signature="2358:2375" placeholder="{...}" />
+            <marker date="1475639560287" expanded="true" signature="2503:2520" placeholder="{...}" />
+            <marker date="1475639560287" expanded="true" signature="2670:2687" placeholder="{...}" />
+            <marker date="1475639560287" expanded="true" signature="2849:2866" placeholder="{...}" />
+            <marker date="1475639560287" expanded="true" signature="3052:3103" placeholder="{...}" />
+            <marker date="1475639560287" expanded="true" signature="3139:3327" placeholder="{...}" />
+            <marker date="1475639560287" expanded="true" signature="3177:3312" placeholder="{...}" />
+            <marker date="1475639560287" expanded="true" signature="3223:3309" placeholder="{...}" />
+            <marker date="1475639560287" expanded="true" signature="3372:3542" placeholder="{...}" />
+            <marker date="1475639560287" expanded="true" signature="3427:3508" placeholder="{...}" />
+            <marker date="1475639560287" expanded="true" signature="3591:3923" placeholder="{...}" />
+            <marker date="1475639560287" expanded="true" signature="3633:3753" placeholder="{...}" />
+            <marker date="1475639560287" expanded="true" signature="3797:3877" placeholder="{...}" />
+            <marker date="1475639560287" expanded="true" signature="3895:3916" placeholder="{...}" />
+            <marker date="1475639560287" expanded="true" signature="4168:5999" placeholder="{...}" />
+            <marker date="1475639560287" expanded="true" signature="5043:5762" placeholder="{...}" />
+            <marker date="1475639560287" expanded="true" signature="5098:5729" placeholder="{...}" />
+            <marker date="1475639560287" expanded="true" signature="5418:5529" placeholder="{...}" />
+            <marker date="1475639560287" expanded="true" signature="5694:5725" placeholder="{...}" />
+            <marker date="1475639560287" expanded="true" signature="5735:5759" placeholder="{...}" />
+            <marker date="1475639560287" expanded="true" signature="5807:5859" placeholder="{...}" />
+            <marker date="1475639560287" expanded="true" signature="5887:5974" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/command/container/run.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2356">
+          <caret line="147" column="9" selection-start-line="147" selection-start-column="9" selection-end-line="147" selection-end-column="9" />
+          <folding>
+            <marker date="1475638509331" expanded="false" signature="26:549" placeholder="..." />
+            <marker date="1475638509331" expanded="true" signature="574:649" placeholder="{...}" />
+            <marker date="1475638509331" expanded="true" signature="766:1965" placeholder="{...}" />
+            <marker date="1475638509331" expanded="true" signature="855:1251" placeholder="{...}" />
+            <marker date="1475638509331" expanded="true" signature="1109:1247" placeholder="{...}" />
+            <marker date="1475638509331" expanded="true" signature="1156:1188" placeholder="{...}" />
+            <marker date="1475638509331" expanded="true" signature="2094:7649" placeholder="{...}" />
+            <marker date="1475638509331" expanded="true" signature="2260:2506" placeholder="(...)" />
+            <marker date="1475638509331" expanded="true" signature="2645:2741" placeholder="{...}" />
+            <marker date="1475638509331" expanded="true" signature="2952:3087" placeholder="{...}" />
+            <marker date="1475638509331" expanded="true" signature="3117:3457" placeholder="{...}" />
+            <marker date="1475638509331" expanded="true" signature="3301:3454" placeholder="{...}" />
+            <marker date="1475638509331" expanded="true" signature="3332:3450" placeholder="{...}" />
+            <marker date="1475638509331" expanded="true" signature="3505:3609" placeholder="{...}" />
+            <marker date="1475638509331" expanded="true" signature="3615:3899" placeholder="{...}" />
+            <marker date="1475638509331" expanded="true" signature="3662:3779" placeholder="{...}" />
+            <marker date="1475638509331" expanded="true" signature="3734:3775" placeholder="{...}" />
+            <marker date="1475638509331" expanded="true" signature="3954:3982" placeholder="{...}" />
+            <marker date="1475638509331" expanded="true" signature="4200:4290" placeholder="{...}" />
+            <marker date="1475638509331" expanded="true" signature="4563:4652" placeholder="{...}" />
+            <marker date="1475638509331" expanded="true" signature="4671:4769" placeholder="{...}" />
+            <marker date="1475638509331" expanded="true" signature="4775:4836" placeholder="(...)" />
+            <marker date="1475638509331" expanded="true" signature="4886:5123" placeholder="{...}" />
+            <marker date="1475638509331" expanded="true" signature="5033:5118" placeholder="{...}" />
+            <marker date="1475638509331" expanded="true" signature="5211:6390" placeholder="{...}" />
+            <marker date="1475638509331" expanded="true" signature="5219:5274" placeholder="(...)" />
+            <marker date="1475638509331" expanded="true" signature="5391:5468" placeholder="{...}" />
+            <marker date="1475638509331" expanded="true" signature="5410:5434" placeholder="{...}" />
+            <marker date="1475638509331" expanded="true" signature="5440:5464" placeholder="{...}" />
+            <marker date="1475638509331" expanded="true" signature="5497:5557" placeholder="{...}" />
+            <marker date="1475638509331" expanded="true" signature="5600:5783" placeholder="{...}" />
+            <marker date="1475638509331" expanded="true" signature="5923:6165" placeholder="{...}" />
+            <marker date="1475638509331" expanded="true" signature="6222:6386" placeholder="{...}" />
+            <marker date="1475638509331" expanded="true" signature="6335:6362" placeholder="{...}" />
+            <marker date="1475638509331" expanded="true" signature="6607:6986" placeholder="{...}" />
+            <marker date="1475638509331" expanded="true" signature="6781:6812" placeholder="{...}" />
+            <marker date="1475638509331" expanded="true" signature="6892:6948" placeholder="{...}" />
+            <marker date="1475638509331" expanded="true" signature="7105:7259" placeholder="{...}" />
+            <marker date="1475638509331" expanded="true" signature="7278:7376" placeholder="{...}" />
+            <marker date="1475638509331" expanded="true" signature="7312:7373" placeholder="{...}" />
+            <marker date="1475638509331" expanded="true" signature="7490:7544" placeholder="{...}" />
+            <marker date="1475638509331" expanded="true" signature="7586:7635" placeholder="{...}" />
+            <marker date="1475638509331" expanded="true" signature="7879:8010" placeholder="{...}" />
+            <marker date="1475638509331" expanded="true" signature="7894:7957" placeholder="{...}" />
+            <marker date="1475638509331" expanded="true" signature="8578:8631" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/container_create.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="39" column="36" selection-start-line="39" selection-start-column="16" selection-end-line="39" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/src/golang.org/x/net/context/context.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="186" column="5" selection-start-line="186" selection-start-column="5" selection-end-line="186" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/runconfig/opts/parse.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1338">
+          <caret line="257" column="0" selection-start-line="257" selection-start-column="0" selection-end-line="257" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/runconfig/opts/parse.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5899">
+          <caret line="561" column="63" selection-start-line="561" selection-start-column="63" selection-end-line="561" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cli/command/container/run.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="142" column="38" selection-start-line="142" selection-start-column="38" selection-end-line="142" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cli/command/container/create.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="164" column="41" selection-start-line="164" selection-start-column="41" selection-end-line="164" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/reference/reference.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="139">
+          <caret line="159" column="5" selection-start-line="159" selection-start-column="5" selection-end-line="159" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/spf13/cobra/command.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="139">
+          <caret line="33" column="5" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/src/github.com/spf13/cobra/command.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="139">
+          <caret line="54" column="8" selection-start-line="54" selection-start-column="8" selection-end-line="54" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cmd/docker/docker.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="75" column="0" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
+          <folding>
+            <element signature="e#14#439#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

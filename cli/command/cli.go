@@ -79,6 +79,7 @@ func (cli *DockerCli) Initialize(opts *cliflags.ClientOptions) error {
 	cli.configFile = LoadDefaultConfigFile(cli.err)
 
 	var err error
+	//生成client对象
 	cli.client, err = NewAPIClientFromFlags(opts.Common, cli.configFile)
 	if err != nil {
 		return err

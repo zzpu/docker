@@ -152,6 +152,7 @@ func createContainer(ctx context.Context, dockerCli *command.DockerCli, config *
 	stderr := dockerCli.Err()
 
 	var containerIDFile *cidFile
+	//Here cidFile is empty
 	if cidfile != "" {
 		var err error
 		if containerIDFile, err = newCIDFile(cidfile); err != nil {
@@ -182,6 +183,7 @@ func createContainer(ctx context.Context, dockerCli *command.DockerCli, config *
 	response, err := dockerCli.Client().ContainerCreate(ctx, config, hostConfig, networkingConfig, name)
 
 	//if image not found try to pull it
+	//如果镜像不存在，就尝试去下载一个
 	if err != nil {
 		if apiclient.IsErrImageNotFound(err) && ref != nil {
 			fmt.Fprintf(stderr, "Unable to find image '%s' locally\n", ref.String())

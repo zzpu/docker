@@ -39,7 +39,7 @@ func NewRunCommand(dockerCli *command.DockerCli) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "run [OPTIONS] IMAGE [COMMAND] [ARG...]",
 		Short: "Run a command in a new container",
-		Args:  cli.RequiresMinArgs(1),
+		Args:  cli.RequiresMinArgs(1),// RequiresMinArgs returns an error if there is not at least min args
 		RunE: func(cmd *cobra.Command, args []string) error {
 			copts.Image = args[0]
 			if len(args) > 1 {
@@ -137,9 +137,9 @@ func runRun(dockerCli *command.DockerCli, flags *pflag.FlagSet, opts *runOptions
 	if runtime.GOOS == "windows" {
 		hostConfig.ConsoleSize[0], hostConfig.ConsoleSize[1] = dockerCli.Out().GetTtySize()
 	}
-
+	// Background returns a non-nil, empty Context.
 	ctx, cancelFun := context.WithCancel(context.Background())
-
+        //建立容器
 	createResponse, err := createContainer(ctx, dockerCli, config, hostConfig, networkingConfig, hostConfig.ContainerIDFile, opts.name)
 	if err != nil {
 		reportError(stderr, cmdPath, err.Error(), true)

@@ -30,6 +30,7 @@ func NewImagesCommand(dockerCli *command.DockerCli) *cobra.Command {
 		Use:   "images [OPTIONS] [REPOSITORY[:TAG]]",
 		Short: "List images",
 		Args:  cli.RequiresMaxArgs(1),
+		//命令执行函数，有一个错误类型的变量作为返回值
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if len(args) > 0 {
 				opts.matchName = args[0]
@@ -37,7 +38,7 @@ func NewImagesCommand(dockerCli *command.DockerCli) *cobra.Command {
 			return runImages(dockerCli, opts)
 		},
 	}
-
+        //为命令添加选项
 	flags := cmd.Flags()
 
 	flags.BoolVarP(&opts.quiet, "quiet", "q", false, "Only show numeric IDs")
