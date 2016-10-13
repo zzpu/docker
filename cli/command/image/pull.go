@@ -46,10 +46,12 @@ func runPull(dockerCli *command.DockerCli, opts pullOptions) error {
 	if err != nil {
 		return err
 	}
+	// -a, --all-tags                Download all tagged images in the repository
+	//如果使用了all选项，但是又不是只有镜像名（包含tag），则报错处理
 	if opts.all && !reference.IsNameOnly(distributionRef) {
 		return errors.New("tag can't be used with --all-tags/-a")
 	}
-
+	//如果没有使用all选项，且只有镜像名，则添加一个默认的tag（latest）
 	if !opts.all && reference.IsNameOnly(distributionRef) {
 		distributionRef = reference.WithDefaultTag(distributionRef)
 		fmt.Fprintf(dockerCli.Out(), "Using default tag: %s\n", reference.DefaultTag)

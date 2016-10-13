@@ -26,6 +26,8 @@ func ElectAuthServer(ctx context.Context, cli *DockerCli) string {
 	// example a Linux client might be interacting with a Windows daemon, hence
 	// the default registry URL might be Windows specific.
 	serverAddress := registry.IndexServer
+
+	// Info returns information about the docker server.
 	if info, err := cli.Client().Info(ctx); err != nil {
 		fmt.Fprintf(cli.Out(), "Warning: failed to get default registry endpoint from daemon (%v). Using system default: %s\n", err, serverAddress)
 	} else {

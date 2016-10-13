@@ -248,6 +248,7 @@ func GetAuthConfigKey(index *registrytypes.IndexInfo) string {
 
 // newRepositoryInfo validates and breaks down a repository name into a RepositoryInfo
 func newRepositoryInfo(config *serviceConfig, name reference.Named) (*RepositoryInfo, error) {
+	// newIndexInfo returns IndexInfo configuration from indexName
 	index, err := newIndexInfo(config, name.Hostname())
 	if err != nil {
 		return nil, err

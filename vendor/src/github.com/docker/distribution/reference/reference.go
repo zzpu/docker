@@ -144,6 +144,7 @@ func SplitHostname(named Named) (string, string) {
 // If an error was encountered it is returned, along with a nil Reference.
 // NOTE: Parse will not handle short digests.
 func Parse(s string) (Reference, error) {
+	//
 	matches := ReferenceRegexp.FindStringSubmatch(s)
 	if matches == nil {
 		if s == "" {

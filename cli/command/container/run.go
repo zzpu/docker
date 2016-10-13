@@ -138,6 +138,7 @@ func runRun(dockerCli *command.DockerCli, flags *pflag.FlagSet, opts *runOptions
 		hostConfig.ConsoleSize[0], hostConfig.ConsoleSize[1] = dockerCli.Out().GetTtySize()
 	}
 	// Background returns a non-nil, empty Context.
+	//返回空的ctx
 	ctx, cancelFun := context.WithCancel(context.Background())
         //建立容器
 	createResponse, err := createContainer(ctx, dockerCli, config, hostConfig, networkingConfig, hostConfig.ContainerIDFile, opts.name)

@@ -7,6 +7,8 @@
       <root url="file://Z:/opt/goHome/src/go" />
       <root url="file://Z:/opt/goHome/src/bytes" />
       <root url="file://Z:/opt/goHome/src/time" />
+      <root url="file://Z:/opt/goHome/workspace/src/got" />
+      <root url="file://Z:/opt/goHome/workspace/src/git.oschina.net" />
       <root url="file://Z:/opt/goHome/workspace/src/goc_b" />
       <root url="file://Z:/opt/goHome/workspace/src/gopkg.in" />
       <root url="file://Z:/opt/goHome/workspace/src/uniConsole" />
@@ -34,6 +36,7 @@
       <root url="file://Z:/opt/goHome/src/encoding" />
       <root url="file://Z:/opt/goHome/src/sync" />
       <root url="file://Z:/opt/goHome/src/crypto" />
+      <root url="file://Z:/opt/goHome/workspace/src/docker" />
       <root url="file://Z:/opt/goHome/src/strconv" />
       <root url="file://Z:/opt/goHome/src/unicode" />
       <root url="file://Z:/opt/goHome/src/math" />
@@ -60,6 +63,8 @@
       <root url="file://Z:/opt/goHome/src/go" />
       <root url="file://Z:/opt/goHome/src/bytes" />
       <root url="file://Z:/opt/goHome/src/time" />
+      <root url="file://Z:/opt/goHome/workspace/src/got" />
+      <root url="file://Z:/opt/goHome/workspace/src/git.oschina.net" />
       <root url="file://Z:/opt/goHome/workspace/src/goc_b" />
       <root url="file://Z:/opt/goHome/workspace/src/gopkg.in" />
       <root url="file://Z:/opt/goHome/workspace/src/uniConsole" />
@@ -87,6 +92,7 @@
       <root url="file://Z:/opt/goHome/src/encoding" />
       <root url="file://Z:/opt/goHome/src/sync" />
       <root url="file://Z:/opt/goHome/src/crypto" />
+      <root url="file://Z:/opt/goHome/workspace/src/docker" />
       <root url="file://Z:/opt/goHome/src/strconv" />
       <root url="file://Z:/opt/goHome/src/unicode" />
       <root url="file://Z:/opt/goHome/src/math" />

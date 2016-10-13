@@ -65,6 +65,8 @@ var (
 	// ReferenceRegexp is the full supported format of a reference. The regexp
 	// is anchored and has capturing groups for name, tag, and digest
 	// components.
+
+	//添加头尾分隔符，tag,digest
 	ReferenceRegexp = anchored(capture(NameRegexp),
 		optional(literal(":"), capture(TagRegexp)),
 		optional(literal("@"), capture(DigestRegexp)))

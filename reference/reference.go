@@ -57,6 +57,7 @@ func ParseNamed(s string) (Named, error) {
 	if err != nil {
 		return nil, fmt.Errorf("Error parsing reference: %q is not a valid repository/tag: %s", s, err)
 	}
+	// If no valid hostname is found, the default hostname is used./如果没有有效的主机名，则使用默认的主机名
 	r, err := WithName(named.Name())
 	if err != nil {
 		return nil, err
@@ -84,6 +85,7 @@ func WithName(name string) (Named, error) {
 	if err != nil {
 		return nil, err
 	}
+	// If no valid hostname is found, the default hostname is used.
 	return &namedRef{r}, nil
 }
 
@@ -122,6 +124,7 @@ func (r *namedRef) FullName() string {
 	return hostname + "/" + remoteName
 }
 func (r *namedRef) Hostname() string {
+	// If no valid hostname is found, the default hostname is used. Repository name
 	hostname, _ := splitHostname(r.Name())
 	return hostname
 }

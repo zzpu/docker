@@ -74,12 +74,15 @@ func runCreate(dockerCli *command.DockerCli, flags *pflag.FlagSet, opts *createO
 }
 
 func pullImage(ctx context.Context, dockerCli *command.DockerCli, image string, out io.Writer) error {
+	// If no valid hostname is found, the default hostname is used.
 	ref, err := reference.ParseNamed(image)
 	if err != nil {
 		return err
 	}
 
 	// Resolve the Repository name from fqn to RepositoryInfo
+	//fmt.Fprintf(dockerCli.Err(), "Name： '%s'\n", ref.Hostname())
+	fmt.Fprintf(dockerCli.Err(), "Hostname： '%s'\n", ref.Hostname())
 	repoInfo, err := registry.ParseRepositoryInfo(ref)
 	if err != nil {
 		return err
@@ -160,7 +163,7 @@ func createContainer(ctx context.Context, dockerCli *command.DockerCli, config *
 		}
 		defer containerIDFile.Close()
 	}
-
+       //规范的
 	var trustedRef reference.Canonical
 	_, ref, err := reference.ParseIDOrReference(config.Image)
 	if err != nil {
@@ -181,7 +184,7 @@ func createContainer(ctx context.Context, dockerCli *command.DockerCli, config *
 
 	//create the container
 	response, err := dockerCli.Client().ContainerCreate(ctx, config, hostConfig, networkingConfig, name)
-
+	fmt.Fprintf(stderr, "Canonical trusted reference '%s'\n", config.Image)
 	//if image not found try to pull it
 	//如果镜像不存在，就尝试去下载一个
 	if err != nil {
@@ -189,6 +192,7 @@ func createContainer(ctx context.Context, dockerCli *command.DockerCli, config *
 			fmt.Fprintf(stderr, "Unable to find image '%s' locally\n", ref.String())
 
 			// we don't want to write to stdout anything apart from container.ID
+			//这里config.Image还是输入的镜像名
 			if err = pullImage(ctx, dockerCli, config.Image, stderr); err != nil {
 				return nil, err
 			}
