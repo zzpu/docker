@@ -31,6 +31,7 @@ func ValidateHost(val string) (string, error) {
 	host := strings.TrimSpace(val)
 	// The empty string means default and is not handled by parseDockerDaemonHost
 	if host != "" {
+		//检查设置默认监听地址  DefaultUnixSocket = "/var/run/docker.sock"
 		_, err := parseDockerDaemonHost(host)
 		if err != nil {
 			return val, err
@@ -45,9 +46,12 @@ func ValidateHost(val string) (string, error) {
 func ParseHost(defaultToTLS bool, val string) (string, error) {
 	host := strings.TrimSpace(val)
 	if host == "" {
+
 		if defaultToTLS {
+			//默认  localhost
 			host = DefaultTLSHost
 		} else {
+			//默认  unix:///var/run/docker.sock
 			host = DefaultHost
 		}
 	} else {

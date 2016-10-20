@@ -112,6 +112,8 @@ func (cli *DaemonCli) start(opts daemonOptions) (err error) {
 	// warn from uuid package when running the daemon
 	uuid.Loggerf = logrus.Warnf
 
+	// SetDefaultOptions sets default values for options after flag parsing is
+	// complete
 	opts.common.SetDefaultOptions(opts.flags)
 
 	if opts.common.TrustKey == "" {
@@ -119,35 +121,37 @@ func (cli *DaemonCli) start(opts daemonOptions) (err error) {
 			getDaemonConfDir(),
 			cliflags.DefaultTrustKeyFile)
 	}
+	//载入配置文件，填充返回config
 	if cli.Config, err = loadDaemonCliConfig(opts); err != nil {
 		return err
 	}
 	cli.configFile = &opts.configFile
+	//选项集
 	cli.flags = opts.flags
 
 	if cli.Config.Debug {
 		utils.EnableDebug()
 	}
-
+         //实验版本
 	if utils.ExperimentalBuild() {
 		logrus.Warn("Running experimental build")
 	}
-
+        //设置日志格式
 	logrus.SetFormatter(&logrus.TextFormatter{
 		TimestampFormat: jsonlog.RFC3339NanoFixed,
 		DisableColors:   cli.Config.RawLogs,
 	})
-
+        //设置文件权限
 	if err := setDefaultUmask(); err != nil {
 		return fmt.Errorf("Failed to set umask: %v", err)
 	}
-
+       //检查日志引擎是否存在
 	if len(cli.LogConfig.Config) > 0 {
 		if err := logger.ValidateLogOpts(cli.LogConfig.Type, cli.LogConfig.Config); err != nil {
 			return fmt.Errorf("Failed to set log opts: %v", err)
 		}
 	}
-
+        //建立pid文件
 	if cli.Pidfile != "" {
 		pf, err := pidfile.New(cli.Pidfile)
 		if err != nil {
@@ -187,18 +191,20 @@ func (cli *DaemonCli) start(opts daemonOptions) (err error) {
 	}
 
 	if len(cli.Config.Hosts) == 0 {
+		logrus.Warn("[!] DIDN'T SET HOST [!]")
 		cli.Config.Hosts = make([]string, 1)
 	}
-
+        //生成一个server对象，配置为serverConfig
 	api := apiserver.New(serverConfig)
 	cli.api = api
 
 	for i := 0; i < len(cli.Config.Hosts); i++ {
 		var err error
+		//ParseHost默认  DefaultUnixSocket = "/var/run/docker.sock"
 		if cli.Config.Hosts[i], err = dopts.ParseHost(cli.Config.TLS, cli.Config.Hosts[i]); err != nil {
 			return fmt.Errorf("error parsing -H %s : %v", cli.Config.Hosts[i], err)
 		}
-
+		logrus.Warn("Docker Host:"+cli.Config.Hosts[i])
 		protoAddr := cli.Config.Hosts[i]
 		protoAddrParts := strings.SplitN(protoAddr, "://", 2)
 		if len(protoAddrParts) != 2 {
@@ -276,6 +282,7 @@ func (cli *DaemonCli) start(opts daemonOptions) (err error) {
 	}).Info("Docker daemon")
 
 	cli.initMiddlewares(api, serverConfig)
+	//初始化路由
 	initRouter(api, d, c)
 
 	cli.d = d
@@ -358,6 +365,7 @@ func loadDaemonCliConfig(opts daemonOptions) (*daemon.Config, error) {
 	config := opts.daemonConfig
 	flags := opts.flags
 	config.Debug = opts.common.Debug
+	//默认监听地址
 	config.Hosts = opts.common.Hosts
 	config.LogLevel = opts.common.LogLevel
 	config.TLS = opts.common.TLS
@@ -369,10 +377,11 @@ func loadDaemonCliConfig(opts daemonOptions) (*daemon.Config, error) {
 		config.CommonTLSOptions.CertFile = opts.common.TLSOptions.CertFile
 		config.CommonTLSOptions.KeyFile = opts.common.TLSOptions.KeyFile
 	}
-
+	//默认配置文件"/etc/docker/daemon.json"
 	if opts.configFile != "" {
 		c, err := daemon.MergeDaemonConfigurations(config, flags, opts.configFile)
 		if err != nil {
+			//解析过程中被修改
 			if flags.Changed(flagDaemonConfigFile) || !os.IsNotExist(err) {
 				return nil, fmt.Errorf("unable to configure the Docker daemon with file %s: %v\n", opts.configFile, err)
 			}
@@ -411,7 +420,7 @@ func initRouter(s *apiserver.Server, d *daemon.Daemon, c *cluster.Cluster) {
 	routers = append(routers, []router.Router{
 		container.NewRouter(d, decoder),
 		image.NewRouter(d, decoder),
-		systemrouter.NewRouter(d, c),
+		systemrouter.NewRouter(d, c), //api/server/router/system---被重命名了
 		volume.NewRouter(d),
 		build.NewRouter(dockerfile.NewBuildManager(d)),
 		swarmrouter.NewRouter(c),

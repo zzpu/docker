@@ -59,8 +59,10 @@ func runPull(dockerCli *command.DockerCli, opts pullOptions) error {
 
 	var tag string
 	switch x := distributionRef.(type) {
+	//标准的
 	case reference.Canonical:
 		tag = x.Digest().String()
+	//name:tag形式
 	case reference.NamedTagged:
 		tag = x.Tag()
 	}

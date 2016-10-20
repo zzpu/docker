@@ -64,8 +64,10 @@ func (commonOpts *CommonOptions) InstallFlags(flags *pflag.FlagSet) {
 	flags.StringVar(&tlsOptions.CAFile, "tlscacert", filepath.Join(dockerCertPath, DefaultCaFile), "Trust certs signed only by this CA")
 	flags.StringVar(&tlsOptions.CertFile, "tlscert", filepath.Join(dockerCertPath, DefaultCertFile), "Path to TLS certificate file")
 	flags.StringVar(&tlsOptions.KeyFile, "tlskey", filepath.Join(dockerCertPath, DefaultKeyFile), "Path to TLS key file")
-
+	// NewNamedListOptsRef creates a reference to a new NamedListOpts struct.
+	//判断监听地址是否正确的函数
 	hostOpt := opts.NewNamedListOptsRef("hosts", &commonOpts.Hosts, opts.ValidateHost)
+	//监听地址，之后会传入config
 	flags.VarP(hostOpt, "host", "H", "Daemon socket(s) to connect to")
 }
 

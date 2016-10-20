@@ -12,6 +12,7 @@ import (
 	"github.com/docker/docker/pkg/reexec"
 	"github.com/docker/docker/pkg/term"
 	"github.com/docker/docker/utils"
+
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 )
@@ -27,9 +28,9 @@ type daemonOptions struct {
 func newDaemonCommand() *cobra.Command {
 	opts := daemonOptions{
 		daemonConfig: daemon.NewConfig(),
-		common:       cliflags.NewCommonOptions(),
+		common:       cliflags.NewCommonOptions(),//comm 选项空白对象
 	}
-
+        //根命令
 	cmd := &cobra.Command{
 		Use:           "dockerd [OPTIONS]",
 		Short:         "A self-sufficient runtime for containers.",
@@ -38,6 +39,7 @@ func newDaemonCommand() *cobra.Command {
 		Args:          cli.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			opts.flags = cmd.Flags()
+			//根命令回调函数
 			return runDaemon(opts)
 		},
 	}
@@ -45,9 +47,13 @@ func newDaemonCommand() *cobra.Command {
 
 	flags := cmd.Flags()
 	flags.BoolVarP(&opts.version, "version", "v", false, "Print version information and quit")
+	//默认配置文件"/etc/docker/daemon.json"
 	flags.StringVar(&opts.configFile, flagDaemonConfigFile, defaultDaemonConfigFile, "Daemon configuration file")
+
+	//通过install，从flag获取选项值，并将相应值传到各个模块
 	opts.common.InstallFlags(flags)
 	opts.daemonConfig.InstallFlags(flags)
+	//在linux下执行空白函数
 	installServiceFlags(flags)
 
 	return cmd
@@ -58,11 +64,12 @@ func runDaemon(opts daemonOptions) error {
 		showVersion()
 		return nil
 	}
-
+        //空的命令行终端
 	daemonCli := NewDaemonCli()
 
 	// On Windows, this may be launching as a service or with an option to
 	// register the service.
+	//在linux下不会执行
 	stop, err := initService(daemonCli)
 	if err != nil {
 		logrus.Fatal(err)
@@ -71,7 +78,7 @@ func runDaemon(opts daemonOptions) error {
 	if stop {
 		return nil
 	}
-
+       //启动一个server
 	err = daemonCli.start(opts)
 	notifyShutdown(err)
 	return err

@@ -191,6 +191,7 @@ func registerService() error {
 }
 
 func unregisterService() error {
+
 	m, err := mgr.Connect()
 	if err != nil {
 		return err
@@ -212,17 +213,18 @@ func unregisterService() error {
 }
 
 func initService(daemonCli *DaemonCli) (bool, error) {
+	//卸载服务
 	if *flUnregisterService {
 		if *flRegisterService {
 			return true, errors.New("--register-service and --unregister-service cannot be used together")
 		}
 		return true, unregisterService()
 	}
-
+        //注册服务
 	if *flRegisterService {
 		return true, registerService()
 	}
-
+        //运行服务？
 	if !*flRunService {
 		return false, nil
 	}

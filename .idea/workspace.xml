@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="17ea82aa-b3c9-4095-b7ef-1d37065327a8" name="Default" comment="">
+    <list default="true" id="43a67c93-ea21-4d07-9a6d-ef1faf580894" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" afterPath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/GOPATH__docker_.xml" afterPath="$PROJECT_DIR$/.idea/libraries/GOPATH__docker_.xml" />
@@ -13,10 +15,15 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cli/command/container/create.go" afterPath="$PROJECT_DIR$/cli/command/container/create.go" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cli/command/container/run.go" afterPath="$PROJECT_DIR$/cli/command/container/run.go" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cli/command/image/list.go" afterPath="$PROJECT_DIR$/cli/command/image/list.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cli/command/image/pull.go" afterPath="$PROJECT_DIR$/cli/command/image/pull.go" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cli/command/node/cmd.go" afterPath="$PROJECT_DIR$/cli/command/node/cmd.go" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cli/command/registry.go" afterPath="$PROJECT_DIR$/cli/command/registry.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cli/flags/common.go" afterPath="$PROJECT_DIR$/cli/flags/common.go" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmd/docker/daemon_none.go" afterPath="$PROJECT_DIR$/cmd/docker/daemon_none.go" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmd/docker/docker.go" afterPath="$PROJECT_DIR$/cmd/docker/docker.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmd/dockerd/daemon.go" afterPath="$PROJECT_DIR$/cmd/dockerd/daemon.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmd/dockerd/docker.go" afterPath="$PROJECT_DIR$/cmd/dockerd/docker.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmd/dockerd/service_windows.go" afterPath="$PROJECT_DIR$/cmd/dockerd/service_windows.go" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contrib/builder/deb/amd64/build.sh" afterPath="$PROJECT_DIR$/contrib/builder/deb/amd64/build.sh" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contrib/builder/deb/amd64/generate.sh" afterPath="$PROJECT_DIR$/contrib/builder/deb/amd64/generate.sh" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contrib/builder/deb/ppc64le/build.sh" afterPath="$PROJECT_DIR$/contrib/builder/deb/ppc64le/build.sh" />
@@ -89,11 +96,13 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/integration-cli/fixtures/auth/docker-credential-shell-test" afterPath="$PROJECT_DIR$/integration-cli/fixtures/auth/docker-credential-shell-test" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/man/generate.sh" afterPath="$PROJECT_DIR$/man/generate.sh" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/man/md2man-all.sh" afterPath="$PROJECT_DIR$/man/md2man-all.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/opts/hosts.go" afterPath="$PROJECT_DIR$/opts/hosts.go" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/profiles/seccomp/default.json" afterPath="$PROJECT_DIR$/profiles/seccomp/default.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/profiles/seccomp/fixtures/example.json" afterPath="$PROJECT_DIR$/profiles/seccomp/fixtures/example.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/CONTRIBUTORS.md" afterPath="$PROJECT_DIR$/project/CONTRIBUTORS.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reference/reference.go" afterPath="$PROJECT_DIR$/reference/reference.go" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/registry/config.go" afterPath="$PROJECT_DIR$/registry/config.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/registry/reference.go" afterPath="$PROJECT_DIR$/registry/reference.go" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/registry/types.go" afterPath="$PROJECT_DIR$/registry/types.go" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/runconfig/opts/parse.go" afterPath="$PROJECT_DIR$/runconfig/opts/parse.go" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/src/github.com/armon/go-metrics/.gitignore" afterPath="$PROJECT_DIR$/vendor/src/github.com/armon/go-metrics/.gitignore" />
@@ -140,6 +149,7 @@
     </list>
     <ignored path="docker.iws" />
     <ignored path=".idea/workspace.xml" />
+    <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -157,102 +167,145 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="create.go" pinned="false" current-in-tab="false">
-        <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/command/container/create.go">
+      <file leaf-file-name="daemon.go" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/cmd/dockerd/daemon.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="833">
-              <caret line="106" column="35" selection-start-line="106" selection-start-column="35" selection-end-line="106" selection-end-column="35" />
+            <state relative-caret-position="294">
+              <caret line="202" column="27" selection-start-line="202" selection-start-column="27" selection-end-line="202" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="hosts.go" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/opts/hosts.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="108">
+              <caret line="45" column="5" selection-start-line="45" selection-start-column="5" selection-end-line="45" selection-end-column="5" />
+              <folding>
+                <element signature="e#14#71#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="hosts_test.go" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/opts/hosts_test.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="108">
+              <caret line="39" column="32" selection-start-line="39" selection-start-column="32" selection-end-line="39" selection-end-column="32" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="opts_unix.go" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/opts/opts_unix.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="95">
+              <caret line="5" column="34" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="hosts_unix.go" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/opts/hosts_unix.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="133">
+              <caret line="7" column="9" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="common.go" pinned="false" current-in-tab="false">
+        <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/flags/common.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-333">
+              <caret line="51" column="30" selection-start-line="51" selection-start-column="16" selection-end-line="51" selection-end-column="30" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="config_unix.go" pinned="false" current-in-tab="false">
+        <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/daemon/config_unix.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="730">
+              <caret line="84" column="79" selection-start-line="84" selection-start-column="79" selection-end-line="84" selection-end-column="79" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="config.go" pinned="false" current-in-tab="false">
+        <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/daemon/config.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="256">
+              <caret line="125" column="8" selection-start-line="125" selection-start-column="8" selection-end-line="125" selection-end-column="8" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="docker.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cmd/docker/docker.go">
+        <entry file="file://$PROJECT_DIR$/cmd/dockerd/docker.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="63" column="23" selection-start-line="63" selection-start-column="23" selection-end-line="63" selection-end-column="23" />
-              <folding />
+            <state relative-caret-position="408">
+              <caret line="81" column="27" selection-start-line="81" selection-start-column="27" selection-end-line="81" selection-end-column="27" />
+              <folding>
+                <element signature="e#14#387#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="commands.go" pinned="false" current-in-tab="false">
-        <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/command/commands/commands.go">
+      <file leaf-file-name="hosts.go" pinned="false" current-in-tab="false">
+        <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/opts/hosts.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="627">
-              <caret line="68" column="35" selection-start-line="68" selection-start-column="35" selection-end-line="68" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pull.go" pinned="false" current-in-tab="true">
-        <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/command/image/pull.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="53" column="47" selection-start-line="53" selection-start-column="47" selection-end-line="53" selection-end-column="47" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="jsonmessage.go" pinned="false" current-in-tab="false">
-        <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/pkg/jsonmessage/jsonmessage.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-553">
-              <caret line="152" column="5" selection-start-line="152" selection-start-column="5" selection-end-line="152" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="client.go" pinned="false" current-in-tab="false">
-        <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/client/client.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="19" column="5" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="image_create.go" pinned="false" current-in-tab="false">
-        <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/client/image_create.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="14" column="19" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="reference.go" pinned="false" current-in-tab="false">
-        <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/reference/reference.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="14" column="28" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="28" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="reference.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/src/github.com/docker/distribution/reference/reference.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="359">
-              <caret line="124" column="5" selection-start-line="124" selection-start-column="5" selection-end-line="124" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="request.go" pinned="false" current-in-tab="false">
-        <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/client/request.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="302">
-              <caret line="33" column="19" selection-start-line="33" selection-start-column="19" selection-end-line="33" selection-end-column="19" />
-              <folding />
+            <state relative-caret-position="108">
+              <caret line="33" column="72" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="72" />
+              <folding>
+                <marker date="1476957488380" expanded="false" signature="21:71" placeholder="..." />
+                <marker date="1476957488380" expanded="true" signature="77:1171" placeholder="(...)" />
+                <marker date="1476957488380" expanded="true" signature="80:375" placeholder="/.../" />
+                <marker date="1476957488380" expanded="true" signature="400:483" placeholder="/.../" />
+                <marker date="1476957488380" expanded="true" signature="511:664" placeholder="/.../" />
+                <marker date="1476957488380" expanded="true" signature="1303:1762" placeholder="{...}" />
+                <marker date="1476957488380" expanded="true" signature="1431:1575" placeholder="{...}" />
+                <marker date="1476957488380" expanded="true" signature="1548:1572" placeholder="{...}" />
+                <marker date="1476957488380" expanded="true" signature="1577:1743" placeholder="/.../" />
+                <marker date="1476957488380" expanded="true" signature="1881:2202" placeholder="{...}" />
+                <marker date="1476957488380" expanded="true" signature="1930:2073" placeholder="{...}" />
+                <marker date="1476957488380" expanded="true" signature="1951:2000" placeholder="{...}" />
+                <marker date="1476957488380" expanded="true" signature="2006:2070" placeholder="{...}" />
+                <marker date="1476957488380" expanded="true" signature="2079:2182" placeholder="{...}" />
+                <marker date="1476957488380" expanded="true" signature="2155:2179" placeholder="{...}" />
+                <marker date="1476957488380" expanded="true" signature="2204:2422" placeholder="/.../" />
+                <marker date="1476957488380" expanded="true" signature="2479:2991" placeholder="{...}" />
+                <marker date="1476957488380" expanded="true" signature="2572:2620" placeholder="{...}" />
+                <marker date="1476957488380" expanded="true" signature="2596:2617" placeholder="{...}" />
+                <marker date="1476957488380" expanded="true" signature="2643:2989" placeholder="{...}" />
+                <marker date="1476957488380" expanded="true" signature="2657:2709" placeholder="..." />
+                <marker date="1476957488380" expanded="true" signature="2723:2794" placeholder="..." />
+                <marker date="1476957488380" expanded="true" signature="2809:2880" placeholder="..." />
+                <marker date="1476957488380" expanded="true" signature="2892:2911" placeholder="..." />
+                <marker date="1476957488380" expanded="true" signature="2921:2986" placeholder="..." />
+                <marker date="1476957488380" expanded="true" signature="3357:3606" placeholder="{...}" />
+                <marker date="1476957488380" expanded="true" signature="3439:3514" placeholder="{...}" />
+                <marker date="1476957488380" expanded="true" signature="3530:3555" placeholder="{...}" />
+                <marker date="1476957488380" expanded="true" signature="3608:3955" placeholder="/.../" />
+                <marker date="1476957488380" expanded="true" signature="4195:4267" placeholder="{...}" />
+                <marker date="1476957488380" expanded="true" signature="4406:4427" placeholder="{...}" />
+                <marker date="1476957488380" expanded="true" signature="4429:4607" placeholder="/.../" />
+                <marker date="1476957488380" expanded="true" signature="4723:4744" placeholder="{...}" />
+                <marker date="1476957488380" expanded="true" signature="4806:4915" placeholder="{...}" />
+                <marker date="1476957488380" expanded="true" signature="4931:5003" placeholder="{...}" />
+                <marker date="1476957488380" expanded="true" signature="5020:5045" placeholder="{...}" />
+                <marker date="1476957488380" expanded="true" signature="5061:5086" placeholder="{...}" />
+                <marker date="1476957488380" expanded="true" signature="5142:5214" placeholder="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -270,12 +323,11 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="Z:/opt/goHome/workspace/src/github.com/docker/docker/registry/config.go" />
-        <option value="Z:/opt/goHome/workspace/src/github.com/docker/docker/registry/types.go" />
-        <option value="Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/command/container/create.go" />
-        <option value="Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/command/registry.go" />
-        <option value="Z:/opt/goHome/workspace/src/github.com/docker/docker/reference/reference.go" />
-        <option value="Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/command/image/pull.go" />
+        <option value="Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/flags/common.go" />
+        <option value="$PROJECT_DIR$/cmd/dockerd/docker.go" />
+        <option value="$PROJECT_DIR$/opts/hosts.go" />
+        <option value="Z:/opt/goHome/workspace/src/github.com/docker/docker/opts/hosts.go" />
+        <option value="$PROJECT_DIR$/cmd/dockerd/daemon.go" />
       </list>
     </option>
   </component>
@@ -310,7 +362,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -340,7 +391,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="cmd" />
+              <option name="myItemId" value="opts" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -358,7 +409,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="docker" />
+              <option name="myItemId" value="dockerd" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -372,23 +423,20 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="cli" />
+              <option name="myItemId" value="cmd" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
-    <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="configurable.Global.libraries.is.expanded" value="true" />
-    <property name="configurable.Project.libraries.is.expanded" value="true" />
-    <property name="configurable.Module.libraries.is.expanded" value="false" />
     <property name="go.libraries.notification.had.been.shown" value="true" />
+    <property name="settings.editor.selected.configurable" value="com.goide.configuration.GoConfigurableProvider$GoProjectSettingsConfigurable" />
+    <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
@@ -458,20 +506,20 @@
       <method />
     </configuration>
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
-      <module name="" />
+      <module name="docker" />
       <working_directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
       <kind value="FILE" />
       <method />
     </configuration>
     <configuration default="true" type="GoRunFileConfiguration" factoryName="Go Single File">
-      <module name="" />
+      <module name="docker" />
       <working_directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
       <method />
     </configuration>
     <configuration default="true" type="GoTestRunConfiguration" factoryName="Go Test">
-      <module name="" />
+      <module name="docker" />
       <working_directory value="$PROJECT_DIR$" />
       <framework value="gotest" />
       <kind value="DIRECTORY" />
@@ -649,19 +697,16 @@
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
   </component>
-  <component name="StructureViewFactory">
-    <option name="ACTIVE_ACTIONS" value=",ALPHA_COMPARATOR,EXPORTABILITY_SORTER" />
-  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="17ea82aa-b3c9-4095-b7ef-1d37065327a8" name="Default" comment="" />
-      <created>1476245104773</created>
+      <changelist id="43a67c93-ea21-4d07-9a6d-ef1faf580894" name="Default" comment="" />
+      <created>1476769232890</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1476245104773</updated>
+      <updated>1476769232890</updated>
     </task>
     <servers />
   </component>
@@ -678,8 +723,9 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1641791" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24946696" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1673774" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22269808" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -687,10 +733,8 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -709,401 +753,445 @@
     <breakpoint-manager />
     <watches-manager />
   </component>
-  <component name="antWorkspaceConfiguration">
-    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
-    <option name="FILTER_TARGETS" value="false" />
-  </component>
   <component name="editorHistoryManager">
-    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/command/container/create.go">
+    <entry file="file://$PROJECT_DIR$/cmd/dockerd/daemon.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2109">
+          <caret line="153" column="17" selection-start-line="153" selection-start-column="17" selection-end-line="153" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/flags/common.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="44" column="5" selection-start-line="44" selection-start-column="5" selection-end-line="44" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cliconfig/config.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="31" column="5" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/opts/opts.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2318">
+          <caret line="129" column="35" selection-start-line="129" selection-start-column="35" selection-end-line="129" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/daemon/config_unix.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1311">
+          <caret line="78" column="112" selection-start-line="78" selection-start-column="112" selection-end-line="78" selection-end-column="112" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/daemon/config.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2071">
+          <caret line="125" column="8" selection-start-line="125" selection-start-column="8" selection-end-line="125" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cmd/dockerd/docker.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#14#387#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cmd/dockerd/service_unsupported.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="12" column="5" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/command/registry.go">
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/opts/hosts.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="874">
-          <caret line="63" column="5" selection-start-line="63" selection-start-column="5" selection-end-line="63" selection-end-column="5" />
+        <state relative-caret-position="437">
+          <caret line="29" column="5" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/registry/config.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4750">
-          <caret line="261" column="5" selection-start-line="261" selection-start-column="5" selection-end-line="261" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/registry/types.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1159">
-          <caret line="64" column="8" selection-start-line="64" selection-start-column="8" selection-end-line="64" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/api/types/registry/registry.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="8" column="5" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/command/image/trust.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8683">
-          <caret line="494" column="5" selection-start-line="494" selection-start-column="5" selection-end-line="494" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/api/types/container/config.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="855">
-          <caret line="50" column="8" selection-start-line="50" selection-start-column="8" selection-end-line="50" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/reference/reference.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="874">
-          <caret line="54" column="5" selection-start-line="54" selection-start-column="5" selection-end-line="54" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/src/github.com/docker/distribution/reference/reference.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3686">
-          <caret line="199" column="5" selection-start-line="199" selection-start-column="5" selection-end-line="199" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Go/src/regexp/regexp.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16853">
-          <caret line="896" column="18" selection-start-line="896" selection-start-column="18" selection-end-line="896" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/command/container/create.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/command/registry.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="874">
-          <caret line="63" column="5" selection-start-line="63" selection-start-column="5" selection-end-line="63" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/registry/config.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4750">
-          <caret line="261" column="5" selection-start-line="261" selection-start-column="5" selection-end-line="261" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/registry/types.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1159">
-          <caret line="64" column="8" selection-start-line="64" selection-start-column="8" selection-end-line="64" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/api/types/registry/registry.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="8" column="5" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/command/image/trust.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8683">
-          <caret line="494" column="5" selection-start-line="494" selection-start-column="5" selection-end-line="494" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/api/types/container/config.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="855">
-          <caret line="50" column="8" selection-start-line="50" selection-start-column="8" selection-end-line="50" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/reference/reference.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="874">
-          <caret line="54" column="5" selection-start-line="54" selection-start-column="5" selection-end-line="54" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/src/github.com/docker/distribution/reference/reference.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3686">
-          <caret line="199" column="5" selection-start-line="199" selection-start-column="5" selection-end-line="199" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Go/src/regexp/regexp.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16853">
-          <caret line="896" column="18" selection-start-line="896" selection-start-column="18" selection-end-line="896" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/client.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cmd/docker/docker.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="912">
-          <caret line="63" column="21" selection-start-line="63" selection-start-column="21" selection-end-line="63" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/command/commands/commands.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="32" column="30" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/command/container/run.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2299">
-          <caret line="143" column="38" selection-start-line="143" selection-start-column="38" selection-end-line="143" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/command/container/create.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/reference/reference.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="28" column="8" selection-start-line="28" selection-start-column="8" selection-end-line="28" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/client.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2040">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/command/container/run.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="143" column="37" selection-start-line="143" selection-start-column="37" selection-end-line="143" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/api/types/container/config.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="855">
-          <caret line="50" column="8" selection-start-line="50" selection-start-column="8" selection-end-line="50" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/command/image/trust.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8683">
-          <caret line="494" column="5" selection-start-line="494" selection-start-column="5" selection-end-line="494" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/api/types/registry/registry.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="8" column="5" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/registry/types.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1159">
-          <caret line="64" column="8" selection-start-line="64" selection-start-column="8" selection-end-line="64" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/registry/config.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4750">
-          <caret line="261" column="5" selection-start-line="261" selection-start-column="5" selection-end-line="261" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Go/src/regexp/regexp.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16853">
-          <caret line="896" column="18" selection-start-line="896" selection-start-column="18" selection-end-line="896" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/command/cli.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
-          <caret line="136" column="26" selection-start-line="136" selection-start-column="26" selection-end-line="136" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/api/types/types.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="217" column="5" selection-start-line="217" selection-start-column="5" selection-end-line="217" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/client/info.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="24" column="24" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/client/container_start.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="11" column="19" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/client/interface.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="69" column="8" selection-start-line="69" selection-start-column="8" selection-end-line="69" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/command/registry.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="65" column="5" selection-start-line="65" selection-start-column="5" selection-end-line="65" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/client/request.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="33" column="19" selection-start-line="33" selection-start-column="19" selection-end-line="33" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/client/image_create.go">
+    <entry file="file://$PROJECT_DIR$/cmd/dockerd/daemon_unix.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
-          <caret line="14" column="19" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="19" />
+          <caret line="20" column="6" selection-start-line="20" selection-start-column="6" selection-end-line="20" selection-end-column="6" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/client/client.go">
+    <entry file="file://$PROJECT_DIR$/cmd/dockerd/daemon.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6099">
+          <caret line="363" column="27" selection-start-line="363" selection-start-column="27" selection-end-line="363" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cmd/dockerd/docker.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="22" column="32" selection-start-line="22" selection-start-column="32" selection-end-line="22" selection-end-column="32" />
+          <folding>
+            <element signature="e#14#387#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/daemon/config_unix.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/opts/hosts.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="722">
+          <caret line="44" column="5" selection-start-line="44" selection-start-column="5" selection-end-line="44" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/opts/opts_unix.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/pkg/listeners/listeners_unix.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="17" column="5" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Go/src/crypto/tls/common.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3306">
+          <caret line="187" column="8" selection-start-line="187" selection-start-column="8" selection-end-line="187" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/api/server/server.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="551">
+          <caret line="43" column="5" selection-start-line="43" selection-start-column="5" selection-end-line="43" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cmd/dockerd/daemon_unix.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="35" column="5" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/Sirupsen/logrus/exported.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="23" column="5" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/pkg/jsonlog/time_marshalling.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
-          <caret line="19" column="5" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
-          <folding />
+          <caret line="12" column="8" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="8" />
         </state>
       </provider>
     </entry>
-    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/command/container/create.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="833">
-          <caret line="106" column="35" selection-start-line="106" selection-start-column="35" selection-end-line="106" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/pkg/jsonmessage/jsonmessage.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-553">
-          <caret line="152" column="5" selection-start-line="152" selection-start-column="5" selection-end-line="152" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cmd/docker/docker.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="63" column="23" selection-start-line="63" selection-start-column="23" selection-end-line="63" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/command/commands/commands.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="627">
-          <caret line="68" column="35" selection-start-line="68" selection-start-column="35" selection-end-line="68" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/src/github.com/docker/distribution/reference/reference.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="359">
-          <caret line="124" column="5" selection-start-line="124" selection-start-column="5" selection-end-line="124" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/reference/reference.go">
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/utils/stubs.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
-          <caret line="14" column="28" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="28" />
+          <caret line="6" column="5" selection-start-line="6" selection-start-column="5" selection-end-line="6" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cmd/dockerd/daemon_linux.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cmd/dockerd/daemon_windows.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="22" column="5" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/command/image/pull.go">
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/daemon/logger/factory.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="53" column="47" selection-start-line="53" selection-start-column="47" selection-end-line="53" selection-end-column="47" />
+        <state relative-caret-position="537">
+          <caret line="89" column="5" selection-start-line="89" selection-start-column="5" selection-end-line="89" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/dockerversion/version_lib.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" column="8" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/api/server/server.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="551">
+          <caret line="43" column="5" selection-start-line="43" selection-start-column="5" selection-end-line="43" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Go/src/crypto/tls/common.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3306">
+          <caret line="187" column="8" selection-start-line="187" selection-start-column="8" selection-end-line="187" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/pkg/listeners/listeners_unix.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="17" column="5" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/Sirupsen/logrus/exported.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="23" column="5" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/opts/opts_unix.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cmd/dockerd/service_unsupported.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="12" column="5" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/spf13/pflag/flag.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="634">
+          <caret line="636" column="18" selection-start-line="636" selection-start-column="18" selection-end-line="636" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cli/command/cli.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="115" column="25" selection-start-line="115" selection-start-column="25" selection-end-line="115" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/required.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="10" column="26" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="26" />
+          <folding>
+            <element signature="e#13#68#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/src/github.com/spf13/cobra/command.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="455">
+          <caret line="54" column="8" selection-start-line="54" selection-start-column="8" selection-end-line="54" selection-end-column="8" />
+          <folding>
+            <element signature="e#839#945#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/spf13/pflag/string.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="35" column="18" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cmd/dockerd/daemon_unix.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="20" column="6" selection-start-line="20" selection-start-column="6" selection-end-line="20" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/opts/opts.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="129" column="36" selection-start-line="129" selection-start-column="36" selection-end-line="129" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cliconfig/config.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="31" column="5" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/daemon/config_unix.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="730">
+          <caret line="84" column="79" selection-start-line="84" selection-start-column="79" selection-end-line="84" selection-end-column="79" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cmd/dockerd/docker.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="81" column="27" selection-start-line="81" selection-start-column="27" selection-end-line="81" selection-end-column="27" />
+          <folding>
+            <element signature="e#14#387#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/daemon/config.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="125" column="8" selection-start-line="125" selection-start-column="8" selection-end-line="125" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/cli/flags/common.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-333">
+          <caret line="51" column="30" selection-start-line="51" selection-start-column="16" selection-end-line="51" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/opts/hosts_unix.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="7" column="9" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/opts/opts_unix.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="34" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/opts/hosts_test.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="39" column="32" selection-start-line="39" selection-start-column="32" selection-end-line="39" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/opts/hosts.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="45" column="5" selection-start-line="45" selection-start-column="5" selection-end-line="45" selection-end-column="5" />
+          <folding>
+            <element signature="e#14#71#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/opt/goHome/workspace/src/github.com/docker/docker/opts/hosts.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="33" column="72" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="72" />
+          <folding>
+            <marker date="1476957488380" expanded="false" signature="21:71" placeholder="..." />
+            <marker date="1476957488380" expanded="true" signature="77:1171" placeholder="(...)" />
+            <marker date="1476957488380" expanded="true" signature="80:375" placeholder="/.../" />
+            <marker date="1476957488380" expanded="true" signature="400:483" placeholder="/.../" />
+            <marker date="1476957488380" expanded="true" signature="511:664" placeholder="/.../" />
+            <marker date="1476957488380" expanded="true" signature="1303:1762" placeholder="{...}" />
+            <marker date="1476957488380" expanded="true" signature="1431:1575" placeholder="{...}" />
+            <marker date="1476957488380" expanded="true" signature="1548:1572" placeholder="{...}" />
+            <marker date="1476957488380" expanded="true" signature="1577:1743" placeholder="/.../" />
+            <marker date="1476957488380" expanded="true" signature="1881:2202" placeholder="{...}" />
+            <marker date="1476957488380" expanded="true" signature="1930:2073" placeholder="{...}" />
+            <marker date="1476957488380" expanded="true" signature="1951:2000" placeholder="{...}" />
+            <marker date="1476957488380" expanded="true" signature="2006:2070" placeholder="{...}" />
+            <marker date="1476957488380" expanded="true" signature="2079:2182" placeholder="{...}" />
+            <marker date="1476957488380" expanded="true" signature="2155:2179" placeholder="{...}" />
+            <marker date="1476957488380" expanded="true" signature="2204:2422" placeholder="/.../" />
+            <marker date="1476957488380" expanded="true" signature="2479:2991" placeholder="{...}" />
+            <marker date="1476957488380" expanded="true" signature="2572:2620" placeholder="{...}" />
+            <marker date="1476957488380" expanded="true" signature="2596:2617" placeholder="{...}" />
+            <marker date="1476957488380" expanded="true" signature="2643:2989" placeholder="{...}" />
+            <marker date="1476957488380" expanded="true" signature="2657:2709" placeholder="..." />
+            <marker date="1476957488380" expanded="true" signature="2723:2794" placeholder="..." />
+            <marker date="1476957488380" expanded="true" signature="2809:2880" placeholder="..." />
+            <marker date="1476957488380" expanded="true" signature="2892:2911" placeholder="..." />
+            <marker date="1476957488380" expanded="true" signature="2921:2986" placeholder="..." />
+            <marker date="1476957488380" expanded="true" signature="3357:3606" placeholder="{...}" />
+            <marker date="1476957488380" expanded="true" signature="3439:3514" placeholder="{...}" />
+            <marker date="1476957488380" expanded="true" signature="3530:3555" placeholder="{...}" />
+            <marker date="1476957488380" expanded="true" signature="3608:3955" placeholder="/.../" />
+            <marker date="1476957488380" expanded="true" signature="4195:4267" placeholder="{...}" />
+            <marker date="1476957488380" expanded="true" signature="4406:4427" placeholder="{...}" />
+            <marker date="1476957488380" expanded="true" signature="4429:4607" placeholder="/.../" />
+            <marker date="1476957488380" expanded="true" signature="4723:4744" placeholder="{...}" />
+            <marker date="1476957488380" expanded="true" signature="4806:4915" placeholder="{...}" />
+            <marker date="1476957488380" expanded="true" signature="4931:5003" placeholder="{...}" />
+            <marker date="1476957488380" expanded="true" signature="5020:5045" placeholder="{...}" />
+            <marker date="1476957488380" expanded="true" signature="5061:5086" placeholder="{...}" />
+            <marker date="1476957488380" expanded="true" signature="5142:5214" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cmd/dockerd/daemon.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="202" column="27" selection-start-line="202" selection-start-column="27" selection-end-line="202" selection-end-column="27" />
           <folding />
         </state>
       </provider>

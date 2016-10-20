@@ -52,6 +52,7 @@ func (dr digestReference) String() string {
 }
 
 // ParseReference parses a reference into either a digest or tag reference
+//解析到digest 或 tag
 func ParseReference(ref string) Reference {
 	if strings.Contains(ref, ":") {
 		dgst, err := digest.ParseDigest(ref)
