@@ -12,7 +12,7 @@ import (
 	"strconv"
 	"strings"
 	"time"
-
+	"github.com/Sirupsen/logrus"
 	"github.com/docker/distribution"
 	"github.com/docker/distribution/context"
 	"github.com/docker/distribution/digest"
@@ -453,7 +453,7 @@ func (ms *manifests) Get(ctx context.Context, dgst digest.Digest, options ...dis
 	if err != nil {
 		return nil, err
 	}
-
+	logrus.Debugf("Get manifest from:%s", u)
 	req, err := http.NewRequest("GET", u, nil)
 	if err != nil {
 		return nil, err
@@ -471,6 +471,7 @@ func (ms *manifests) Get(ctx context.Context, dgst digest.Digest, options ...dis
 	if err != nil {
 		return nil, err
 	}
+
 	defer resp.Body.Close()
 	if resp.StatusCode == http.StatusNotModified {
 		return nil, distribution.ErrManifestNotModified
@@ -491,6 +492,7 @@ func (ms *manifests) Get(ctx context.Context, dgst digest.Digest, options ...dis
 		if err != nil {
 			return nil, err
 		}
+		logrus.Debug("Manifest body:",body)
 		return m, nil
 	}
 	return nil, HandleErrorResponse(resp)

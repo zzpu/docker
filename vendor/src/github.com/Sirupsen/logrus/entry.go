@@ -6,6 +6,9 @@ import (
 	"io"
 	"os"
 	"time"
+	"runtime"
+	"path"
+	"strconv"
 )
 
 // Defines the key when adding errors using WithError.
@@ -116,7 +119,14 @@ func (entry Entry) log(level Level, msg string) {
 
 func (entry *Entry) Debug(args ...interface{}) {
 	if entry.Logger.Level >= DebugLevel {
-		entry.log(DebugLevel, fmt.Sprint(args...))
+		_, file, line, ok := runtime.Caller(3)
+		if !ok {
+			file = "???"
+			line = 0
+		}
+		_, filename := path.Split(file)
+
+		entry.log(DebugLevel, "[" + filename + ":" + strconv.FormatInt(int64(line), 10) + "] "+fmt.Sprint(args...))
 	}
 }
 

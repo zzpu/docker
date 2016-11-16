@@ -30,7 +30,7 @@ func newDaemonCommand() *cobra.Command {
 		daemonConfig: daemon.NewConfig(),
 		common:       cliflags.NewCommonOptions(),//comm 选项空白对象
 	}
-        //根命令
+	//根命令
 	cmd := &cobra.Command{
 		Use:           "dockerd [OPTIONS]",
 		Short:         "A self-sufficient runtime for containers.",
@@ -52,6 +52,7 @@ func newDaemonCommand() *cobra.Command {
 
 	//通过install，从flag获取选项值，并将相应值传到各个模块
 	opts.common.InstallFlags(flags)
+	//守护进程选项，在loadDaemonCliConfig函数中要用到
 	opts.daemonConfig.InstallFlags(flags)
 	//在linux下执行空白函数
 	installServiceFlags(flags)
@@ -64,7 +65,7 @@ func runDaemon(opts daemonOptions) error {
 		showVersion()
 		return nil
 	}
-        //空的命令行终端
+	//空的命令行终端
 	daemonCli := NewDaemonCli()
 
 	// On Windows, this may be launching as a service or with an option to
@@ -78,7 +79,7 @@ func runDaemon(opts daemonOptions) error {
 	if stop {
 		return nil
 	}
-       //启动一个server
+	//启动一个server
 	err = daemonCli.start(opts)
 	notifyShutdown(err)
 	return err

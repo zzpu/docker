@@ -73,7 +73,7 @@ func (s *imageRouter) postImagesCreate(ctx context.Context, w http.ResponseWrite
 	if err := httputils.ParseForm(r); err != nil {
 		return err
 	}
-
+	// Calling POST /v1.25/images/create?fromImage=gplang&tag=latest
 	var (
 		image   = r.Form.Get("fromImage")
 		repo    = r.Form.Get("repo")
@@ -83,7 +83,7 @@ func (s *imageRouter) postImagesCreate(ctx context.Context, w http.ResponseWrite
 		output  = ioutils.NewWriteFlusher(w)
 	)
 	defer output.Close()
-
+	//设置回应的http头，说明数据是json
 	w.Header().Set("Content-Type", "application/json")
 
 	if image != "" { //pull
@@ -104,7 +104,9 @@ func (s *imageRouter) postImagesCreate(ctx context.Context, w http.ResponseWrite
 				authConfig = &types.AuthConfig{}
 			}
 		}
-
+		// Backend is all the methods that need to be implemented
+		// to provide image specific functionality（功能）.
+		//在Daemon类型实现了该API接口，在docker/daemon/image_pull.go
 		err = s.backend.PullImage(ctx, image, tag, metaHeaders, authConfig, output)
 	} else { //import
 		src := r.Form.Get("fromSrc")

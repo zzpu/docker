@@ -79,6 +79,9 @@ func newPuller(endpoint registry.APIEndpoint, repoInfo *registry.RepositoryInfo,
 // tag may be either empty, or indicate a specific tag to pull.
 func Pull(ctx context.Context, ref reference.Named, imagePullConfig *ImagePullConfig) error {
 	// Resolve the Repository name from fqn to RepositoryInfo
+	//解析仓库信息
+	//在/docker/registry/config.go的 newServiceConfig初始化仓库地址和仓库镜像地址，其中有官方的和通过选项insecure-registry自定义的
+	//实质是通过IndexName找到IndexInfo，有用的也只有IndexName
 	repoInfo, err := imagePullConfig.RegistryService.ResolveRepository(ref)
 	if err != nil {
 		return err
@@ -88,7 +91,10 @@ func Pull(ctx context.Context, ref reference.Named, imagePullConfig *ImagePullCo
 	if err := ValidateRepoName(repoInfo.Name()); err != nil {
 		return err
 	}
-
+	// APIEndpoint represents a remote API endpoint
+	//寻找接入点
+	// /docker/cmd/dockerddaemon.go----大约125 和 248
+	//如果没有镜像仓库服务器地址，默认使用V2仓库地址registry-1.docker.io
 	endpoints, err := imagePullConfig.RegistryService.LookupPullEndpoints(repoInfo.Hostname())
 	if err != nil {
 		return err
@@ -116,6 +122,7 @@ func Pull(ctx context.Context, ref reference.Named, imagePullConfig *ImagePullCo
 		// retry for any of these.
 		confirmedTLSRegistries = make(map[string]struct{})
 	)
+	//包含镜像服务器地址
 	for _, endpoint := range endpoints {
 		if confirmedV2 && endpoint.Version == registry.APIVersion1 {
 			logrus.Debugf("Skipping v1 endpoint %s because v2 registry was detected", endpoint.URL)
@@ -130,7 +137,7 @@ func Pull(ctx context.Context, ref reference.Named, imagePullConfig *ImagePullCo
 		}
 
 		logrus.Debugf("Trying to pull %s from %s %s", repoInfo.Name(), endpoint.URL, endpoint.Version)
-
+		//针对每一个endpoint，建立一个Puller,newPuller会根据endpoint的形式（endpoint应该遵循restful api的设计，url中含有版本号），决定采用version1还是version2版本
 		puller, err := newPuller(endpoint, repoInfo, imagePullConfig)
 		if err != nil {
 			lastErr = err

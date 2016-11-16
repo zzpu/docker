@@ -21,12 +21,13 @@ func (daemon *Daemon) PullImage(ctx context.Context, image, tag string, metaHead
 	// trailing :. This is ugly, but let's not break API
 	// compatibility.
 	image = strings.TrimSuffix(image, ":")
-
+	//fromImage=gplang&tag=latest
+	//name格式: xxx:yyy | @zzz  xxx 代表镜像名,如果没有加上仓库地址:docker.io，会使用默认的仓库地址， yyy ：代表版本 zzz： 代表摘要
 	ref, err := reference.ParseNamed(image)
 	if err != nil {
 		return err
 	}
-
+	//如果tag不为空，则要看标签还是摘要，或者什么也不是
 	if tag != "" {
 		// The "tag" could actually be a digest.
 		var dgst digest.Digest
@@ -91,7 +92,7 @@ func (daemon *Daemon) pullImageWithReference(ctx context.Context, ref reference.
 		MetaHeaders:      metaHeaders,
 		AuthConfig:       authConfig,
 		ProgressOutput:   progress.ChanOutput(progressChan),
-		RegistryService:  daemon.RegistryService,
+		RegistryService:  daemon.RegistryService,//默认regist服务接口实现的实例
 		ImageEventLogger: daemon.LogImageEvent,
 		MetadataStore:    daemon.distributionMetadataStore,
 		ImageStore:       daemon.imageStore,

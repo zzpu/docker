@@ -62,6 +62,8 @@ type v2Puller struct {
 
 func (p *v2Puller) Pull(ctx context.Context, ref reference.Named) (err error) {
 	// TODO(tiborvass): was ReceiveTimeout
+	//creates an HTTP transpfort
+	logrus.Debugf("AuthName: %s AuthPasswd: %s Auth:%s", p.config.AuthConfig.Username,p.config.AuthConfig.Password,p.config.AuthConfig.Auth)
 	p.repo, p.confirmedV2, err = NewV2Repository(ctx, p.repoInfo, p.endpoint, p.config.MetaHeaders, p.config.AuthConfig, "pull")
 	if err != nil {
 		logrus.Warnf("Error getting v2 registry: %v", err)
@@ -83,15 +85,22 @@ func (p *v2Puller) Pull(ctx context.Context, ref reference.Named) (err error) {
 	}
 	return err
 }
-
+//首先获得tagName，通过manifest获得tags清单，一个repository可能对应着多个tag，docker的镜像呈现的是树形关系，
+// 比如ubuntu是一个repository，实际的存储情况是可能会有一个基础镜像base，这个基础镜像上，增加一些新的内容（实际上就是增加一个新的读写层，写入东西进去）就会形成新的镜像，
+// 比如：ubuntu:12.12是一个镜像，那么ubuntu:14.01是在前者基础上进行若干修改操作而形成的新的镜像；所以要下载ubuntu:14.01这个镜像的话，必须要将其父镜像完全下载下来，这样下载之后的镜像才是完整的；
+//
 func (p *v2Puller) pullV2Repository(ctx context.Context, ref reference.Named) (err error) {
 	var layersDownloaded bool
+	//镜像名带tag
 	if !reference.IsNameOnly(ref) {
+		//真正进入镜像下载
 		layersDownloaded, err = p.pullV2Tag(ctx, ref)
 		if err != nil {
 			return err
 		}
+		//只有镜像名
 	} else {
+		// 在docker/distribution/registry/client/repository.go生成一个tag对象，tag对象的All函数返回所有tag
 		tags, err := p.repo.Tags(ctx).All(ctx)
 		if err != nil {
 			// If this repository doesn't exist on V2, we should
@@ -104,6 +113,7 @@ func (p *v2Puller) pullV2Repository(ctx context.Context, ref reference.Named) (e
 		// error later on.
 		p.confirmedV2 = true
 
+		//拉取所有tag
 		for _, tag := range tags {
 			tagRef, err := reference.WithTag(ref, tag)
 			if err != nil {
@@ -161,6 +171,7 @@ func (ld *v2LayerDescriptor) Download(ctx context.Context, progressOutput progre
 	)
 
 	if ld.tmpFile == nil {
+		//建立临时镜像文件/var/lib/docker/tmp/GetImageBlobxxxx，该临时文件需要调用者删除
 		ld.tmpFile, err = createDownloadFile()
 		if err != nil {
 			return nil, 0, xfer.DoNotRetry{Err: err}
@@ -183,9 +194,12 @@ func (ld *v2LayerDescriptor) Download(ctx context.Context, progressOutput progre
 			logrus.Debugf("attempting to resume download of %q from %d bytes", ld.digest, offset)
 		}
 	}
-
+	//用于存放镜像数据
 	tmpFile := ld.tmpFile
 
+	//打开二进制数据块
+	//在 docker/distribution/registry/client/transport/http_reader.go实现的 ReadSeekCloser
+	//支持断点续传的io对象
 	layerDownload, err := ld.open(ctx)
 	if err != nil {
 		logrus.Errorf("Error initiating layer download: %v", err)
@@ -237,7 +251,7 @@ func (ld *v2LayerDescriptor) Download(ctx context.Context, progressOutput progre
 			return nil, 0, xfer.DoNotRetry{Err: err}
 		}
 	}
-
+	//将缓存中的数据拷贝到文件
 	_, err = io.Copy(tmpFile, io.TeeReader(reader, ld.verifier))
 	if err != nil {
 		if err == transport.ErrWrongCodeForByteRange {
@@ -328,6 +342,12 @@ func (ld *v2LayerDescriptor) Registered(diffID layer.DiffID) {
 }
 
 func (p *v2Puller) pullV2Tag(ctx context.Context, ref reference.Named) (tagUpdated bool, err error) {
+	//                   显示
+	//在NewV2Repository生成
+	//在/docker/distribution/registry/client/repository.go中实现
+	//传入参数ctx其实是没啥用
+	//获取一个镜像清单操作集
+	logrus.Debugf("PullV2Tag....")
 	manSvc, err := p.repo.Manifests(ctx)
 	if err != nil {
 		return false, err
@@ -341,12 +361,16 @@ func (p *v2Puller) pullV2Tag(ctx context.Context, ref reference.Named) (tagUpdat
 		// NOTE: not using TagService.Get, since it uses HEAD requests
 		// against the manifests endpoint, which are not supported by
 		// all registry versions.
+		//在docker/distribution/registry/client/repository.go
+		//获得一个镜像清单
+
 		manifest, err = manSvc.Get(ctx, "", distribution.WithTag(tagged.Tag()))
 		if err != nil {
 			return false, allowV1Fallback(err)
 		}
 		tagOrDigest = tagged.Tag()
 	} else if digested, isDigested := ref.(reference.Canonical); isDigested {
+		logrus.Debugf("Get manifest with digest: %s", digested.Digest())
 		manifest, err = manSvc.Get(ctx, digested.Digest())
 		if err != nil {
 			return false, err
@@ -379,16 +403,19 @@ func (p *v2Puller) pullV2Tag(ctx context.Context, ref reference.Named) (tagUpdat
 	)
 
 	switch v := manifest.(type) {
+	//注册镜像列表，原生数据
 	case *schema1.SignedManifest:
 		id, manifestDigest, err = p.pullSchema1(ctx, ref, v)
 		if err != nil {
 			return false, err
 		}
+	//原始json数据
 	case *schema2.DeserializedManifest:
 		id, manifestDigest, err = p.pullSchema2(ctx, ref, v)
 		if err != nil {
 			return false, err
 		}
+	//序列化列表包裹的json数据
 	case *manifestlist.DeserializedManifestList:
 		id, manifestDigest, err = p.pullManifestList(ctx, ref, v)
 		if err != nil {
@@ -399,7 +426,7 @@ func (p *v2Puller) pullV2Tag(ctx context.Context, ref reference.Named) (tagUpdat
 	}
 
 	progress.Message(p.config.ProgressOutput, "", "Digest: "+manifestDigest.String())
-
+	//
 	oldTagID, err := p.config.ReferenceStore.Get(ref)
 	if err == nil {
 		if oldTagID == id {
@@ -408,7 +435,9 @@ func (p *v2Puller) pullV2Tag(ctx context.Context, ref reference.Named) (tagUpdat
 	} else if err != reference.ErrDoesNotExist {
 		return false, err
 	}
-
+	// Canonical reference is an object with a fully unique
+	// name including a name with hostname and digest
+	//名字+签名摘要
 	if canonical, ok := ref.(reference.Canonical); ok {
 		if err = p.config.ReferenceStore.AddDigest(canonical, id, true); err != nil {
 			return false, err
@@ -446,6 +475,7 @@ func (p *v2Puller) pullSchema1(ctx context.Context, ref reference.Named, unverif
 
 	// Note that the order of this loop is in the direction of bottom-most
 	// to top-most, so that the downloads slice gets ordered correctly.
+
 	for i := len(verifiedManifest.FSLayers) - 1; i >= 0; i-- {
 		blobSum := verifiedManifest.FSLayers[i].BlobSum
 
@@ -475,7 +505,7 @@ func (p *v2Puller) pullSchema1(ctx context.Context, ref reference.Named, unverif
 
 		descriptors = append(descriptors, layerDescriptor)
 	}
-
+	//下载...
 	resultRootFS, release, err := p.config.DownloadManager.Download(ctx, *rootFS, descriptors, p.config.ProgressOutput)
 	if err != nil {
 		return "", "", err
@@ -572,7 +602,7 @@ func (p *v2Puller) pullSchema2(ctx context.Context, ref reference.Named, mfst *s
 	}
 
 	downloadRootFS = *image.NewRootFS()
-
+	//下载镜像数据，最终是通过descriptors的download下载的
 	rootFS, release, err := p.config.DownloadManager.Download(ctx, downloadRootFS, descriptors, p.config.ProgressOutput)
 	if err != nil {
 		if configJSON != nil {
@@ -584,10 +614,10 @@ func (p *v2Puller) pullSchema2(ctx context.Context, ref reference.Named, mfst *s
 			return "", "", err
 		default:
 			cancel()
-			select {
-			case <-configChan:
-			case <-errChan:
-			}
+				select {
+				case <-configChan:
+				case <-errChan:
+				}
 			return "", "", err
 		}
 	}
@@ -635,8 +665,8 @@ func receiveConfig(configChan <-chan []byte, errChan <-chan error) ([]byte, imag
 		return configJSON, unmarshalledConfig, nil
 	case err := <-errChan:
 		return nil, image.Image{}, err
-		// Don't need a case for ctx.Done in the select because cancellation
-		// will trigger an error in p.pullSchema2ImageConfig.
+	// Don't need a case for ctx.Done in the select because cancellation
+	// will trigger an error in p.pullSchema2ImageConfig.
 	}
 }
 

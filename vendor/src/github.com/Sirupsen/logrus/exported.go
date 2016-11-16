@@ -2,6 +2,9 @@ package logrus
 
 import (
 	"io"
+	"runtime"
+	"path"
+	"strconv"
 )
 
 var (
@@ -74,6 +77,7 @@ func WithFields(fields Fields) *Entry {
 
 // Debug logs a message at level Debug on the standard logger.
 func Debug(args ...interface{}) {
+
 	std.Debug(args...)
 }
 
@@ -114,6 +118,13 @@ func Fatal(args ...interface{}) {
 
 // Debugf logs a message at level Debug on the standard logger.
 func Debugf(format string, args ...interface{}) {
+	_, file, line, ok := runtime.Caller(1)
+	if !ok {
+		file = "???"
+		line = 0
+	}
+	_, filename := path.Split(file)
+	format = "[" + filename + ":" + strconv.FormatInt(int64(line), 10) + "] " + format
 	std.Debugf(format, args...)
 }
 
