@@ -492,7 +492,7 @@ func (ms *manifests) Get(ctx context.Context, dgst digest.Digest, options ...dis
 		if err != nil {
 			return nil, err
 		}
-		logrus.Debug("Manifest body:",body)
+		//logrus.Debug("Manifest body:",body)
 		return m, nil
 	}
 	return nil, HandleErrorResponse(resp)

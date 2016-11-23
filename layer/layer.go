@@ -167,6 +167,7 @@ type MountInit func(root string) error
 
 // Store represents a backend for managing both
 // read-only and read-write layers.
+//实现在docker/layer/layer_store.go
 type Store interface {
 	Register(io.Reader, ChainID) (Layer, error)
 	Get(ChainID) (Layer, error)

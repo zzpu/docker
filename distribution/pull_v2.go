@@ -383,7 +383,7 @@ func (p *v2Puller) pullV2Tag(ctx context.Context, ref reference.Named) (tagUpdat
 	if manifest == nil {
 		return false, fmt.Errorf("image manifest does not exist for tag or digest %q", tagOrDigest)
 	}
-
+        //带json描述结构
 	if m, ok := manifest.(*schema2.DeserializedManifest); ok {
 		if m.Manifest.Config.MediaType == schema2.MediaTypePluginConfig {
 			return false, errMediaTypePlugin
@@ -405,18 +405,21 @@ func (p *v2Puller) pullV2Tag(ctx context.Context, ref reference.Named) (tagUpdat
 	switch v := manifest.(type) {
 	//注册镜像列表，原生数据
 	case *schema1.SignedManifest:
+		logrus.Debugf("Receive SignedManifest")
 		id, manifestDigest, err = p.pullSchema1(ctx, ref, v)
 		if err != nil {
 			return false, err
 		}
 	//原始json数据
 	case *schema2.DeserializedManifest:
+		logrus.Debugf("Receive schema2.DeserializedManifest")
 		id, manifestDigest, err = p.pullSchema2(ctx, ref, v)
 		if err != nil {
 			return false, err
 		}
 	//序列化列表包裹的json数据
 	case *manifestlist.DeserializedManifestList:
+		logrus.Debugf("Receive manifestlist.DeserializedManifestList")
 		id, manifestDigest, err = p.pullManifestList(ctx, ref, v)
 		if err != nil {
 			return false, err
@@ -425,7 +428,7 @@ func (p *v2Puller) pullV2Tag(ctx context.Context, ref reference.Named) (tagUpdat
 		return false, errors.New("unsupported manifest format")
 	}
 
-	progress.Message(p.config.ProgressOutput, "", "Digest: "+manifestDigest.String())
+	progress.Message(p.config.ProgressOutput, "", "Image Digest: "+manifestDigest.String())
 	//
 	oldTagID, err := p.config.ReferenceStore.Get(ref)
 	if err == nil {
@@ -544,6 +547,7 @@ func (p *v2Puller) pullSchema2(ctx context.Context, ref reference.Named, mfst *s
 
 	// Note that the order of this loop is in the direction of bottom-most
 	// to top-most, so that the downloads slice gets ordered correctly.
+	//镜像的层描述，将根据这些描述下载各层
 	for _, d := range mfst.Layers {
 		layerDescriptor := &v2LayerDescriptor{
 			digest:            d.Digest,
@@ -554,6 +558,7 @@ func (p *v2Puller) pullSchema2(ctx context.Context, ref reference.Named, mfst *s
 		}
 
 		descriptors = append(descriptors, layerDescriptor)
+		logrus.Debugf("Image layer:%s",d.Digest)
 	}
 
 	configChan := make(chan []byte, 1)
@@ -673,6 +678,7 @@ func receiveConfig(configChan <-chan []byte, errChan <-chan error) ([]byte, imag
 // pullManifestList handles "manifest lists" which point to various
 // platform-specifc manifests.
 func (p *v2Puller) pullManifestList(ctx context.Context, ref reference.Named, mfstList *manifestlist.DeserializedManifestList) (id digest.Digest, manifestListDigest digest.Digest, err error) {
+	//数字签名列表
 	manifestListDigest, err = schema2ManifestDigest(ref, mfstList)
 	if err != nil {
 		return "", "", err

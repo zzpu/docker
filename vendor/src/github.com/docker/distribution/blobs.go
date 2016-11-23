@@ -60,6 +60,7 @@ func (err ErrBlobMounted) Error() string {
 type Descriptor struct {
 	// MediaType describe the type of the content. All text based formats are
 	// encoded as utf-8.
+	//omitempty 意思是为空则不输出
 	MediaType string `json:"mediaType,omitempty"`
 
 	// Size in bytes of content.

@@ -552,7 +552,9 @@ func NewDaemon(config *Config, registryService registry.Service, containerdRemot
 	}
 
 	d.pluginStore = pluginstore.NewStore(config.Root)
-
+	// Store represents a backend for managing both
+	// read-only and read-write layers.
+	//Store代表镜像中的只读和读写层
 	d.layerStore, err = layer.NewStoreFromOptions(layer.StoreOptions{
 		StorePath:                 config.Root,
 		MetadataStorePathTemplate: filepath.Join(config.Root, "image", "%s", "layerdb"),
@@ -567,6 +569,7 @@ func NewDaemon(config *Config, registryService registry.Service, containerdRemot
 	}
 
 	graphDriver := d.layerStore.DriverName()
+	//镜像的存储位置"/var/lib/docker/image"
 	imageRoot := filepath.Join(config.Root, "image", graphDriver)
 
 	// Configure and validate the kernels security support
@@ -578,12 +581,13 @@ func NewDaemon(config *Config, registryService registry.Service, containerdRemot
 	d.downloadManager = xfer.NewLayerDownloadManager(d.layerStore, *config.MaxConcurrentDownloads)
 	logrus.Debugf("Max Concurrent Uploads: %d", *config.MaxConcurrentUploads)
 	d.uploadManager = xfer.NewLayerUploadManager(*config.MaxConcurrentUploads)
-
+        //传入镜像的存储位置  "/var/lib/docker/image/overlay/imagedb"
 	ifs, err := image.NewFSStoreBackend(filepath.Join(imageRoot, "imagedb"))
 	if err != nil {
 		return nil, err
 	}
-
+	// Store is an interface for creating and accessing images
+	//创建和访问镜像的接口
 	d.imageStore, err = image.NewImageStore(ifs, d.layerStore)
 	if err != nil {
 		return nil, err

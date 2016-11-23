@@ -39,6 +39,7 @@ const (
 
 // NewFSStoreBackend returns new filesystem based backend for image.Store
 func NewFSStoreBackend(root string) (StoreBackend, error) {
+	//传入镜像的存储位置  "/var/lib/docker/image/overlay/imagedb"
 	return newFSStore(root)
 }
 
@@ -56,6 +57,7 @@ func newFSStore(root string) (*fs, error) {
 }
 
 func (s *fs) contentFile(dgst digest.Digest) string {
+	// "/var/lib/docker/image/overlay/imagedb/content/sha256"
 	return filepath.Join(s.root, contentDirName, string(dgst.Algorithm()), dgst.Hex())
 }
 
@@ -67,6 +69,9 @@ func (s *fs) metadataDir(dgst digest.Digest) string {
 func (s *fs) Walk(f DigestWalkFunc) error {
 	// Only Canonical digest (sha256) is currently supported
 	s.RLock()
+	//镜像的存储位置  "/var/lib/docker/image/overlay/imagedb/content"
+
+	logrus.Debugf("Access content path: %s", filepath.Join(s.root, contentDirName, string(digest.Canonical)))
 	dir, err := ioutil.ReadDir(filepath.Join(s.root, contentDirName, string(digest.Canonical)))
 	s.RUnlock()
 	if err != nil {
@@ -78,6 +83,7 @@ func (s *fs) Walk(f DigestWalkFunc) error {
 			logrus.Debugf("Skipping invalid digest %s: %s", dgst, err)
 			continue
 		}
+		logrus.Debugf("Found valid image digest: %s", dgst)
 		if err := f(dgst); err != nil {
 			return err
 		}
@@ -86,6 +92,7 @@ func (s *fs) Walk(f DigestWalkFunc) error {
 }
 
 // Get returns the content stored under a given digest.
+// "/var/lib/docker/image/overlay/imagedb/content/sha256/xxx"
 func (s *fs) Get(dgst digest.Digest) ([]byte, error) {
 	s.RLock()
 	defer s.RUnlock()
@@ -94,6 +101,7 @@ func (s *fs) Get(dgst digest.Digest) ([]byte, error) {
 }
 
 func (s *fs) get(dgst digest.Digest) ([]byte, error) {
+	// "/var/lib/docker/image/overlay/imagedb/content/sha256/xxx"
 	content, err := ioutil.ReadFile(s.contentFile(dgst))
 	if err != nil {
 		return nil, err

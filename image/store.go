@@ -25,6 +25,7 @@ type Store interface {
 }
 
 // LayerGetReleaser is a minimal interface for getting and releasing images.
+//实现在/docker/layer/layer_store.go
 type LayerGetReleaser interface {
 	Get(layer.ChainID) (layer.Layer, error)
 	Release(layer.Layer) ([]layer.Metadata, error)
@@ -46,6 +47,7 @@ type store struct {
 // NewImageStore returns new store object for given layer store
 func NewImageStore(fs StoreBackend, ls LayerGetReleaser) (Store, error) {
 	is := &store{
+		//实现在/docker/layer/layer_store.go
 		ls:        ls,
 		images:    make(map[ID]*imageMeta),
 		fs:        fs,
@@ -59,9 +61,11 @@ func NewImageStore(fs StoreBackend, ls LayerGetReleaser) (Store, error) {
 
 	return is, nil
 }
-
+//获取所有的镜像信息
 func (is *store) restore() error {
+	//Walk调用得到镜像数字签名，如： sha256:f753707788c5c100f194ce0a73058faae1a457774efcda6c1469544a114f8644
 	err := is.fs.Walk(func(dgst digest.Digest) error {
+		//通过解析"/var/lib/docker/image/imagedb/content/sha265"目录下json文件得到
 		img, err := is.Get(IDFromDigest(dgst))
 		if err != nil {
 			logrus.Errorf("invalid image %v, %v", dgst, err)
@@ -69,6 +73,7 @@ func (is *store) restore() error {
 		}
 		var l layer.Layer
 		if chainID := img.RootFS.ChainID(); chainID != "" {
+			//LayerGetReleaser实现在/docker/layer/layer_store.go
 			l, err = is.ls.Get(chainID)
 			if err != nil {
 				return err
@@ -181,11 +186,12 @@ func (is *store) Search(term string) (ID, error) {
 func (is *store) Get(id ID) (*Image, error) {
 	// todo: Check if image is in images
 	// todo: Detect manual insertions and start using them
+	//读入 "/var/lib/docker/image/imagedb/content/sha265/xxx"中对应的镜像信息json文件
 	config, err := is.fs.Get(id.Digest())
 	if err != nil {
 		return nil, err
 	}
-
+	//解析json文件
 	img, err := NewFromJSON(config)
 	if err != nil {
 		return nil, err
@@ -289,6 +295,7 @@ func (is *store) imagesMap(all bool) map[ID]*Image {
 			logrus.Errorf("invalid image access: %q, error: %q", id, err)
 			continue
 		}
+		logrus.Debugf("Access image : %q", id)
 		images[id] = img
 	}
 	return images

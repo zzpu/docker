@@ -49,6 +49,7 @@ type StoreOptions struct {
 }
 
 // NewStoreFromOptions creates a new Store instance
+//没有实现RegisterWithDescriptor接口
 func NewStoreFromOptions(options StoreOptions) (Store, error) {
 	driver, err := graphdriver.New(
 		options.StorePath,
@@ -61,6 +62,7 @@ func NewStoreFromOptions(options StoreOptions) (Store, error) {
 		return nil, fmt.Errorf("error initializing graphdriver: %v", err)
 	}
 	logrus.Debugf("Using graph driver %s", driver)
+	logrus.Debugf("StorePath ：%s", options.StorePath)
 
 	fms, err := NewFSMetadataStore(fmt.Sprintf(options.MetadataStorePathTemplate, driver))
 	if err != nil {
@@ -220,7 +222,7 @@ func (ls *layerStore) applyTar(tx MetadataTransaction, ts io.Reader, parent stri
 	if err != nil {
 		return err
 	}
-
+        //应用差异的数据
 	applySize, err := ls.driver.ApplyDiff(layer.cacheID, parent, archive.Reader(rdr))
 	if err != nil {
 		return err
@@ -238,6 +240,7 @@ func (ls *layerStore) applyTar(tx MetadataTransaction, ts io.Reader, parent stri
 }
 
 func (ls *layerStore) Register(ts io.Reader, parent ChainID) (Layer, error) {
+	logrus.Debugf("Register : %s", parent)
 	return ls.registerWithDescriptor(ts, parent, distribution.Descriptor{})
 }
 
@@ -298,7 +301,7 @@ func (ls *layerStore) registerWithDescriptor(ts io.Reader, parent ChainID, descr
 			}
 		}
 	}()
-
+	//应用tar包
 	if err = ls.applyTar(tx, ts, pid, layer); err != nil {
 		return nil, err
 	}

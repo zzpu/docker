@@ -44,6 +44,7 @@ type InitFunc func(root string, options []string, uidMaps, gidMaps []idtools.IDM
 // interface and use the NaiveDiffDriver wrapper constructor.
 //
 // Use of ProtoDriver directly by client code is not recommended.
+//驱动原型
 type ProtoDriver interface {
 	// String returns a string representation of this driver.
 	String() string
@@ -159,6 +160,7 @@ func getBuiltinDriver(name, home string, options []string, uidMaps, gidMaps []id
 func New(root string, name string, options []string, uidMaps, gidMaps []idtools.IDMap, plugingetter getter.PluginGetter) (Driver, error) {
 	if name != "" {
 		logrus.Debugf("[graphdriver] trying provided driver: %s", name) // so the logs show specified driver
+		//取得存储驱动
 		return GetDriver(name, root, options, uidMaps, gidMaps, plugingetter)
 	}
 

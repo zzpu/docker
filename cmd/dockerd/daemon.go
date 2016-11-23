@@ -248,7 +248,7 @@ func (cli *DaemonCli) start(opts daemonOptions) (err error) {
 		cli.stop()
 		<-stopc // wait for daemonCli.start() to return
 	})
-
+        //所有后台接口在这里实现//-------------------//---------------------------//在125行导入配置//
 	d, err := daemon.NewDaemon(cli.Config, registryService, containerdRemote)
 	if err != nil {
 		return fmt.Errorf("Error starting daemon: %v", err)

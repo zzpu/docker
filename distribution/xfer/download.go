@@ -97,19 +97,26 @@ func (ldm *LayerDownloadManager) Download(ctx context.Context, initialRootFS ima
 		transferKey    = ""
 		downloadsByKey = make(map[string]*downloadTransfer)
 	)
-
+        //一个新的镜像有一个rootfs
 	rootFS := initialRootFS
 	for _, descriptor := range layers {
+		//防止重复下载
 		key := descriptor.Key()
-		transferKey += key
 
+		transferKey += key
+                 //missingLayer默认是false,所以一定会进入
 		if !missingLayer {
 			missingLayer = true
 			diffID, err := descriptor.DiffID()
+			//如果镜像层存在，则可以找到DiffID
 			if err == nil {
+				logrus.Debugf("Layer DiffID: %s", diffID)
 				getRootFS := rootFS
 				getRootFS.Append(diffID)
+				//// ChainID is the content-addressable ID of a layer.
+				// chain is made up of DiffID of top layer and all of its parents.
 				l, err := ldm.layerStore.Get(getRootFS.ChainID())
+				//不出错，说明，该镜像层已经存在
 				if err == nil {
 					// Layer already exists.
 					logrus.Debugf("Layer already exists: %s", descriptor.ID())
@@ -122,7 +129,9 @@ func (ldm *LayerDownloadManager) Download(ctx context.Context, initialRootFS ima
 					rootFS.Append(diffID)
 					continue
 				}
+
 			}
+			logrus.Debugf("Layer with key: %s didn't download before" , key)
 		}
 
 		// Does this layer have the same data as a previous layer in
@@ -307,12 +316,13 @@ func (ldm *LayerDownloadManager) makeDownloadFunc(descriptor DownloadDescriptor,
 					downloadReader.Close()
 					return
 				}
+				// chain is made up of DiffID of top layer and all of its parents.
 				parentLayer = l.ChainID()
 			}
 
 			reader := progress.NewProgressReader(ioutils.NewCancelReadCloser(d.Transfer.Context(), downloadReader), progressOutput, size, descriptor.ID(), "Extracting")
 			defer reader.Close()
-
+                        //解压
 			inflatedLayerData, err := archive.DecompressStream(reader)
 			if err != nil {
 				d.err = fmt.Errorf("could not get decompression stream: %v", err)
@@ -323,6 +333,9 @@ func (ldm *LayerDownloadManager) makeDownloadFunc(descriptor DownloadDescriptor,
 			if fs, ok := descriptor.(distribution.Describable); ok {
 				src = fs.Descriptor()
 			}
+			//下载完了，写到文件系统中
+			//实现在docker/layer/layer_store.go
+			//没有实现RegisterWithDescriptor接口，会走else分支
 			if ds, ok := d.layerStore.(layer.DescribableStore); ok {
 				d.layer, err = ds.RegisterWithDescriptor(inflatedLayerData, parentLayer, src)
 			} else {
