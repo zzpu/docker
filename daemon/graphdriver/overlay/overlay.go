@@ -235,6 +235,7 @@ func (d *Driver) Create(id, parent, mountLabel string, storageOpt map[string]str
 	if err != nil {
 		return err
 	}
+	//建一个镜像层的独有目录，但是不懂为何要做两次这个动作
 	if err := idtools.MkdirAllAs(path.Dir(dir), 0700, rootUID, rootGID); err != nil {
 		return err
 	}
@@ -250,13 +251,14 @@ func (d *Driver) Create(id, parent, mountLabel string, storageOpt map[string]str
 	}()
 
 	// Toplevel images are just a "root" dir
+	//在镜像层目录下建一个root目录
 	if parent == "" {
 		if err := idtools.MkdirAs(path.Join(dir, "root"), 0755, rootUID, rootGID); err != nil {
 			return err
 		}
 		return nil
 	}
-
+	logrus.Debugf("Make layer dir")
 	parentDir := d.dir(parent)
 
 	// Ensure parent exists
@@ -265,9 +267,11 @@ func (d *Driver) Create(id, parent, mountLabel string, storageOpt map[string]str
 	}
 
 	// If parent has a root, just do an overlay to it
+	//如果父镜像层有root目录，将会被覆盖？
 	parentRoot := path.Join(parentDir, "root")
 
 	if s, err := os.Lstat(parentRoot); err == nil {
+
 		if err := idtools.MkdirAs(path.Join(dir, "upper"), s.Mode(), rootUID, rootGID); err != nil {
 			return err
 		}
@@ -409,6 +413,7 @@ func (d *Driver) ApplyDiff(id string, parent string, diff archive.Reader) (size 
 	if err != nil {
 		return 0, err
 	}
+	//最后删掉upper等临时目录
 	defer func() {
 		if err != nil {
 			os.RemoveAll(tmpRootDir)

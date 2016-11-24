@@ -11,7 +11,7 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
-
+	"github.com/Sirupsen/logrus"
 	"github.com/docker/docker/pkg/archive"
 	"github.com/docker/docker/pkg/reexec"
 	"github.com/docker/docker/pkg/system"
@@ -83,6 +83,7 @@ func applyLayer() {
 // contents of the layer.
 func applyLayerHandler(dest string, layer archive.Reader, options *archive.TarOptions, decompress bool) (size int64, err error) {
 	dest = filepath.Clean(dest)
+	//直接实现为ApplyUncompressedLayer，false，不用解压，之前已经做了
 	if decompress {
 		decompressed, err := archive.DecompressStream(layer)
 		if err != nil {
@@ -106,14 +107,14 @@ func applyLayerHandler(dest string, layer archive.Reader, options *archive.TarOp
 	if err != nil {
 		return 0, fmt.Errorf("ApplyLayer json encode: %v", err)
 	}
-
+        //命令在docker/pkg/chrootarchive/init_unix.go注册
 	cmd := reexec.Command("docker-applyLayer", dest)
 	cmd.Stdin = layer
 	cmd.Env = append(cmd.Env, fmt.Sprintf("OPT=%s", data))
 
 	outBuf, errBuf := new(bytes.Buffer), new(bytes.Buffer)
 	cmd.Stdout, cmd.Stderr = outBuf, errBuf
-
+	logrus.Debugf("Apply running...with opt:%s",data)
 	if err = cmd.Run(); err != nil {
 		return 0, fmt.Errorf("ApplyLayer %s stdout: %s stderr: %s", err, outBuf, errBuf)
 	}

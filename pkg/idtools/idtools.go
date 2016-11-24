@@ -7,6 +7,7 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+	"github.com/Sirupsen/logrus"
 )
 
 // IDMap contains a single entry for user namespace range remapping. An array
@@ -51,6 +52,7 @@ func MkdirAllNewAs(path string, mode os.FileMode, ownerUID, ownerGID int) error 
 // MkdirAs creates a directory and then modifies ownership to the requested uid/gid.
 // If the directory already exists, this function still changes ownership
 func MkdirAs(path string, mode os.FileMode, ownerUID, ownerGID int) error {
+	logrus.Debugf("Make dir：%s",path)
 	return mkdirAs(path, mode, ownerUID, ownerGID, false, true)
 }
 
