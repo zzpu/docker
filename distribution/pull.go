@@ -79,15 +79,19 @@ func newPuller(endpoint registry.APIEndpoint, repoInfo *registry.RepositoryInfo,
 // tag may be either empty, or indicate a specific tag to pull.
 func Pull(ctx context.Context, ref reference.Named, imagePullConfig *ImagePullConfig) error {
 	// Resolve the Repository name from fqn to RepositoryInfo
-	//解析仓库信息
-	//在/docker/registry/config.go的 newServiceConfig初始化仓库地址和仓库镜像地址，其中有官方的和通过选项insecure-registry自定义的
-	//实质是通过IndexName找到IndexInfo，有用的也只有IndexName
+
+	//在/docker/registry/config.go的 newServiceConfig初始化仓库地址和仓库镜像地址，其中有官方的和通过选项insecure-registry自定义的私有仓库,实质是通过IndexName找到IndexInfo，有用的也只有IndexName
+	//这里的imagePullConfig.RegistryService为daemon.RegistryService，也即是docker\registry\service.go的DefaultService
+	//初始化时,会将insecure-registry选项和registry-mirrors存入ServiceOptions,在NewService函数被调用时,作为参入传入
+
+	//repoInfo为RepositoryInfo对象,其实是对reference.Named对象的封装,添加了镜像成员和官方标示
 	repoInfo, err := imagePullConfig.RegistryService.ResolveRepository(ref)
 	if err != nil {
 		return err
 	}
 
 	// makes sure name is not empty or `scratch`
+	//为了确保不为空或?
 	if err := ValidateRepoName(repoInfo.Name()); err != nil {
 		return err
 	}
@@ -95,6 +99,8 @@ func Pull(ctx context.Context, ref reference.Named, imagePullConfig *ImagePullCo
 	//寻找接入点
 	// /docker/cmd/dockerddaemon.go----大约125 和 248
 	//如果没有镜像仓库服务器地址，默认使用V2仓库地址registry-1.docker.io
+	//Hostname()函数来源于Named
+	logrus.Debugf("Get endpoint from:%s", repoInfo.Hostname())
 	endpoints, err := imagePullConfig.RegistryService.LookupPullEndpoints(repoInfo.Hostname())
 	if err != nil {
 		return err
@@ -124,6 +130,7 @@ func Pull(ctx context.Context, ref reference.Named, imagePullConfig *ImagePullCo
 	)
 	//包含镜像服务器地址
 	for _, endpoint := range endpoints {
+		logrus.Debugf("Endpoint API version:%d", endpoint.Version)
 		if confirmedV2 && endpoint.Version == registry.APIVersion1 {
 			logrus.Debugf("Skipping v1 endpoint %s because v2 registry was detected", endpoint.URL)
 			continue
@@ -138,6 +145,7 @@ func Pull(ctx context.Context, ref reference.Named, imagePullConfig *ImagePullCo
 
 		logrus.Debugf("Trying to pull %s from %s %s", repoInfo.Name(), endpoint.URL, endpoint.Version)
 		//针对每一个endpoint，建立一个Puller,newPuller会根据endpoint的形式（endpoint应该遵循restful api的设计，url中含有版本号），决定采用version1还是version2版本
+		//imagePullConfig是个很重要的对象,包含了很多镜像操作相关的对象
 		puller, err := newPuller(endpoint, repoInfo, imagePullConfig)
 		if err != nil {
 			lastErr = err

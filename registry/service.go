@@ -41,6 +41,7 @@ type DefaultService struct {
 
 // NewService returns a new instance of DefaultService ready to be
 // installed into an engine.
+//在docker\cmd\dockerd\daemon.go的start被调用
 func NewService(options ServiceOptions) *DefaultService {
 	return &DefaultService{
 		config: newServiceConfig(options),
@@ -191,6 +192,9 @@ func (s *DefaultService) ResolveRepository(name reference.Named) (*RepositoryInf
 
 // ResolveIndex takes indexName and returns index info
 func (s *DefaultService) ResolveIndex(name string) (*registrytypes.IndexInfo, error) {
+	//s.config是在上面NewService函数中通过传入的ServiceOptions选项生成的
+	//serviceConfig，在docker\registry\config.go的InstallCliFlags被初始化
+	//
 	return newIndexInfo(s.config, name)
 }
 

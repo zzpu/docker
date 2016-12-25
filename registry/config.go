@@ -100,6 +100,7 @@ func newServiceConfig(options ServiceOptions) *serviceConfig {
 		V2Only: options.V2Only,
 	}
 	// Split --insecure-registry into CIDR and registry-specific settings.
+        //私有仓库,私有仓库是没有镜像的
 	for _, r := range options.InsecureRegistries {
 		// Check if CIDR was passed to --insecure-registry
 		_, ipnet, err := net.ParseCIDR(r)
@@ -118,6 +119,7 @@ func newServiceConfig(options ServiceOptions) *serviceConfig {
 	}
 
 	// Configure public registry.
+	//官方仓库
 	config.IndexConfigs[IndexName] = &registrytypes.IndexInfo{
 		Name:     IndexName,
 		Mirrors:  config.Mirrors,
@@ -223,6 +225,10 @@ func newIndexInfo(config *serviceConfig, indexName string) (*registrytypes.Index
 	}
 
 	// Return any configured index info, first.
+	//config是在上面NewService函数中通过传入的ServiceOptions选项生成的
+	//serviceConfig，在docker\registry\config.go的InstallCliFlags被初始化
+	//index其实就是镜像的仓库地址,或仓库的镜像地址
+        //
 	if index, ok := config.IndexConfigs[indexName]; ok {
 		return index, nil
 	}

@@ -129,6 +129,7 @@ func (cli *DaemonCli) start(opts daemonOptions) (err error) {
 	//选项集
 	cli.flags = opts.flags
 
+	//调试开关
 	if cli.Config.Debug {
 		utils.EnableDebug()
 	}

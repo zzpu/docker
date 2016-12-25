@@ -87,7 +87,7 @@ func (daemon *Daemon) pullImageWithReference(ctx context.Context, ref reference.
 		writeDistributionProgress(cancelFunc, outStream, progressChan)
 		close(writesDone)
 	}()
-
+        //注意这里有很多重要的接口
 	imagePullConfig := &distribution.ImagePullConfig{
 		MetaHeaders:      metaHeaders,
 		AuthConfig:       authConfig,

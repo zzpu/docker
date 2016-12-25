@@ -79,7 +79,7 @@ func runPull(dockerCli *command.DockerCli, opts pullOptions) error {
 
 	authConfig := command.ResolveAuthConfig(ctx, dockerCli, repoInfo.Index)
 	requestPrivilege := command.RegistryAuthenticationPrivilegedFunc(dockerCli, repoInfo.Index, "pull")
-
+        //如果没有添加禁止信任镜像内容选项disable-content-trust,而且没有附带数字摘要,则不对镜像进行校验
 	if command.IsTrusted() && !registryRef.HasDigest() {
 		// Check if tag is digest
 		err = trustedPull(ctx, dockerCli, repoInfo, registryRef, authConfig, requestPrivilege)

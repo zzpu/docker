@@ -14,6 +14,7 @@ var (
 
 // AddTrustedFlags adds content trust flags to the current command flagset
 func AddTrustedFlags(fs *pflag.FlagSet, verify bool) {
+	//默认verify=true
 	trusted, message := setupTrustedFlag(verify)
 	fs.BoolVar(&untrusted, "disable-content-trust", !trusted, message)
 }

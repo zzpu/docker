@@ -85,7 +85,7 @@ func (s *imageRouter) postImagesCreate(ctx context.Context, w http.ResponseWrite
 	defer output.Close()
 	//设置回应的http头，说明数据是json
 	w.Header().Set("Content-Type", "application/json")
-
+        //有镜像名
 	if image != "" { //pull
 		metaHeaders := map[string][]string{}
 		for k, v := range r.Header {
