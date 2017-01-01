@@ -183,7 +183,7 @@ func (s *DefaultService) Search(ctx context.Context, term string, limit int, aut
 	}
 	return r.SearchRepositories(remoteName, limit)
 }
-
+//
 // ResolveRepository splits a repository name into its components
 // and configuration of the associated registry.
 func (s *DefaultService) ResolveRepository(name reference.Named) (*RepositoryInfo, error) {

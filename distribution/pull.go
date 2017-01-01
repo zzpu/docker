@@ -14,6 +14,7 @@ import (
 	"github.com/docker/docker/reference"
 	"github.com/docker/docker/registry"
 	"golang.org/x/net/context"
+
 )
 
 // ImagePullConfig stores pull configuration.
@@ -85,6 +86,7 @@ func Pull(ctx context.Context, ref reference.Named, imagePullConfig *ImagePullCo
 	//初始化时,会将insecure-registry选项和registry-mirrors存入ServiceOptions,在NewService函数被调用时,作为参入传入
 
 	//repoInfo为RepositoryInfo对象,其实是对reference.Named对象的封装,添加了镜像成员和官方标示
+	//RepositoryInfo包含了一个Named对象,Index对象和一个Official标志
 	repoInfo, err := imagePullConfig.RegistryService.ResolveRepository(ref)
 	if err != nil {
 		return err
@@ -96,10 +98,24 @@ func Pull(ctx context.Context, ref reference.Named, imagePullConfig *ImagePullCo
 		return err
 	}
 	// APIEndpoint represents a remote API endpoint
-	//寻找接入点
 	// /docker/cmd/dockerddaemon.go----大约125 和 248
 	//如果没有镜像仓库服务器地址，默认使用V2仓库地址registry-1.docker.io
 	//Hostname()函数来源于Named
+
+	//实质上如果Hostname()返回的是官方仓库地址,则endpoint的URL将是registry-1.docker.io,如果有镜像则会添加镜像作为endpoint
+	// 否则就是私有地址的两种类型:http和https
+
+	//V2的接口具体代码在Zdocker\registry\service_v2.go的函数lookupV2Endpoints
+	// endpoints其实就是对hostname的一个封装,并没有加什么特别的东西
+	//{
+	//	URL: &url.URL{
+	//		Scheme: "https",
+	//		Host:   hostname,
+	//	},
+	//		Version:      APIVersion2,
+	//	TrimHostname: true,
+	//	TLSConfig:    tlsConfig,
+	//},
 	logrus.Debugf("Get endpoint from:%s", repoInfo.Hostname())
 	endpoints, err := imagePullConfig.RegistryService.LookupPullEndpoints(repoInfo.Hostname())
 	if err != nil {
@@ -128,7 +144,7 @@ func Pull(ctx context.Context, ref reference.Named, imagePullConfig *ImagePullCo
 		// retry for any of these.
 		confirmedTLSRegistries = make(map[string]struct{})
 	)
-	//包含镜像服务器地址
+	//如果设置了镜像服务器地址,且使用了官方默认的镜像仓库,则endpoints包含官方仓库地址:registry-1.docker.io和镜像服务器地址,否则就是私有仓库地址的http和https形式
 	for _, endpoint := range endpoints {
 		logrus.Debugf("Endpoint API version:%d", endpoint.Version)
 		if confirmedV2 && endpoint.Version == registry.APIVersion1 {
@@ -151,6 +167,7 @@ func Pull(ctx context.Context, ref reference.Named, imagePullConfig *ImagePullCo
 			lastErr = err
 			continue
 		}
+		//如果是v2,实现在docker\distribution\pull_v2.go
 		if err := puller.Pull(ctx, ref); err != nil {
 			// Was this pull cancelled? If so, don't try to fall
 			// back.

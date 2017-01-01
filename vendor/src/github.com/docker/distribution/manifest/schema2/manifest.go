@@ -60,10 +60,12 @@ type Manifest struct {
 	manifest.Versioned
 
 	// Config references the image configuration as a blob.
+	//包含大小
 	Config distribution.Descriptor `json:"config"`
 
 	// Layers lists descriptors for the layers referenced by the
 	// configuration.
+	//镜像层描述
 	Layers []distribution.Descriptor `json:"layers"`
 }
 
@@ -79,6 +81,7 @@ func (m Manifest) Target() distribution.Descriptor {
 
 // DeserializedManifest wraps Manifest with a copy of the original JSON.
 // It satisfies the distribution.Manifest interface.
+//实现了接口distribution.Manifest
 type DeserializedManifest struct {
 	Manifest
 

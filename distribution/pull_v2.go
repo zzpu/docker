@@ -64,6 +64,9 @@ func (p *v2Puller) Pull(ctx context.Context, ref reference.Named) (err error) {
 	// TODO(tiborvass): was ReceiveTimeout
 	//creates an HTTP transpfort
 	logrus.Debugf("AuthName: %s AuthPasswd: %s Auth:%s", p.config.AuthConfig.Username,p.config.AuthConfig.Password,p.config.AuthConfig.Auth)
+
+	//提供超时机制和认证机制的客户端
+	//这里的p.repo会在下面pullV2Repository用到
 	p.repo, p.confirmedV2, err = NewV2Repository(ctx, p.repoInfo, p.endpoint, p.config.MetaHeaders, p.config.AuthConfig, "pull")
 	if err != nil {
 		logrus.Warnf("Error getting v2 registry: %v", err)
@@ -98,9 +101,9 @@ func (p *v2Puller) pullV2Repository(ctx context.Context, ref reference.Named) (e
 		if err != nil {
 			return err
 		}
-		//只有镜像名
+		//只有镜像名,加了all选项
 	} else {
-		// 在docker/distribution/registry/client/repository.go生成一个tag对象，tag对象的All函数返回所有tag
+		// docker\vendor\src\github.com\docker\distribution\registry\client\repository.go生成一个tag对象，tag对象的All函数返回所有tag
 		tags, err := p.repo.Tags(ctx).All(ctx)
 		if err != nil {
 			// If this repository doesn't exist on V2, we should
@@ -344,7 +347,7 @@ func (ld *v2LayerDescriptor) Registered(diffID layer.DiffID) {
 func (p *v2Puller) pullV2Tag(ctx context.Context, ref reference.Named) (tagUpdated bool, err error) {
 	//                   显示
 	//在NewV2Repository生成
-	//在/docker/distribution/registry/client/repository.go中实现
+	//在docker\vendor\src\github.com\docker\distribution\registry\client\repository.go中实现
 	//传入参数ctx其实是没啥用
 	//获取一个镜像清单操作集
 	logrus.Debugf("PullV2Tag....")
@@ -361,9 +364,10 @@ func (p *v2Puller) pullV2Tag(ctx context.Context, ref reference.Named) (tagUpdat
 		// NOTE: not using TagService.Get, since it uses HEAD requests
 		// against the manifests endpoint, which are not supported by
 		// all registry versions.
-		//在docker/distribution/registry/client/repository.go
-		//获得一个镜像清单
+		//在docker\vendor\src\github.com\docker\distribution\registry\client\repository.go
+		//获得一个镜像清单(镜像层的清单)
 
+		// Get retrieves(检索[储存的信息) the manifest specified by the given digest
 		manifest, err = manSvc.Get(ctx, "", distribution.WithTag(tagged.Tag()))
 		if err != nil {
 			return false, allowV1Fallback(err)
@@ -401,7 +405,6 @@ func (p *v2Puller) pullV2Tag(ctx context.Context, ref reference.Named) (tagUpdat
 		id             digest.Digest
 		manifestDigest digest.Digest
 	)
-
 	switch v := manifest.(type) {
 	//注册镜像列表，原生数据
 	case *schema1.SignedManifest:
@@ -537,9 +540,12 @@ func (p *v2Puller) pullSchema2(ctx context.Context, ref reference.Named, mfst *s
 	}
 
 	target := mfst.Target()
+	//ImageStore在docker\daemon\daemon.go初始化,实现在docker\image\store.go
+	//实际读入 "/var/lib/docker/image/imagedb/content/sha265/xxx"中对应的镜像信息json文件
 	if _, err := p.config.ImageStore.Get(image.IDFromDigest(target.Digest)); err == nil {
 		// If the image already exists locally, no need to pull
 		// anything.
+		//没有出错,说明镜像存在,直接返回镜像信息
 		return target.Digest, manifestDigest, nil
 	}
 
@@ -608,6 +614,8 @@ func (p *v2Puller) pullSchema2(ctx context.Context, ref reference.Named, mfst *s
 
 	downloadRootFS = *image.NewRootFS()
 	//下载镜像数据，最终是通过descriptors的download下载的
+	//DownloadManager在docker\daemon\daemon.go的NewDaemon函数初始化
+	//实现在docker\distribution\xfer\download.go
 	rootFS, release, err := p.config.DownloadManager.Download(ctx, downloadRootFS, descriptors, p.config.ProgressOutput)
 	if err != nil {
 		if configJSON != nil {

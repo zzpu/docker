@@ -66,6 +66,6 @@ type RepositoryInfo struct {
 	// Official indicates whether the repository is considered official.
 	// If the registry is official, and the normalized name does not
 	// contain a '/' (e.g. "foo"), then it is considered an official repo.
-	//表示是否官方的地址
+	//表示是否官方的地址,实际上只要拉取镜像时只传入镜像的信息,而没有仓库的信息,就会使用官方默认的仓库地址,这时Official成员就是true
 	Official bool
 }

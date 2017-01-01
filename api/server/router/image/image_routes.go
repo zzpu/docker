@@ -108,6 +108,7 @@ func (s *imageRouter) postImagesCreate(ctx context.Context, w http.ResponseWrite
 		// to provide image specific functionality（功能）.
 		//在Daemon类型实现了该API接口，在docker/daemon/image_pull.go
 		err = s.backend.PullImage(ctx, image, tag, metaHeaders, authConfig, output)
+	//从文件中导入镜像
 	} else { //import
 		src := r.Form.Get("fromSrc")
 		// 'err' MUST NOT be defined within this block, we need any error
