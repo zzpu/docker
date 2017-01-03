@@ -88,16 +88,17 @@ func (daemon *Daemon) pullImageWithReference(ctx context.Context, ref reference.
 		close(writesDone)
 	}()
         //注意这里有很多重要的接口
+	//初始化都是在docker\daemon\daemon.go的NewDaemon函数中完成的
 	imagePullConfig := &distribution.ImagePullConfig{
 		MetaHeaders:      metaHeaders,
 		AuthConfig:       authConfig,
 		ProgressOutput:   progress.ChanOutput(progressChan),
-		RegistryService:  daemon.RegistryService,//默认regist服务接口实现的实例
+		RegistryService:  daemon.RegistryService,//默认registry服务接口实现的实例,658行
 		ImageEventLogger: daemon.LogImageEvent,
-		MetadataStore:    daemon.distributionMetadataStore,
-		ImageStore:       daemon.imageStore,
-		ReferenceStore:   daemon.referenceStore,
-		DownloadManager:  daemon.downloadManager,
+		MetadataStore:    daemon.distributionMetadataStore,//614行
+		ImageStore:       daemon.imageStore,               //592行
+		ReferenceStore:   daemon.referenceStore,           //621行
+		DownloadManager:  daemon.downloadManager,          //582行
 	}
 
 	err := distribution.Pull(ctx, ref, imagePullConfig)

@@ -614,7 +614,7 @@ func (p *v2Puller) pullSchema2(ctx context.Context, ref reference.Named, mfst *s
 
 	downloadRootFS = *image.NewRootFS()
 	//下载镜像数据，最终是通过descriptors的download下载的
-	//DownloadManager在docker\daemon\daemon.go的NewDaemon函数初始化
+	//DownloadManager在docker\daemon\daemon.go的NewDaemon函数初始化(582行)
 	//实现在docker\distribution\xfer\download.go
 	rootFS, release, err := p.config.DownloadManager.Download(ctx, downloadRootFS, descriptors, p.config.ProgressOutput)
 	if err != nil {
@@ -659,7 +659,8 @@ func (p *v2Puller) pullSchema2(ctx context.Context, ref reference.Named, mfst *s
 			return "", "", errRootFSMismatch
 		}
 	}
-
+	//ImageStore在docker\daemon\daemon.go初始化,实现在docker\image\store.go
+	//实际操作 "/var/lib/docker/image/imagedb/content/sha265/xxx"中对应的镜像信息json文件
 	imageID, err := p.config.ImageStore.Create(configJSON)
 	if err != nil {
 		return "", "", err

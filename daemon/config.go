@@ -159,6 +159,7 @@ func (config *Config) InstallCommonFlags(flags *pflag.FlagSet) {
 	flags.StringVarP(&config.Root, "graph", "g", defaultGraph, "Root of the Docker runtime")
 	flags.BoolVarP(&config.AutoRestart, "restart", "r", true, "--restart on the daemon has been deprecated in favor of --restart policies on docker run")
 	flags.MarkDeprecated("restart", "Please use a restart policy on docker run")
+	//存储驱动
 	flags.StringVarP(&config.GraphDriver, "storage-driver", "s", "", "Storage driver to use")
 	flags.IntVar(&config.Mtu, "mtu", 0, "Set the containers network MTU")
 	flags.BoolVar(&config.RawLogs, "raw-logs", false, "Full timestamps without ANSI coloring")

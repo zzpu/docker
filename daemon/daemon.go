@@ -548,6 +548,7 @@ func NewDaemon(config *Config, registryService registry.Service, containerdRemot
 
 	driverName := os.Getenv("DOCKER_DRIVER")
 	if driverName == "" {
+		logrus.Debugf("DOCKER_DRIVER is NULL")
 		driverName = config.GraphDriver
 	}
 
@@ -579,6 +580,7 @@ func NewDaemon(config *Config, registryService registry.Service, containerdRemot
 
 	logrus.Debugf("Max Concurrent Downloads: %d", *config.MaxConcurrentDownloads)
 	d.downloadManager = xfer.NewLayerDownloadManager(d.layerStore, *config.MaxConcurrentDownloads)
+
 	logrus.Debugf("Max Concurrent Uploads: %d", *config.MaxConcurrentUploads)
 	d.uploadManager = xfer.NewLayerUploadManager(*config.MaxConcurrentUploads)
         //传入镜像的存储位置  "/var/lib/docker/image/overlay/imagedb"

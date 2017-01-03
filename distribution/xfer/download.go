@@ -105,6 +105,7 @@ func (ldm *LayerDownloadManager) Download(ctx context.Context, initialRootFS ima
 
 		transferKey += key
                  //missingLayer默认是false,所以一定会进入
+		//而且进入后会置为true,确保只进入一次
 		if !missingLayer {
 			missingLayer = true
 			diffID, err := descriptor.DiffID()
@@ -115,6 +116,9 @@ func (ldm *LayerDownloadManager) Download(ctx context.Context, initialRootFS ima
 				getRootFS.Append(diffID)
 				//// ChainID is the content-addressable ID of a layer.
 				// chain is made up of DiffID of top layer and all of its parents.
+
+				//ImageStore在docker\daemon\daemon.go初始化,实现在docker\image\store.go
+				//实际读入 "/var/lib/docker/image/imagedb/content/sha265/xxx"中对应的镜像信息json文件
 				l, err := ldm.layerStore.Get(getRootFS.ChainID())
 				//不出错，说明，该镜像层已经存在
 				if err == nil {
@@ -127,6 +131,7 @@ func (ldm *LayerDownloadManager) Download(ctx context.Context, initialRootFS ima
 					topLayer = l
 					missingLayer = false
 					rootFS.Append(diffID)
+					//不出错，说明，该镜像层已经存在,无需重新下载,直接添加ID即可
 					continue
 				}
 
@@ -138,8 +143,11 @@ func (ldm *LayerDownloadManager) Download(ctx context.Context, initialRootFS ima
 		// the stack? If so, avoid downloading it more than once.
 		var topDownloadUncasted Transfer
 		if existingDownload, ok := downloadsByKey[key]; ok {
+			//下载函数,最终会调用descriptor的download函数
 			xferFunc := ldm.makeDownloadFuncFromDownload(descriptor, existingDownload, topDownload)
 			defer topDownload.Transfer.Release(watcher)
+			//实现在docker\distribution\xfer\transfer.go
+			//
 			topDownloadUncasted, watcher = ldm.tm.Transfer(transferKey, xferFunc, progressOutput)
 			topDownload = topDownloadUncasted.(*downloadTransfer)
 			continue
@@ -153,8 +161,10 @@ func (ldm *LayerDownloadManager) Download(ctx context.Context, initialRootFS ima
 			xferFunc = ldm.makeDownloadFunc(descriptor, "", topDownload)
 			defer topDownload.Transfer.Release(watcher)
 		} else {
+			//下载函数,最终会调用descriptor的download函数
 			xferFunc = ldm.makeDownloadFunc(descriptor, rootFS.ChainID(), nil)
 		}
+		//实现在docker\distribution\xfer\transfer.go
 		topDownloadUncasted, watcher = ldm.tm.Transfer(transferKey, xferFunc, progressOutput)
 		topDownload = topDownloadUncasted.(*downloadTransfer)
 		downloadsByKey[key] = topDownload
@@ -255,6 +265,7 @@ func (ldm *LayerDownloadManager) makeDownloadFunc(descriptor DownloadDescriptor,
 			defer descriptor.Close()
 
 			for {
+				//使用descriptor的Download函数
 				downloadReader, size, err = descriptor.Download(d.Transfer.Context(), progressOutput)
 				if err == nil {
 					break

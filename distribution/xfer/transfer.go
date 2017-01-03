@@ -316,6 +316,7 @@ func (tm *transferManager) Transfer(key string, xferFunc DoFunc, progressOutput 
 
 	for {
 		xfer, present := tm.transfers[key]
+		//如果不存在就不监听进度情况
 		if !present {
 			break
 		}
@@ -345,15 +346,17 @@ func (tm *transferManager) Transfer(key string, xferFunc DoFunc, progressOutput 
 
 	start := make(chan struct{})
 	inactive := make(chan struct{})
-
+        //确保小于最大进程限制
 	if tm.concurrencyLimit == 0 || tm.activeTransfers < tm.concurrencyLimit {
 		close(start)
 		tm.activeTransfers++
 	} else {
+		//否则放到等待队列
 		tm.waitingTransfers = append(tm.waitingTransfers, start)
 	}
 
 	masterProgressChan := make(chan progress.Progress)
+	//实现在docker\distribution\xfer\download.go 221行
 	xfer := xferFunc(masterProgressChan, start, inactive)
 	watcher := xfer.Watch(progressOutput)
 	go xfer.Broadcast(masterProgressChan)
@@ -373,6 +376,7 @@ func (tm *transferManager) Transfer(key string, xferFunc DoFunc, progressOutput 
 				if inactive != nil {
 					tm.inactivate(start)
 				}
+			        //remove from the map
 				delete(tm.transfers, key)
 				tm.mu.Unlock()
 				xfer.Close()

@@ -18,7 +18,10 @@ spawn bash -c "scp -r -o GSSAPIAuthentication=no /root/docker/bundles/1.13.0-dev
 expect "*password:"
 send "$password\r"
 expect eof.
-
+spawn bash -c "scp -r -o GSSAPIAuthentication=no /root/docker/bundles/1.13.0-dev/binary-client/* root@$host:/usr/bin/"
+expect "*password:"
+send "$password\r"
+expect eof.
 #spawn scp -o GSSAPIAuthentication=no /root/docker/bundles/1.13.0-dev/binary-daemon/docker-containerd root@$host:/usr/bin/
 #expect "*password:"
 #send "$password\r"
