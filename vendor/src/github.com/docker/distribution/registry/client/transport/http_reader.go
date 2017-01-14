@@ -77,7 +77,7 @@ func (hrs *httpReadSeeker) Read(p []byte) (n int, err error) {
 	}
 
 	hrs.readerOffset = hrs.seekOffset
-
+        //实质是http客户端按发送http请求
 	rd, err := hrs.reader()
 	if err != nil {
 		return 0, err

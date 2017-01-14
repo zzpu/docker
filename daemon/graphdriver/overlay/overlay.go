@@ -53,8 +53,11 @@ func NaiveDiffDriverWithApply(driver ApplyDiffProtoDriver, uidMaps, gidMaps []id
 
 // ApplyDiff creates a diff layer with either the NaiveDiffDriver or with a fallback.
 func (d *naiveDiffDriverWithApply) ApplyDiff(id, parent string, diff archive.Reader) (int64, error) {
+
 	b, err := d.applyDiff.ApplyDiff(id, parent, diff)
 	if err == ErrApplyDiffFallback {
+		//初始化在NaiveDiffDriverWithApply函数（47行）
+		//Driver实现在docker\daemon\graphdriver\fsdiff.go
 		return d.Driver.ApplyDiff(id, parent, diff)
 	}
 	return b, err
@@ -362,6 +365,7 @@ func (d *Driver) Get(id string, mountLabel string) (s string, err error) {
 		workDir  = path.Join(dir, "work")
 		opts     = fmt.Sprintf("lowerdir=%s,upperdir=%s,workdir=%s", lowerDir, upperDir, workDir)
 	)
+	logrus.Debugf("Mount overlay:%s",opts)
 	if err := syscall.Mount("overlay", mergedDir, "overlay", 0, label.FormatMountLabel(opts, mountLabel)); err != nil {
 		return "", fmt.Errorf("error creating overlay mount to %s: %v", mergedDir, err)
 	}
@@ -394,9 +398,11 @@ func (d *Driver) ApplyDiff(id string, parent string, diff archive.Reader) (size 
 	dir := d.dir(id)
 
 	if parent == "" {
+		logrus.Debugf("Applied tar on err,no parent")
 		return 0, ErrApplyDiffFallback
 	}
-
+	logrus.Debugf("Applied tar on parent：%s",parent)
+	//只有有父镜像层的才会继续往下执行
 	parentRootDir := path.Join(d.dir(parent), "root")
 	if _, err := os.Stat(parentRootDir); err != nil {
 		return 0, ErrApplyDiffFallback
@@ -409,11 +415,12 @@ func (d *Driver) ApplyDiff(id string, parent string, diff archive.Reader) (size 
 	// 2) ApplyDiff doesn't do any in-place writes to files (would break hardlinks)
 	// These are all currently true and are not expected to break
 
+        //先生成一个临时的目录tmproot
 	tmpRootDir, err := ioutil.TempDir(dir, "tmproot")
 	if err != nil {
 		return 0, err
 	}
-	//最后删掉upper等临时目录
+	//最后要删掉upper等临时目录
 	defer func() {
 		if err != nil {
 			os.RemoveAll(tmpRootDir)
@@ -425,15 +432,18 @@ func (d *Driver) ApplyDiff(id string, parent string, diff archive.Reader) (size 
 		}
 	}()
 
+	//tmproot指向了父镜像层的root
 	if err = copyDir(parentRootDir, tmpRootDir, copyHardlink); err != nil {
 		return 0, err
 	}
 
 	options := &archive.TarOptions{UIDMaps: d.uidMaps, GIDMaps: d.gidMaps}
+	//最终调用applyLayerHandler，实现在docker\docker\pkg\chrootarchive\diff_unix.go
+	//
 	if size, err = graphdriver.ApplyUncompressedLayer(tmpRootDir, diff, options); err != nil {
 		return 0, err
 	}
-
+        //搞不懂为何不一开始就命名为 root呢，而是要后来才改为root
 	rootDir := path.Join(dir, "root")
 	if err := os.Rename(tmpRootDir, rootDir); err != nil {
 		return 0, err

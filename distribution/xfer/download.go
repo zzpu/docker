@@ -162,6 +162,7 @@ func (ldm *LayerDownloadManager) Download(ctx context.Context, initialRootFS ima
 			defer topDownload.Transfer.Release(watcher)
 		} else {
 			//下载函数,最终会调用descriptor的download函数
+			//下载完后会在该函数进行解压
 			xferFunc = ldm.makeDownloadFunc(descriptor, rootFS.ChainID(), nil)
 		}
 		//实现在docker\distribution\xfer\transfer.go
@@ -266,6 +267,8 @@ func (ldm *LayerDownloadManager) makeDownloadFunc(descriptor DownloadDescriptor,
 
 			for {
 				//使用descriptor的Download函数
+				//downloadReader是io.ReadCloser对象
+				// 其实是临时镜像文件/var/lib/docker/tmp/GetImageBlobxxxx读取出来的
 				downloadReader, size, err = descriptor.Download(d.Transfer.Context(), progressOutput)
 				if err == nil {
 					break
@@ -330,10 +333,11 @@ func (ldm *LayerDownloadManager) makeDownloadFunc(descriptor DownloadDescriptor,
 				// chain is made up of DiffID of top layer and all of its parents.
 				parentLayer = l.ChainID()
 			}
+			// Reader is a Reader with progress bar.
 
 			reader := progress.NewProgressReader(ioutils.NewCancelReadCloser(d.Transfer.Context(), downloadReader), progressOutput, size, descriptor.ID(), "Extracting")
 			defer reader.Close()
-                        //解压
+                        //解压出镜像数据，会调用reader的read函数，所以会打印Extracting...
 			inflatedLayerData, err := archive.DecompressStream(reader)
 			if err != nil {
 				d.err = fmt.Errorf("could not get decompression stream: %v", err)
@@ -344,12 +348,13 @@ func (ldm *LayerDownloadManager) makeDownloadFunc(descriptor DownloadDescriptor,
 			if fs, ok := descriptor.(distribution.Describable); ok {
 				src = fs.Descriptor()
 			}
-			//下载完了，写到文件系统中
+			//解压完了之后，写到文件系统中
 			//实现在docker/layer/layer_store.go
 			//没有实现RegisterWithDescriptor接口，会走else分支
 			if ds, ok := d.layerStore.(layer.DescribableStore); ok {
 				d.layer, err = ds.RegisterWithDescriptor(inflatedLayerData, parentLayer, src)
 			} else {
+
 				d.layer, err = d.layerStore.Register(inflatedLayerData, parentLayer)
 			}
 			if err != nil {

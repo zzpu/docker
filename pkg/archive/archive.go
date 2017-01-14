@@ -164,6 +164,7 @@ func xzDecompress(archive io.Reader) (io.ReadCloser, <-chan struct{}, error) {
 // DecompressStream decompresses the archive and returns a ReaderCloser with the decompressed archive.
 func DecompressStream(archive io.Reader) (io.ReadCloser, error) {
 	p := pools.BufioReader32KPool
+	//档案
 	buf := p.Get(archive)
 	bs, err := buf.Peek(10)
 	if err != nil && err != io.EOF {
@@ -179,9 +180,11 @@ func DecompressStream(archive io.Reader) (io.ReadCloser, error) {
 	compression := DetectCompression(bs)
 	switch compression {
 	case Uncompressed:
+		logrus.Debugf("Got raw data...")
 		readBufWrapper := p.NewReadCloserWrapper(buf, buf)
 		return readBufWrapper, nil
 	case Gzip:
+		logrus.Debugf("Got Gzip data...")
 		gzReader, err := gzip.NewReader(buf)
 		if err != nil {
 			return nil, err
@@ -189,10 +192,12 @@ func DecompressStream(archive io.Reader) (io.ReadCloser, error) {
 		readBufWrapper := p.NewReadCloserWrapper(buf, gzReader)
 		return readBufWrapper, nil
 	case Bzip2:
+		logrus.Debugf("Got Bzip data...")
 		bz2Reader := bzip2.NewReader(buf)
 		readBufWrapper := p.NewReadCloserWrapper(buf, bz2Reader)
 		return readBufWrapper, nil
 	case Xz:
+		logrus.Debugf("Got Xz data...")
 		xzReader, chdone, err := xzDecompress(buf)
 		if err != nil {
 			return nil, err

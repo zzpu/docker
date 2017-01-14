@@ -58,6 +58,7 @@ func copyDir(srcDir, dstDir string, flags copyFlags) error {
 		}
 
 		// Rebase path
+		//这个什么意思？
 		relPath, err := filepath.Rel(srcDir, srcPath)
 		if err != nil {
 			return err

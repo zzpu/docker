@@ -225,7 +225,7 @@ func newIndexInfo(config *serviceConfig, indexName string) (*registrytypes.Index
 	}
 
 	// Return any configured index info, first.
-	//config是在上面NewService函数中通过传入的ServiceOptions选项生成的
+	//config是在docker\registry\service.go的NewService函数中通过传入的ServiceOptions选项生成的
 	//serviceConfig，在docker\registry\config.go的InstallCliFlags被初始化
 	//index其实就是镜像的仓库地址,或仓库的镜像地址
         //

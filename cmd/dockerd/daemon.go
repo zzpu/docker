@@ -196,6 +196,7 @@ func (cli *DaemonCli) start(opts daemonOptions) (err error) {
 		cli.Config.Hosts = make([]string, 1)
 	}
         //生成一个server对象，配置为serverConfig
+	//Server为RestFul API的服务端实现
 	api := apiserver.New(serverConfig)
 	cli.api = api
 
@@ -239,7 +240,8 @@ func (cli *DaemonCli) start(opts daemonOptions) (err error) {
 	}
 	// FIXME: why is this down here instead of with the other TrustKey logic above?
 	cli.TrustKeyPath = opts.common.TrustKey
-
+	//仓库服务，是Service的默认类DefaultService的实例对象
+	//s实现在docker\registry\service.go
 	registryService := registry.NewService(cli.Config.ServiceOptions)
 	containerdRemote, err := libcontainerd.New(cli.getLibcontainerdRoot(), cli.getPlatformRemoteOptions()...)
 	if err != nil {
@@ -419,11 +421,11 @@ func initRouter(s *apiserver.Server, d *daemon.Daemon, c *cluster.Cluster) {
 	routers = addExperimentalRouters(routers, d, decoder)
 
 	routers = append(routers, []router.Router{
-		container.NewRouter(d, decoder),
-		image.NewRouter(d, decoder),
+		container.NewRouter(d, decoder),               //容器相关的命令
+		image.NewRouter(d, decoder),                   //镜像相关的命令
 		systemrouter.NewRouter(d, c), //api/server/router/system---被重命名了
-		volume.NewRouter(d),
-		build.NewRouter(dockerfile.NewBuildManager(d)),
+		volume.NewRouter(d),                           //卷相关的命令
+		build.NewRouter(dockerfile.NewBuildManager(d)),//构建相关的命令
 		swarmrouter.NewRouter(c),
 	}...)
 

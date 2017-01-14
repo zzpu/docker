@@ -36,6 +36,8 @@ func applyLayer() {
 	flag.Parse()
 
 	inUserns := rsystem.RunningInUserNS()
+	//更换根目录到dest
+	//dest其实是镜像层目录下的一个名为tmproot的目录
 	if err := chroot(flag.Arg(0)); err != nil {
 		fatal(err)
 	}
@@ -60,6 +62,7 @@ func applyLayer() {
 	}
 
 	os.Setenv("TMPDIR", tmpDir)
+	//解压到镜像层的根目录
 	size, err := archive.UnpackLayer("/", os.Stdin, options)
 	os.RemoveAll(tmpDir)
 	if err != nil {
@@ -82,6 +85,7 @@ func applyLayer() {
 // applies it to the directory `dest`. Returns the size in bytes of the
 // contents of the layer.
 func applyLayerHandler(dest string, layer archive.Reader, options *archive.TarOptions, decompress bool) (size int64, err error) {
+	//dest其实是镜像层目录下的一个名为tmproot的目录
 	dest = filepath.Clean(dest)
 	//直接实现为ApplyUncompressedLayer，false，不用解压，之前已经做了
 	if decompress {

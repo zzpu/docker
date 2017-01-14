@@ -9,6 +9,7 @@ import (
 	"github.com/docker/docker/pkg/chrootarchive"
 	"github.com/docker/docker/pkg/idtools"
 	"github.com/docker/docker/pkg/ioutils"
+
 )
 
 var (
@@ -36,6 +37,7 @@ type NaiveDiffDriver struct {
 //     ApplyDiff(id, parent string, diff archive.Reader) (size int64, err error)
 //     DiffSize(id, parent string) (size int64, err error)
 func NewNaiveDiffDriver(driver ProtoDriver, uidMaps, gidMaps []idtools.IDMap) Driver {
+	//driver是docker\daemon\graphdriver\overlay\overlay.go这里的Diver
 	return &NaiveDiffDriver{ProtoDriver: driver,
 		uidMaps: uidMaps,
 		gidMaps: gidMaps}
@@ -45,7 +47,7 @@ func NewNaiveDiffDriver(driver ProtoDriver, uidMaps, gidMaps []idtools.IDMap) Dr
 // layer and its parent layer which may be "".
 func (gdw *NaiveDiffDriver) Diff(id, parent string) (arch archive.Archive, err error) {
 	driver := gdw.ProtoDriver
-
+	//driver是docker\daemon\graphdriver\overlay\overlay.go这里的Diver
 	layerFs, err := driver.Get(id, "")
 	if err != nil {
 		return nil, err
@@ -123,6 +125,7 @@ func (gdw *NaiveDiffDriver) ApplyDiff(id, parent string, diff archive.Reader) (s
 	driver := gdw.ProtoDriver
 
 	// Mount the root filesystem so we can apply the diff/layer.
+	//通过ID获取镜像层根目录
 	layerFs, err := driver.Get(id, "")
 	if err != nil {
 		return
@@ -132,7 +135,7 @@ func (gdw *NaiveDiffDriver) ApplyDiff(id, parent string, diff archive.Reader) (s
 	options := &archive.TarOptions{UIDMaps: gdw.uidMaps,
 		GIDMaps: gdw.gidMaps}
 	start := time.Now().UTC()
-	logrus.Debug("Start untar layer")
+	logrus.Debug("ApplyUncompressedLayer")
 	if size, err = ApplyUncompressedLayer(layerFs, diff, options); err != nil {
 		return
 	}

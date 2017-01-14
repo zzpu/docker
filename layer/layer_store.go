@@ -222,12 +222,21 @@ func (ls *layerStore) applyTar(tx MetadataTransaction, ts io.Reader, parent stri
 	if err != nil {
 		return err
 	}
-        //应用差异的数据
+
+	//对于overlay驱动，如果parent为空将返回ErrApplyDiffFallback错误
+	//对于aufs驱动，不需要parent的信息
+
+        //应用差异的数据,即是根据父层与子层的差异
+        //对于启用overlay驱动来说，driver是docker\daemon\graphdriver\overlay\overlay.go的naiveDiffDriverWithApply
+        //naiveDiffDriverWithApply包含graphdriver.Driver和applyDiff ApplyDiffProtoDriver
+
+	//NaiveDiffDriver实现在docker\daemon\graphdriver\fsdiff.go
 	applySize, err := ls.driver.ApplyDiff(layer.cacheID, parent, archive.Reader(rdr))
 	if err != nil {
+
 		return err
 	}
-
+	//logrus.Debugf("Applied tar on parent：%s",parent)
 	// Discard trailing data but ensure metadata is picked up to reconstruct stream
 	io.Copy(ioutil.Discard, rdr) // ignore error as reader may be closed
 
@@ -240,7 +249,7 @@ func (ls *layerStore) applyTar(tx MetadataTransaction, ts io.Reader, parent stri
 }
 
 func (ls *layerStore) Register(ts io.Reader, parent ChainID) (Layer, error) {
-	logrus.Debugf("Register : %s", parent)
+	logrus.Debugf("Register parent: %s", parent)
 	return ls.registerWithDescriptor(ts, parent, distribution.Descriptor{})
 }
 
@@ -280,7 +289,7 @@ func (ls *layerStore) registerWithDescriptor(ts io.Reader, parent ChainID, descr
 		references:     map[Layer]struct{}{},
 		descriptor:     descriptor,
 	}
-
+       //如果parent为空，这里pid为空，会建一个根目录
 	if err = ls.driver.Create(layer.cacheID, pid, "", nil); err != nil {
 		return nil, err
 	}
@@ -309,6 +318,7 @@ func (ls *layerStore) registerWithDescriptor(ts io.Reader, parent ChainID, descr
 	if layer.parent == nil {
 		layer.chainID = ChainID(layer.diffID)
 	} else {
+
 		layer.chainID = createChainIDFromParent(layer.parent.chainID, layer.diffID)
 	}
 

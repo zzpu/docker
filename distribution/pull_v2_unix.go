@@ -9,7 +9,8 @@ import (
 
 func (ld *v2LayerDescriptor) open(ctx context.Context) (distribution.ReadSeekCloser, error) {
 	// Blobs returns a reference to this repository's blob service.
-	//在/docker/distribution/registry/client/repository.go中实现
+	//实现在docker\vendor\src\github.com\docker\distribution\registry\client\repository.go
+	//得到的是httpReadSeeker对象，实现在docker\vendor\src\github.com\docker\distribution\registry\client\transport\http_reader.go
 	blobs := ld.repo.Blobs(ctx)
 	return blobs.Open(ctx, ld.digest)
 }

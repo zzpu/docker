@@ -45,6 +45,7 @@ func UnpackLayer(dest string, layer Reader, options *TarOptions) (size int64, er
 		options = &TarOptions{}
 	}
 	// Iterate through the files in the archive.
+	//枚举tar包中的文件
 	for {
 		hdr, err := tr.Next()
 		if err == io.EOF {

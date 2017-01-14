@@ -80,7 +80,7 @@ func (s *DefaultService) Auth(ctx context.Context, authConfig *types.AuthConfig,
 		if endpoint.Version == APIVersion1 {
 			login = loginV1
 		}
-
+                //获取token
 		status, token, err = login(authConfig, endpoint, userAgent)
 		if err == nil {
 			return

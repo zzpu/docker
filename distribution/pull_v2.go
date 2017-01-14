@@ -65,7 +65,7 @@ func (p *v2Puller) Pull(ctx context.Context, ref reference.Named) (err error) {
 	//creates an HTTP transpfort
 	logrus.Debugf("AuthName: %s AuthPasswd: %s Auth:%s", p.config.AuthConfig.Username,p.config.AuthConfig.Password,p.config.AuthConfig.Auth)
 
-	//提供超时机制和认证机制的客户端
+	//提供超时机制和认证机制的http客户端
 	//这里的p.repo会在下面pullV2Repository用到
 	p.repo, p.confirmedV2, err = NewV2Repository(ctx, p.repoInfo, p.endpoint, p.config.MetaHeaders, p.config.AuthConfig, "pull")
 	if err != nil {
@@ -201,8 +201,9 @@ func (ld *v2LayerDescriptor) Download(ctx context.Context, progressOutput progre
 	tmpFile := ld.tmpFile
 
 	//打开二进制数据块
-	//在 docker/distribution/registry/client/transport/http_reader.go实现的 ReadSeekCloser
+	//得到的是httpReadSeeker对象，实现在docker\vendor\src\github.com\docker\distribution\registry\client\transport\http_reader.go
 	//支持断点续传的io对象
+	//实质是Response的Body对象附加其他借口
 	layerDownload, err := ld.open(ctx)
 	if err != nil {
 		logrus.Errorf("Error initiating layer download: %v", err)
@@ -244,7 +245,7 @@ func (ld *v2LayerDescriptor) Download(ctx context.Context, progressOutput progre
 			return nil, 0, err
 		}
 	}
-
+        //这里会调用layerDownload的Read函数，也就是Response的Body的Read函数
 	reader := progress.NewProgressReader(ioutils.NewCancelReadCloser(ctx, layerDownload), progressOutput, size-offset, ld.ID(), "Downloading")
 	defer reader.Close()
 
@@ -305,6 +306,7 @@ func (ld *v2LayerDescriptor) Download(ctx context.Context, progressOutput progre
 
 	return ioutils.NewReadCloserWrapper(tmpFile, func() error {
 		tmpFile.Close()
+		//关闭后删除临时文件
 		err := os.RemoveAll(tmpFile.Name())
 		if err != nil {
 			logrus.Errorf("Failed to remove temp file: %s", tmpFile.Name())
@@ -541,7 +543,7 @@ func (p *v2Puller) pullSchema2(ctx context.Context, ref reference.Named, mfst *s
 
 	target := mfst.Target()
 	//ImageStore在docker\daemon\daemon.go初始化,实现在docker\image\store.go
-	//实际读入 "/var/lib/docker/image/imagedb/content/sha265/xxx"中对应的镜像信息json文件
+	//实际读入 "/var/lib/docker/image/（文件系统）/imagedb/content/sha265/xxx"中对应的镜像信息json文件
 	if _, err := p.config.ImageStore.Get(image.IDFromDigest(target.Digest)); err == nil {
 		// If the image already exists locally, no need to pull
 		// anything.
@@ -611,11 +613,14 @@ func (p *v2Puller) pullSchema2(ctx context.Context, ref reference.Named, mfst *s
 			return "", "", fmt.Errorf("image operating system %q cannot be used on this platform", unmarshalledConfig.OS)
 		}
 	}
-
+	// RootFS describes images root filesystem
+	//代表镜像的根文件系统，目前只支持层叠式
 	downloadRootFS = *image.NewRootFS()
+
 	//下载镜像数据，最终是通过descriptors的download下载的
 	//DownloadManager在docker\daemon\daemon.go的NewDaemon函数初始化(582行)
 	//实现在docker\distribution\xfer\download.go
+	//rootFS是downloadRootFS处理后的对象
 	rootFS, release, err := p.config.DownloadManager.Download(ctx, downloadRootFS, descriptors, p.config.ProgressOutput)
 	if err != nil {
 		if configJSON != nil {
@@ -660,7 +665,7 @@ func (p *v2Puller) pullSchema2(ctx context.Context, ref reference.Named, mfst *s
 		}
 	}
 	//ImageStore在docker\daemon\daemon.go初始化,实现在docker\image\store.go
-	//实际操作 "/var/lib/docker/image/imagedb/content/sha265/xxx"中对应的镜像信息json文件
+	//实际操作 "/var/lib/docker/image/(文件系统)/imagedb/content/sha265/xxx"中对应的镜像信息json文件
 	imageID, err := p.config.ImageStore.Create(configJSON)
 	if err != nil {
 		return "", "", err
@@ -743,6 +748,7 @@ func (p *v2Puller) pullManifestList(ctx context.Context, ref reference.Named, mf
 
 func (p *v2Puller) pullSchema2Config(ctx context.Context, dgst digest.Digest) (configJSON []byte, err error) {
 	blobs := p.repo.Blobs(ctx)
+	//实质是镜像的引用+dgst构造URL，然后http去访问该URL，得到数据
 	configJSON, err = blobs.Get(ctx, dgst)
 	if err != nil {
 		return nil, err

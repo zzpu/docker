@@ -48,7 +48,7 @@ func NewV2Repository(ctx context.Context, repoInfo *registry.RepositoryInfo, end
 	if err == nil {
 		base.Dial = proxyDialer.Dial
 	}
-
+        //修改器其实就是添加一些头信息
 	modifiers := registry.DockerHeaders(dockerversion.DockerUserAgent(ctx), metaHeaders)
 	authTransport := transport.NewTransport(base, modifiers...)
 
@@ -86,6 +86,7 @@ func NewV2Repository(ctx context.Context, repoInfo *registry.RepositoryInfo, end
 		basicHandler := auth.NewBasicHandler(creds)
 		modifiers = append(modifiers, auth.NewAuthorizer(challengeManager, tokenHandler, basicHandler))
 	}
+	//http.RoundTripper对象
 	tr := transport.NewTransport(base, modifiers...)
 
 	repoNameRef, err := distreference.ParseNamed(repoName)
@@ -96,7 +97,7 @@ func NewV2Repository(ctx context.Context, repoInfo *registry.RepositoryInfo, end
 			transportOK: true,
 		}
 	}
-
+        //这里传入http.RoundTripper对象，生成一个http客户端对象，
 	repo, err = client.NewRepository(ctx, repoNameRef, endpoint.URL.String(), tr)
 	if err != nil {
 		err = fallbackError{
