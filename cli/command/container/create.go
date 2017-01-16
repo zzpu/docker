@@ -183,6 +183,9 @@ func createContainer(ctx context.Context, dockerCli *command.DockerCli, config *
 	}
 
 	//create the container
+	//docker\cli\command\cli.go的Initialize函数初始化一个client
+	//client定义在docker\client\client.go
+	//ContainerCreate实现在docker\client\container_create.go
 	response, err := dockerCli.Client().ContainerCreate(ctx, config, hostConfig, networkingConfig, name)
 	fmt.Fprintf(stderr, "Canonical trusted reference '%s'\n", config.Image)
 	//if image not found try to pull it

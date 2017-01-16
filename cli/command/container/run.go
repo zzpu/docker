@@ -215,6 +215,7 @@ func runRun(dockerCli *command.DockerCli, flags *pflag.FlagSet, opts *runOptions
 	statusChan := waitExitOrRemoved(dockerCli, ctx, createResponse.ID, hostConfig.AutoRemove)
 
 	//start the container
+	//运行容器
 	if err := client.ContainerStart(ctx, createResponse.ID, types.ContainerStartOptions{}); err != nil {
 		// If we have holdHijackedConnection, we should notify
 		// holdHijackedConnection we are going to exit and wait

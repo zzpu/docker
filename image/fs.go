@@ -39,7 +39,7 @@ const (
 
 // NewFSStoreBackend returns new filesystem based backend for image.Store
 func NewFSStoreBackend(root string) (StoreBackend, error) {
-	//传入镜像的存储位置  "/var/lib/docker/image/overlay/imagedb"
+	//传入镜像的存储位置  "/var/lib/docker/image/(graphDriver名)/imagedb"
 	return newFSStore(root)
 }
 

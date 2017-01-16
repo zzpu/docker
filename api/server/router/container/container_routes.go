@@ -358,6 +358,7 @@ func (s *containerRouter) postContainersCreate(ctx context.Context, w http.Respo
 	adjustCPUShares := versions.LessThan(version, "1.19")
 
 	validateHostname := versions.GreaterThanOrEqualTo(version, "1.24")
+	//实现在docker\daemon\create.go
 	ccr, err := s.backend.ContainerCreate(types.ContainerCreateConfig{
 		Name:             name,
 		Config:           config,

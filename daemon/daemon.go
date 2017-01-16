@@ -570,7 +570,7 @@ func NewDaemon(config *Config, registryService registry.Service, containerdRemot
 	}
 
 	graphDriver := d.layerStore.DriverName()
-	//镜像的存储位置"/var/lib/docker/image"
+	//镜像的存储位置"/var/lib/docker/image/(graphDriver名)"
 	imageRoot := filepath.Join(config.Root, "image", graphDriver)
 
 	// Configure and validate the kernels security support
@@ -583,7 +583,7 @@ func NewDaemon(config *Config, registryService registry.Service, containerdRemot
 
 	logrus.Debugf("Max Concurrent Uploads: %d", *config.MaxConcurrentUploads)
 	d.uploadManager = xfer.NewLayerUploadManager(*config.MaxConcurrentUploads)
-        //传入镜像的存储位置  "/var/lib/docker/image/overlay/imagedb"
+        //传入镜像的存储位置  "/var/lib/docker/image/(graphDriver名)/imagedb"
 	ifs, err := image.NewFSStoreBackend(filepath.Join(imageRoot, "imagedb"))
 	if err != nil {
 		return nil, err

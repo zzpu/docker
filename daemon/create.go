@@ -39,7 +39,7 @@ func (daemon *Daemon) containerCreate(params types.ContainerCreateConfig, manage
 	if err != nil {
 		return types.ContainerCreateResponse{Warnings: warnings}, err
 	}
-
+	//
 	err = daemon.verifyNetworkingConfig(params.NetworkingConfig)
 	if err != nil {
 		return types.ContainerCreateResponse{Warnings: warnings}, err
@@ -48,11 +48,12 @@ func (daemon *Daemon) containerCreate(params types.ContainerCreateConfig, manage
 	if params.HostConfig == nil {
 		params.HostConfig = &containertypes.HostConfig{}
 	}
+	//
 	err = daemon.adaptContainerSettings(params.HostConfig, params.AdjustCPUShares)
 	if err != nil {
 		return types.ContainerCreateResponse{Warnings: warnings}, err
 	}
-
+        //
 	container, err := daemon.create(params, managed)
 	if err != nil {
 		return types.ContainerCreateResponse{Warnings: warnings}, daemon.imageNotExistToErrcode(err)
