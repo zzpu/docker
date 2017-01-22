@@ -20,6 +20,7 @@ import (
 
 // ContainerStart starts a container.
 func (daemon *Daemon) ContainerStart(name string, hostConfig *containertypes.HostConfig, validateHostname bool, checkpoint string) error {
+	//通过名字获取容器
 	container, err := daemon.GetContainer(name)
 	if err != nil {
 		return err
@@ -123,7 +124,7 @@ func (daemon *Daemon) containerStart(container *container.Container, checkpoint 
 			}
 		}
 	}()
-
+	//挂载什么?
 	if err := daemon.conditionalMountOnStart(container); err != nil {
 		return err
 	}
@@ -149,7 +150,12 @@ func (daemon *Daemon) containerStart(container *container.Container, checkpoint 
 	if copts != nil {
 		createOptions = append(createOptions, *copts...)
 	}
+	//是个libcontainerd.Client对象
+	//初始化在docker\daemon\daemon.go（673行）
+	//实现在docker\libcontainerd\client_linux.go
 
+	// Create is the entrypoint to create a container from a spec, and if successfully
+	// created, start it too.
 	if err := daemon.containerd.Create(container.ID, checkpoint, container.CheckpointDir(), *spec, createOptions...); err != nil {
 		errDesc := grpc.ErrorDesc(err)
 		logrus.Errorf("Create container failed with error: %s", errDesc)

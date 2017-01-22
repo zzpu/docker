@@ -115,6 +115,8 @@ func (daemon *Daemon) newContainer(name string, config *containertypes.Config, i
 	daemon.generateHostname(id, config)
 	entrypoint, args := daemon.getEntrypointAndArgs(config.Entrypoint, config.Cmd)
 
+	// NewBaseContainer creates a new container with its
+	// basic configuration.
 	base := daemon.newBaseContainer(id)
 	base.Created = time.Now().UTC()
 	base.Managed = managed

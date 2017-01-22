@@ -130,7 +130,7 @@ func (ctr *container) start(checkpoint string, checkpointDir string) error {
 		ctr.closeFifos(iopipe)
 		return err
 	}
-
+        //发送rpc请求？
 	resp, err := ctr.client.remote.apiClient.CreateContainer(context.Background(), r)
 	if err != nil {
 		close(createChan)

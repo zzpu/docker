@@ -252,6 +252,7 @@ hash_files() {
 bundle() {
 	local bundle="$1"; shift
 	echo "---> Making bundle: $(basename "$bundle") (in $DEST)"
+	echo "--->SCRIPTDIR:$SCRIPTDIR"
 	source "$SCRIPTDIR/make/$bundle" "$@"
 }
 

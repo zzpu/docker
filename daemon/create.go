@@ -35,10 +35,12 @@ func (daemon *Daemon) containerCreate(params types.ContainerCreateConfig, manage
 		return types.ContainerCreateResponse{}, fmt.Errorf("Config cannot be empty in order to create a container")
 	}
 
+        //
 	warnings, err := daemon.verifyContainerSettings(params.HostConfig, params.Config, false, validateHostname)
 	if err != nil {
 		return types.ContainerCreateResponse{Warnings: warnings}, err
 	}
+
 	//
 	err = daemon.verifyNetworkingConfig(params.NetworkingConfig)
 	if err != nil {
@@ -48,12 +50,14 @@ func (daemon *Daemon) containerCreate(params types.ContainerCreateConfig, manage
 	if params.HostConfig == nil {
 		params.HostConfig = &containertypes.HostConfig{}
 	}
+
 	//
 	err = daemon.adaptContainerSettings(params.HostConfig, params.AdjustCPUShares)
 	if err != nil {
 		return types.ContainerCreateResponse{Warnings: warnings}, err
 	}
-        //
+
+	// Create creates a new container from the given configuration with a given name.
 	container, err := daemon.create(params, managed)
 	if err != nil {
 		return types.ContainerCreateResponse{Warnings: warnings}, daemon.imageNotExistToErrcode(err)
@@ -72,6 +76,7 @@ func (daemon *Daemon) create(params types.ContainerCreateConfig, managed bool) (
 	)
 
 	if params.Config.Image != "" {
+		//通过引用或ID
 		img, err = daemon.GetImage(params.Config.Image)
 		if err != nil {
 			return nil, err

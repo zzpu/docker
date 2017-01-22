@@ -669,7 +669,8 @@ func NewDaemon(config *Config, registryService registry.Service, containerdRemot
 	d.containerdRemote = containerdRemote
 
 	go d.execCommandGC()
-
+        //实现在docker\libcontainerd\remote_linux.go
+	//返回的是client，实现在docker\libcontainerd\client_linux.go
 	d.containerd, err = containerdRemote.Client(d)
 	if err != nil {
 		return nil, err

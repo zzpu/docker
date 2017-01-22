@@ -599,6 +599,7 @@ func Parse(flags *pflag.FlagSet, copts *ContainerOptions) (*container.Config, *c
 	}
 
 	// only set this value if the user provided the flag, else it should default to nil
+	// Run a custom init inside the container, if null, use the daemon's configured settings
 	if flags.Changed("init") {
 		hostConfig.Init = &copts.init
 	}

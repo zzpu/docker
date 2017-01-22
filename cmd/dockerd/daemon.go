@@ -243,6 +243,8 @@ func (cli *DaemonCli) start(opts daemonOptions) (err error) {
 	//仓库服务，是Service的默认类DefaultService的实例对象
 	//s实现在docker\registry\service.go
 	registryService := registry.NewService(cli.Config.ServiceOptions)
+
+	//容器RPC调用的客户端？
 	containerdRemote, err := libcontainerd.New(cli.getLibcontainerdRoot(), cli.getPlatformRemoteOptions()...)
 	if err != nil {
 		return err

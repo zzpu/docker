@@ -996,7 +996,7 @@ func (devices *DeviceSet) verifyBaseDeviceUUIDFS(baseInfo *devInfo) error {
 		return err
 	}
 	defer devices.deactivateDevice(baseInfo)
-
+	//
 	uuid, err := getDeviceUUID(baseInfo.DevName())
 	if err != nil {
 		return err
@@ -1134,7 +1134,7 @@ func (devices *DeviceSet) setupVerifyBaseImageUUIDFS(baseInfo *devInfo) error {
 		}
 		return nil
 	}
-
+        //
 	if err := devices.verifyBaseDeviceUUIDFS(baseInfo); err != nil {
 		return fmt.Errorf("devmapper: Base Device UUID and Filesystem verification failed: %v", err)
 	}
@@ -1225,6 +1225,7 @@ func (devices *DeviceSet) setupBaseImage() error {
 
 	if oldInfo != nil {
 		if oldInfo.Initialized && !oldInfo.Deleted {
+			//验证？
 			if err := devices.setupVerifyBaseImageUUIDFS(oldInfo); err != nil {
 				return err
 			}
@@ -1713,6 +1714,7 @@ func (devices *DeviceSet) initDevmapper(doInit bool) error {
 	}
 
 	// https://github.com/docker/docker/issues/4036
+	//调用libdevmapper库的C函数
 	if supported := devicemapper.UdevSetSyncSupport(true); !supported {
 		if dockerversion.IAmStatic == "true" {
 			logrus.Errorf("devmapper: Udev sync is not supported. This will lead to data loss and unexpected behavior. Install a dynamic binary to use devicemapper or select a different storage driver. For more information, see https://docs.docker.com/engine/reference/commandline/daemon/#daemon-storage-driver-option")
@@ -1844,7 +1846,7 @@ func (devices *DeviceSet) initDevmapper(doInit bool) error {
 			}
 		}
 		defer metadataFile.Close()
-
+                //建立存储池内存映象
 		if err := devicemapper.CreatePool(devices.getPoolName(), dataFile, metadataFile, devices.thinpBlockSize); err != nil {
 			return err
 		}
@@ -1883,6 +1885,7 @@ func (devices *DeviceSet) initDevmapper(doInit bool) error {
 
 	// Setup the base image
 	if doInit {
+		//
 		if err := devices.setupBaseImage(); err != nil {
 			logrus.Debugf("devmapper: Error device setupBaseImage: %s", err)
 			return err

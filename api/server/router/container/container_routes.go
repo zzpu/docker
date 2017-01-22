@@ -136,6 +136,7 @@ func (s *containerRouter) postContainersStart(ctx context.Context, w http.Respon
 	// A non-nil json object is at least 7 characters.
 	if r.ContentLength > 7 || r.ContentLength == -1 {
 		if versions.GreaterThanOrEqualTo(version, "1.24") {
+			                                                                                                //不赞成
 			return validationError{fmt.Errorf("starting container with non-empty request body was deprecated since v1.10 and removed in v1.12")}
 		}
 
@@ -156,6 +157,7 @@ func (s *containerRouter) postContainersStart(ctx context.Context, w http.Respon
 
 	checkpoint := r.Form.Get("checkpoint")
 	validateHostname := versions.GreaterThanOrEqualTo(version, "1.24")
+	//实现在docker\daemon\start.go
 	if err := s.backend.ContainerStart(vars["name"], hostConfig, validateHostname, checkpoint); err != nil {
 		return err
 	}
@@ -354,6 +356,9 @@ func (s *containerRouter) postContainersCreate(ctx context.Context, w http.Respo
 	if err != nil {
 		return err
 	}
+	logrus.Debug(config)
+	logrus.Debug(hostConfig)
+	logrus.Debug(networkingConfig)
 	version := httputils.VersionFromContext(ctx)
 	adjustCPUShares := versions.LessThan(version, "1.19")
 
