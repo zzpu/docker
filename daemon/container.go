@@ -29,7 +29,9 @@ func (daemon *Daemon) GetContainer(prefixOrName string) (*container.Container, e
 	if len(prefixOrName) == 0 {
 		return nil, errors.NewBadRequestError(fmt.Errorf("No container name or ID supplied"))
 	}
-
+        //daemon.containers初始化在docker\daemon\daemon.go
+	//实现类定义在docker\container\memory_store.go
+	//其实就是一个Map加锁
 	if containerByID := daemon.containers.Get(prefixOrName); containerByID != nil {
 		// prefix is an exact match to a full container ID
 		return containerByID, nil
@@ -111,7 +113,7 @@ func (daemon *Daemon) newContainer(name string, config *containertypes.Config, i
 	if err != nil {
 		return nil, err
 	}
-
+         //从id中截取一段作为hostname
 	daemon.generateHostname(id, config)
 	entrypoint, args := daemon.getEntrypointAndArgs(config.Entrypoint, config.Cmd)
 

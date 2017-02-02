@@ -356,9 +356,19 @@ func (s *containerRouter) postContainersCreate(ctx context.Context, w http.Respo
 	if err != nil {
 		return err
 	}
+	logrus.Debug("##############################################")
+	// Config contains the configuration data about a container.
+	// It should hold only portable information about the container.
 	logrus.Debug(config)
+	logrus.Debug("##############################################")
+
+	// HostConfig the non-portable Config structure of a container.
+	// Here, "non-portable" means "dependent of the host we are running on".
 	logrus.Debug(hostConfig)
+	logrus.Debug("##############################################")
+	//这里是空
 	logrus.Debug(networkingConfig)
+	logrus.Debug("##############################################")
 	version := httputils.VersionFromContext(ctx)
 	adjustCPUShares := versions.LessThan(version, "1.19")
 

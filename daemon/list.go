@@ -60,6 +60,8 @@ var errStopIteration = errors.New("container list iteration stopped")
 
 // List returns an array of all containers registered in the daemon.
 func (daemon *Daemon) List() []*container.Container {
+	//实现类定义在docker\container\memory_store.go   //其实就是一个Map加锁
+	//实际上是读取Map
 	return daemon.containers.List()
 }
 

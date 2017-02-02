@@ -72,7 +72,7 @@ var (
 type Daemon struct {
 	ID                        string
 	repository                string
-	containers                container.Store
+	containers                container.Store    //实现类定义在docker\container\memory_store.go   //其实就是一个Map加锁
 	execCommands              *exec.Store
 	referenceStore            reference.Store
 	downloadManager           *xfer.LayerDownloadManager
@@ -94,7 +94,7 @@ type Daemon struct {
 	uidMaps                   []idtools.IDMap
 	gidMaps                   []idtools.IDMap
 	layerStore                layer.Store
-	imageStore                image.Store
+	imageStore                image.Store   //docker\image\store.go
 	pluginStore               *pluginstore.Store
 	nameIndex                 *registrar.Registrar
 	linkIndex                 *linkIndex
@@ -114,6 +114,7 @@ func (daemon *Daemon) restore() error {
 	if !debug {
 		logrus.Info("Loading containers: start.")
 	}
+	logrus.Debugf("Read container dir:%s", daemon.repository)
 	dir, err := ioutil.ReadDir(daemon.repository)
 	if err != nil {
 		return err
@@ -680,7 +681,7 @@ func NewDaemon(config *Config, registryService registry.Service, containerdRemot
 	if err := pluginInit(d, config, containerdRemote); err != nil {
 		return nil, err
 	}
-
+        //这里应该是读取所容器信息到Map中
 	if err := d.restore(); err != nil {
 		return nil, err
 	}
@@ -780,7 +781,17 @@ func (daemon *Daemon) Shutdown() error {
 
 // Mount sets container.BaseFS
 // (is it not set coming in? why is it unset?)
+//挂载什么?
+// RWLayer represents a layer which is
+// read and writable
+//返回RWLayer,实际上是referencedRWLayer,实现在docker\layer\mounted_layer.go
+//layerStore实现在docker/layer/layer_store.go
 func (daemon *Daemon) Mount(container *container.Container) error {
+	//
+	// RWLayer represents a layer which is
+	// read and writable
+	//RWLayer,实际上是referencedRWLayer初始化在docker\daemon\create.go
+	//实现在docker\layer\mounted_layer.go
 	dir, err := container.RWLayer.Mount(container.GetMountLabel())
 	if err != nil {
 		return err

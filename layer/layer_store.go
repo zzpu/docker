@@ -27,6 +27,7 @@ import (
 const maxLayerDepth = 125
 
 type layerStore struct {
+	//store实现在docker\layer\filestore.go
 	store  MetadataStore
 	driver graphdriver.Driver
 
@@ -63,12 +64,15 @@ func NewStoreFromOptions(options StoreOptions) (Store, error) {
 	}
 	logrus.Debugf("Using graph driver %s", driver)
 	logrus.Debugf("StorePath ：%s", options.StorePath)
+	logrus.Debugf("MetadataStorePath ：%s", fmt.Sprintf(options.MetadataStorePathTemplate, driver))
 
+	//meta
+	//在/var/lib/docker/image/overlay/layerdb
 	fms, err := NewFSMetadataStore(fmt.Sprintf(options.MetadataStorePathTemplate, driver))
 	if err != nil {
 		return nil, err
 	}
-
+        //同时加载所有镜像层
 	return NewStoreFromGraphDriver(fms, driver)
 }
 
@@ -82,14 +86,16 @@ func NewStoreFromGraphDriver(store MetadataStore, driver graphdriver.Driver) (St
 		layerMap: map[ChainID]*roLayer{},
 		mounts:   map[string]*mountedLayer{},
 	}
-
+        //store实现在docker\layer\filestore.go
+	//实质是读取var/lib/docker/image/overlay/layerdb/sha256文件夹列表
 	ids, mounts, err := store.List()
 	if err != nil {
 		return nil, err
 	}
-
+        //加载所有镜像层到Map中
 	for _, id := range ids {
 		l, err := ls.loadLayer(id)
+		logrus.Debugf("Loading layer: %s", id)
 		if err != nil {
 			logrus.Debugf("Failed to load layer %s: %s", id, err)
 			continue
@@ -113,7 +119,8 @@ func (ls *layerStore) loadLayer(layer ChainID) (*roLayer, error) {
 	if ok {
 		return cl, nil
 	}
-
+	//MetadataStore
+	//store实现在docker\layer\filestore.go
 	diff, err := ls.store.GetDiffID(layer)
 	if err != nil {
 		return nil, fmt.Errorf("failed to get diff id for %s: %s", layer, err)
@@ -128,12 +135,12 @@ func (ls *layerStore) loadLayer(layer ChainID) (*roLayer, error) {
 	if err != nil {
 		return nil, fmt.Errorf("failed to get cache id for %s: %s", layer, err)
 	}
-
+        //看是否有/var/lib/docker/image/overlay/layerdb/sha256/xxx/parent
 	parent, err := ls.store.GetParent(layer)
 	if err != nil {
 		return nil, fmt.Errorf("failed to get parent for %s: %s", layer, err)
 	}
-
+	//对于overlay驱动而言,这个文件是不存在的
 	descriptor, err := ls.store.GetDescriptor(layer)
 	if err != nil {
 		return nil, fmt.Errorf("failed to get descriptor for %s: %s", layer, err)
@@ -189,7 +196,7 @@ func (ls *layerStore) loadMount(mount string) error {
 		layerStore: ls,
 		references: map[RWLayer]*referencedRWLayer{},
 	}
-
+        //
 	if parent != "" {
 		p, err := ls.loadLayer(parent)
 		if err != nil {
@@ -338,7 +345,7 @@ func (ls *layerStore) registerWithDescriptor(ts io.Reader, parent ChainID, descr
 	if err = tx.Commit(layer.chainID); err != nil {
 		return nil, err
 	}
-
+	//注册层
 	ls.layerMap[layer.chainID] = layer
 
 	return layer.getReference(), nil
@@ -457,7 +464,10 @@ func (ls *layerStore) Release(l Layer) ([]Metadata, error) {
 
 	return ls.releaseLayer(layer)
 }
-
+// RWLayer represents a layer which is
+// read and writable
+//用container.ID建一个文件夹,作为读写层的专属文件夹
+//在docker\daemon\daemon_unix.go实现了一个initFunc
 func (ls *layerStore) CreateRWLayer(name string, parent ChainID, mountLabel string, initFunc MountInit, storageOpt map[string]string) (RWLayer, error) {
 	ls.mountL.Lock()
 	defer ls.mountL.Unlock()
@@ -489,19 +499,20 @@ func (ls *layerStore) CreateRWLayer(name string, parent ChainID, mountLabel stri
 	m = &mountedLayer{
 		name:       name,
 		parent:     p,
-		mountID:    ls.mountID(name),
+		mountID:    ls.mountID(name),//随机生成ID
 		layerStore: ls,
 		references: map[RWLayer]*referencedRWLayer{},
 	}
-
+	//ID是随机产生的
 	if initFunc != nil {
+		//调用驱动创建%s-init目录
 		pid, err = ls.initMount(m.mountID, pid, mountLabel, initFunc, storageOpt)
 		if err != nil {
 			return nil, err
 		}
 		m.initID = pid
 	}
-
+	//调用驱动创建目录作为读写镜像层的目录
 	if err = ls.driver.CreateReadWrite(m.mountID, pid, "", storageOpt); err != nil {
 		return nil, err
 	}
@@ -615,16 +626,17 @@ func (ls *layerStore) initMount(graphID, parent, mountLabel string, initFunc Mou
 	if err := ls.driver.CreateReadWrite(initID, parent, mountLabel, storageOpt); err != nil {
 		return "", err
 	}
+	//挂载
 	p, err := ls.driver.Get(initID, "")
 	if err != nil {
 		return "", err
 	}
-
+        //docker\daemon\daemon.go的setupInitLayer函数
 	if err := initFunc(p); err != nil {
 		ls.driver.Put(initID)
 		return "", err
 	}
-
+        //卸载
 	if err := ls.driver.Put(initID); err != nil {
 		return "", err
 	}

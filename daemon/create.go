@@ -67,6 +67,7 @@ func (daemon *Daemon) containerCreate(params types.ContainerCreateConfig, manage
 }
 
 // Create creates a new container from the given configuration with a given name.
+//返回Container只是为了得到ID?
 func (daemon *Daemon) create(params types.ContainerCreateConfig, managed bool) (retC *container.Container, retErr error) {
 	var (
 		container *container.Container
@@ -76,7 +77,7 @@ func (daemon *Daemon) create(params types.ContainerCreateConfig, managed bool) (
 	)
 
 	if params.Config.Image != "" {
-		//通过引用或ID
+		//获得镜像的描述信息结构
 		img, err = daemon.GetImage(params.Config.Image)
 		if err != nil {
 			return nil, err
@@ -91,7 +92,22 @@ func (daemon *Daemon) create(params types.ContainerCreateConfig, managed bool) (
 	if err := daemon.mergeAndVerifyLogConfig(&params.HostConfig.LogConfig); err != nil {
 		return nil, err
 	}
-
+	// NewBaseContainer creates a new container with its
+	// basic configuration.
+	//type Container struct {
+	//	CommonContainer
+	//
+	//	// Fields below here are platform specific.
+	//	AppArmorProfile string
+	//	HostnamePath    string
+	//	HostsPath       string
+	//	ShmPath         string
+	//	ResolvConfPath  string
+	//	SeccompProfile  string
+	//	NoNewPrivileges bool
+	//}
+	//基本配置的容器
+	//docker\container\container_unix.go
 	if container, err = daemon.newContainer(params.Name, params.Config, imgID, managed); err != nil {
 		return nil, err
 	}
@@ -110,10 +126,11 @@ func (daemon *Daemon) create(params types.ContainerCreateConfig, managed bool) (
 	container.HostConfig.StorageOpt = params.HostConfig.StorageOpt
 
 	// Set RWLayer for container after mount labels have been set
+	//这里是建读写层目录和init目录
 	if err := daemon.setRWLayer(container); err != nil {
 		return nil, err
 	}
-
+	logrus.Debugf("container.Root: %s", container.Root)
 	rootUID, rootGID, err := idtools.GetRootUIDGID(daemon.uidMaps, daemon.gidMaps)
 	if err != nil {
 		return nil, err
@@ -128,7 +145,8 @@ func (daemon *Daemon) create(params types.ContainerCreateConfig, managed bool) (
 	if err := daemon.setHostConfig(container, params.HostConfig); err != nil {
 		return nil, err
 	}
-
+        //这里挂载一次不知挂载什么
+	//对卷的处理
 	if err := daemon.createContainerPlatformSpecificSettings(container, params.Config, params.HostConfig); err != nil {
 		return nil, err
 	}
@@ -149,6 +167,7 @@ func (daemon *Daemon) create(params types.ContainerCreateConfig, managed bool) (
 		logrus.Errorf("Error saving new container to disk: %v", err)
 		return nil, err
 	}
+	//实际上是添加到一个内存Map中,以ID为key
 	if err := daemon.Register(container); err != nil {
 		return nil, err
 	}
@@ -207,7 +226,11 @@ func (daemon *Daemon) setRWLayer(container *container.Container) error {
 		}
 		layerID = img.RootFS.ChainID()
 	}
-
+	// RWLayer represents a layer which is
+	// read and writable
+	//返回RWLayer,实际上是mountedLayer,实现在docker\layer\mounted_layer.go
+	//layerStore实现在docker/layer/layer_store.go
+	//建读写的目录和init目录
 	rwLayer, err := daemon.layerStore.CreateRWLayer(container.ID, layerID, container.MountLabel, daemon.getLayerInit(), container.HostConfig.StorageOpt)
 
 	if err != nil {

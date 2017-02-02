@@ -334,6 +334,7 @@ func (d *Driver) Remove(id string) error {
 }
 
 // Get creates and mounts the required file system for the given id and returns the mount path.
+//返回挂载的路劲
 func (d *Driver) Get(id string, mountLabel string) (s string, err error) {
 	dir := d.dir(id)
 	if _, err := os.Stat(dir); err != nil {

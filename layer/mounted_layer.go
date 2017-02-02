@@ -2,7 +2,7 @@ package layer
 
 import (
 	"io"
-
+	//"github.com/Sirupsen/logrus"
 	"github.com/docker/docker/pkg/archive"
 )
 
@@ -93,6 +93,7 @@ type referencedRWLayer struct {
 }
 
 func (rl *referencedRWLayer) Mount(mountLabel string) (string, error) {
+	//logrus.Debugf("Mount mountLabel:%s",mountLabel)
 	return rl.layerStore.driver.Get(rl.mountedLayer.mountID, mountLabel)
 }
 

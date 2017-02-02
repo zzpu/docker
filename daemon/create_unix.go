@@ -17,6 +17,7 @@ import (
 
 // createContainerPlatformSpecificSettings performs platform specific container create functionality
 func (daemon *Daemon) createContainerPlatformSpecificSettings(container *container.Container, config *containertypes.Config, hostConfig *containertypes.HostConfig) error {
+	//这是挂载什么?
 	if err := daemon.Mount(container); err != nil {
 		return err
 	}

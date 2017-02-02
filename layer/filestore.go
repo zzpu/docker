@@ -44,6 +44,7 @@ func NewFSMetadataStore(root string) (MetadataStore, error) {
 	if err := os.MkdirAll(root, 0700); err != nil {
 		return nil, err
 	}
+	//在/var/lib/docker/image/overlay/layerdb
 	return &fileMetadataStore{
 		root: root,
 	}, nil
@@ -51,6 +52,7 @@ func NewFSMetadataStore(root string) (MetadataStore, error) {
 
 func (fms *fileMetadataStore) getLayerDirectory(layer ChainID) string {
 	dgst := digest.Digest(layer)
+	//返回16进制?
 	return filepath.Join(fms.root, string(dgst.Algorithm()), dgst.Hex())
 }
 
@@ -202,10 +204,14 @@ func (fms *fileMetadataStore) GetCacheID(layer ChainID) (string, error) {
 }
 
 func (fms *fileMetadataStore) GetDescriptor(layer ChainID) (distribution.Descriptor, error) {
+	//读取/var/lib/docker/image/overlay/layerdb/sha256/xxx/descriptor.json
+	logrus.Debugf("Reading :%s",fms.getLayerFilename(layer, "descriptor.json"))
 	content, err := ioutil.ReadFile(fms.getLayerFilename(layer, "descriptor.json"))
 	if err != nil {
 		if os.IsNotExist(err) {
 			// only return empty descriptor to represent what is stored
+			//对于overlay驱动而言,这个文件是不存在的
+			logrus.Debugf("Empty Read :%s",fms.getLayerFilename(layer, "descriptor.json"))
 			return distribution.Descriptor{}, nil
 		}
 		return distribution.Descriptor{}, err
@@ -307,6 +313,7 @@ func (fms *fileMetadataStore) GetMountParent(mount string) (ChainID, error) {
 func (fms *fileMetadataStore) List() ([]ChainID, []string, error) {
 	var ids []ChainID
 	for _, algorithm := range supportedAlgorithms {
+		///var/lib/docker/image/overlay/layerdb/sha256?
 		fileInfos, err := ioutil.ReadDir(filepath.Join(fms.root, string(algorithm)))
 		if err != nil {
 			if os.IsNotExist(err) {
@@ -317,6 +324,7 @@ func (fms *fileMetadataStore) List() ([]ChainID, []string, error) {
 
 		for _, fi := range fileInfos {
 			if fi.IsDir() && fi.Name() != "mounts" {
+				//sh256:FileName
 				dgst := digest.NewDigestFromHex(string(algorithm), fi.Name())
 				if err := dgst.Validate(); err != nil {
 					logrus.Debugf("Ignoring invalid digest %s:%s", algorithm, fi.Name())

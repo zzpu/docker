@@ -43,6 +43,7 @@ func (daemon *Daemon) generateIDAndName(name string) (string, string, error) {
 		id  = stringid.GenerateNonCryptoID()
 	)
 
+	//如果参数中名字为空则从id中生成一个
 	if name == "" {
 		if name, err = daemon.generateNewName(id); err != nil {
 			return "", "", err

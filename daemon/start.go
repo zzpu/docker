@@ -21,6 +21,10 @@ import (
 // ContainerStart starts a container.
 func (daemon *Daemon) ContainerStart(name string, hostConfig *containertypes.HostConfig, validateHostname bool, checkpoint string) error {
 	//通过名字获取容器
+	// one of the following inputs from the caller:
+	//  - A full container ID, which will exact match a container in daemon's list
+	//  - A container name, which will only exact match via the GetByName() function
+	//  - A partial container ID prefix (e.g. short ID) of any length that is
 	container, err := daemon.GetContainer(name)
 	if err != nil {
 		return err
@@ -124,7 +128,12 @@ func (daemon *Daemon) containerStart(container *container.Container, checkpoint 
 			}
 		}
 	}()
-	//挂载什么?
+	//挂载什么?就是将镜像层组合层root根文件系统-----根据平台而定的动作
+
+	// RWLayer represents a layer which is
+	// read and writable
+	//返回RWLayer,实际上是referencedRWLayer,实现在docker\layer\mounted_layer.go
+	//layerStore实现在docker/layer/layer_store.go
 	if err := daemon.conditionalMountOnStart(container); err != nil {
 		return err
 	}
@@ -136,7 +145,7 @@ func (daemon *Daemon) containerStart(container *container.Container, checkpoint 
 	if err := daemon.initializeNetworking(container); err != nil {
 		return err
 	}
-
+	// Spec is the base configuration for the container.
 	spec, err := daemon.createSpec(container)
 	if err != nil {
 		return err
@@ -150,7 +159,7 @@ func (daemon *Daemon) containerStart(container *container.Container, checkpoint 
 	if copts != nil {
 		createOptions = append(createOptions, *copts...)
 	}
-	//是个libcontainerd.Client对象
+	//是个libcontainerd.Client对象---调用rpc接口
 	//初始化在docker\daemon\daemon.go（673行）
 	//实现在docker\libcontainerd\client_linux.go
 

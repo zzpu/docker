@@ -25,6 +25,8 @@ func (daemon *Daemon) GetImageID(refOrID string) (image.ID, error) {
 		return "", err
 	}
 	if id != "" {
+		//读入 "/var/lib/docker/image/驱动名/imagedb/content/sha265/xxx"中对应的镜像信息json文件
+		//得到image,docker\image\image.go
 		if _, err := daemon.imageStore.Get(image.IDFromDigest(id)); err != nil {
 			return "", ErrImageDoesNotExist{refOrID}
 		}

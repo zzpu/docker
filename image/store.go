@@ -186,12 +186,13 @@ func (is *store) Search(term string) (ID, error) {
 func (is *store) Get(id ID) (*Image, error) {
 	// todo: Check if image is in images
 	// todo: Detect manual insertions and start using them
-	//读入 "/var/lib/docker/image/imagedb/content/sha265/xxx"中对应的镜像信息json文件
+	//读入 "/var/lib/docker/image/驱动名/imagedb/content/sha265/xxx"中对应的镜像信息json文件
 	config, err := is.fs.Get(id.Digest())
 	if err != nil {
 		return nil, err
 	}
 	//解析json文件
+	//得到image,docker\image\image.go
 	img, err := NewFromJSON(config)
 	if err != nil {
 		return nil, err
