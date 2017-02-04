@@ -238,6 +238,9 @@ func (ls *layerStore) applyTar(tx MetadataTransaction, ts io.Reader, parent stri
         //naiveDiffDriverWithApply包含graphdriver.Driver和applyDiff ApplyDiffProtoDriver
 
 	//NaiveDiffDriver实现在docker\daemon\graphdriver\fsdiff.go
+	//layer.cacheI是个随机值  stringid.GenerateRandomID()
+
+	//差异数据其实以一些修改,直接覆盖从父层拷贝过来的数据
 	applySize, err := ls.driver.ApplyDiff(layer.cacheID, parent, archive.Reader(rdr))
 	if err != nil {
 
@@ -268,6 +271,7 @@ func (ls *layerStore) registerWithDescriptor(ts io.Reader, parent ChainID, descr
 	var pid string
 	var p *roLayer
 	if string(parent) != "" {
+		//这里直接从Map中取
 		p = ls.get(parent)
 		if p == nil {
 			return nil, ErrLayerDoesNotExist
@@ -296,7 +300,8 @@ func (ls *layerStore) registerWithDescriptor(ts io.Reader, parent ChainID, descr
 		references:     map[Layer]struct{}{},
 		descriptor:     descriptor,
 	}
-       //如果parent为空，这里pid为空，会建一个根目录
+       //如果parent为空，这里pid为空，会建一个根目录root
+	//拷贝父层的数据到子层
 	if err = ls.driver.Create(layer.cacheID, pid, "", nil); err != nil {
 		return nil, err
 	}

@@ -93,12 +93,12 @@ func (daemon *Daemon) pullImageWithReference(ctx context.Context, ref reference.
 		MetaHeaders:      metaHeaders,
 		AuthConfig:       authConfig,
 		ProgressOutput:   progress.ChanOutput(progressChan),
-		RegistryService:  daemon.RegistryService,//默认registry服务接口实现的实例,658行
+		RegistryService:  daemon.RegistryService,//默认registry服务接口实现的实例,658行   实现在\docker\registry\service.go
 		ImageEventLogger: daemon.LogImageEvent,
-		MetadataStore:    daemon.distributionMetadataStore,//614行
-		ImageStore:       daemon.imageStore,               //592行
-		ReferenceStore:   daemon.referenceStore,           //621行
-		DownloadManager:  daemon.downloadManager,          //582行
+		MetadataStore:    daemon.distributionMetadataStore,//614行   //实现在docker\distribution\metadata\metadata.go
+		ImageStore:       daemon.imageStore,               //592行   //实现在docker\image\store.go
+		ReferenceStore:   daemon.referenceStore,           //621行   //实现在docker\reference\store.go
+		DownloadManager:  daemon.downloadManager,          //582行   //实现在docker\distribution\xfer\download.go
 	}
 
 	err := distribution.Pull(ctx, ref, imagePullConfig)

@@ -59,7 +59,7 @@ type v2Puller struct {
 	// registry. This is used to limit fallbacks to the v1 protocol.
 	confirmedV2 bool
 }
-
+//关于imagePullConfig看docker\daemon\image_pull.go的pullImageWithReference
 func (p *v2Puller) Pull(ctx context.Context, ref reference.Named) (err error) {
 	// TODO(tiborvass): was ReceiveTimeout
 	//creates an HTTP transpfort
@@ -203,7 +203,7 @@ func (ld *v2LayerDescriptor) Download(ctx context.Context, progressOutput progre
 	//打开二进制数据块
 	//得到的是httpReadSeeker对象，实现在docker\vendor\src\github.com\docker\distribution\registry\client\transport\http_reader.go
 	//支持断点续传的io对象
-	//实质是Response的Body对象附加其他借口
+	//实质是Response的Body对象附加其他接口
 	layerDownload, err := ld.open(ctx)
 	if err != nil {
 		logrus.Errorf("Error initiating layer download: %v", err)
@@ -351,7 +351,7 @@ func (p *v2Puller) pullV2Tag(ctx context.Context, ref reference.Named) (tagUpdat
 	//在NewV2Repository生成
 	//在docker\vendor\src\github.com\docker\distribution\registry\client\repository.go中实现
 	//传入参数ctx其实是没啥用
-	//获取一个镜像清单操作集
+	//获取一个镜像清单操作集对象---注意是清单操作集,不是清单-----实质以一个包含http客户端的对象
 	logrus.Debugf("PullV2Tag....")
 	manSvc, err := p.repo.Manifests(ctx)
 	if err != nil {
@@ -407,6 +407,7 @@ func (p *v2Puller) pullV2Tag(ctx context.Context, ref reference.Named) (tagUpdat
 		id             digest.Digest
 		manifestDigest digest.Digest
 	)
+	//下面进入实质下载数据
 	switch v := manifest.(type) {
 	//注册镜像列表，原生数据
 	case *schema1.SignedManifest:
@@ -416,6 +417,7 @@ func (p *v2Puller) pullV2Tag(ctx context.Context, ref reference.Named) (tagUpdat
 			return false, err
 		}
 	//原始json数据
+	//这里会将下载各层数据
 	case *schema2.DeserializedManifest:
 		logrus.Debugf("Receive schema2.DeserializedManifest")
 		id, manifestDigest, err = p.pullSchema2(ctx, ref, v)
@@ -556,6 +558,7 @@ func (p *v2Puller) pullSchema2(ctx context.Context, ref reference.Named, mfst *s
 	// Note that the order of this loop is in the direction of bottom-most
 	// to top-most, so that the downloads slice gets ordered correctly.
 	//镜像的层描述，将根据这些描述下载各层
+	//主要是镜像层的Digest
 	for _, d := range mfst.Layers {
 		layerDescriptor := &v2LayerDescriptor{
 			digest:            d.Digest,
@@ -621,6 +624,7 @@ func (p *v2Puller) pullSchema2(ctx context.Context, ref reference.Named, mfst *s
 	//DownloadManager在docker\daemon\daemon.go的NewDaemon函数初始化(582行)
 	//实现在docker\distribution\xfer\download.go
 	//rootFS是downloadRootFS处理后的对象
+	//数据会在这里解压,而且镜像层在这注册
 	rootFS, release, err := p.config.DownloadManager.Download(ctx, downloadRootFS, descriptors, p.config.ProgressOutput)
 	if err != nil {
 		if configJSON != nil {

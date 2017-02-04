@@ -56,6 +56,8 @@ type Puller interface {
 // whether a v1 or v2 puller will be created. The other parameters are passed
 // through to the underlying puller implementation for use during the actual
 // pull operation.
+
+//关于imagePullConfig看docker\daemon\image_pull.go的pullImageWithReference
 func newPuller(endpoint registry.APIEndpoint, repoInfo *registry.RepositoryInfo, imagePullConfig *ImagePullConfig) (Puller, error) {
 	switch endpoint.Version {
 	case registry.APIVersion2:
@@ -78,6 +80,7 @@ func newPuller(endpoint registry.APIEndpoint, repoInfo *registry.RepositoryInfo,
 
 // Pull initiates a pull operation. image is the repository name to pull, and
 // tag may be either empty, or indicate a specific tag to pull.
+//关于imagePullConfig看docker\daemon\image_pull.go的pullImageWithReference
 func Pull(ctx context.Context, ref reference.Named, imagePullConfig *ImagePullConfig) error {
 	// Resolve the Repository name from fqn to RepositoryInfo
 
@@ -105,7 +108,7 @@ func Pull(ctx context.Context, ref reference.Named, imagePullConfig *ImagePullCo
 	//实质上如果Hostname()返回的是官方仓库地址,则endpoint的URL将是registry-1.docker.io,如果有镜像则会添加镜像作为endpoint
 	// 否则就是私有地址的两种类型:http和https
 
-	//V2的接口具体代码在Zdocker\registry\service_v2.go的函数lookupV2Endpoints
+	//V2的接口具体代码在docker\registry\service_v2.go的函数lookupV2Endpoints
 	// endpoints其实就是对hostname的一个封装,并没有加什么特别的东西
 	//{
 	//	URL: &url.URL{

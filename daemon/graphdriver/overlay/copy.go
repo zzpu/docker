@@ -52,6 +52,7 @@ func copyXattr(srcPath, dstPath, attr string) error {
 }
 
 func copyDir(srcDir, dstDir string, flags copyFlags) error {
+	//遍历指定目录下的所有文件
 	err := filepath.Walk(srcDir, func(srcPath string, f os.FileInfo, err error) error {
 		if err != nil {
 			return err

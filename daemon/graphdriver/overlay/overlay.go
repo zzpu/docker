@@ -317,7 +317,7 @@ func (d *Driver) Create(id, parent, mountLabel string, storageOpt map[string]str
 	if err := idtools.MkdirAs(path.Join(dir, "merged"), 0700, rootUID, rootGID); err != nil {
 		return err
 	}
-
+        //这里应该是把父镜像层的所有数据拷贝到子镜像层
 	return copyDir(parentUpperDir, upperDir, 0)
 }
 

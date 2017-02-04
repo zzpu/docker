@@ -88,6 +88,7 @@ type DownloadDescriptorWithRegistered interface {
 // Download method is called to get the layer tar data. Layers are then
 // registered in the appropriate order.  The caller must call the returned
 // release function once it is is done with the returned RootFS object.
+//数据会在这里解压
 func (ldm *LayerDownloadManager) Download(ctx context.Context, initialRootFS image.RootFS, layers []DownloadDescriptor, progressOutput progress.Output) (image.RootFS, func(), error) {
 	var (
 		topLayer       layer.Layer
@@ -163,6 +164,7 @@ func (ldm *LayerDownloadManager) Download(ctx context.Context, initialRootFS ima
 		} else {
 			//下载函数,最终会调用descriptor的download函数
 			//下载完后会在该函数进行解压
+			//解压动作函数,同时镜像层也会在这里注册到系统中
 			xferFunc = ldm.makeDownloadFunc(descriptor, rootFS.ChainID(), nil)
 		}
 		//实现在docker\distribution\xfer\transfer.go
@@ -221,6 +223,7 @@ func (ldm *LayerDownloadManager) Download(ctx context.Context, initialRootFS ima
 // complete before the registration step, and registers the downloaded data
 // on top of parentDownload's resulting layer. Otherwise, it registers the
 // layer on top of the ChainID given by parentLayer.
+//镜像层会在这里注册到系统中
 func (ldm *LayerDownloadManager) makeDownloadFunc(descriptor DownloadDescriptor, parentLayer layer.ChainID, parentDownload *downloadTransfer) DoFunc {
 	return func(progressChan chan<- progress.Progress, start <-chan struct{}, inactive chan<- struct{}) Transfer {
 		d := &downloadTransfer{
@@ -354,7 +357,7 @@ func (ldm *LayerDownloadManager) makeDownloadFunc(descriptor DownloadDescriptor,
 			if ds, ok := d.layerStore.(layer.DescribableStore); ok {
 				d.layer, err = ds.RegisterWithDescriptor(inflatedLayerData, parentLayer, src)
 			} else {
-
+                                //注册镜像层
 				d.layer, err = d.layerStore.Register(inflatedLayerData, parentLayer)
 			}
 			if err != nil {
