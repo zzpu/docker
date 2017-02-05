@@ -301,7 +301,7 @@ func (ls *layerStore) registerWithDescriptor(ts io.Reader, parent ChainID, descr
 		descriptor:     descriptor,
 	}
        //如果parent为空，这里pid为空，会建一个根目录root
-	//拷贝父层的数据到子层
+	//如果parent的root存在，则做overlay
 	if err = ls.driver.Create(layer.cacheID, pid, "", nil); err != nil {
 		return nil, err
 	}

@@ -238,10 +238,12 @@ func (d *Driver) Create(id, parent, mountLabel string, storageOpt map[string]str
 	if err != nil {
 		return err
 	}
-	//建一个镜像层的独有目录，但是不懂为何要做两次这个动作
+
+	//path.Dir(dir)返回除最后一个子目录外的所有路径
 	if err := idtools.MkdirAllAs(path.Dir(dir), 0700, rootUID, rootGID); err != nil {
 		return err
 	}
+	//建一个镜像层的独有目录
 	if err := idtools.MkdirAs(dir, 0700, rootUID, rootGID); err != nil {
 		return err
 	}
@@ -273,6 +275,7 @@ func (d *Driver) Create(id, parent, mountLabel string, storageOpt map[string]str
 	//如果父镜像层有root目录，将会被覆盖？
 	parentRoot := path.Join(parentDir, "root")
 
+	//如果父层的root存在，则
 	if s, err := os.Lstat(parentRoot); err == nil {
 
 		if err := idtools.MkdirAs(path.Join(dir, "upper"), s.Mode(), rootUID, rootGID); err != nil {
@@ -403,7 +406,7 @@ func (d *Driver) ApplyDiff(id string, parent string, diff archive.Reader) (size 
 		return 0, ErrApplyDiffFallback
 	}
 	logrus.Debugf("Applied tar on parent：%s",parent)
-	//只有有父镜像层的才会继续往下执行
+	//只有父镜像层存在的的才会继续往下执行
 	parentRootDir := path.Join(d.dir(parent), "root")
 	if _, err := os.Stat(parentRootDir); err != nil {
 		return 0, ErrApplyDiffFallback
@@ -434,13 +437,14 @@ func (d *Driver) ApplyDiff(id string, parent string, diff archive.Reader) (size 
 	}()
 
 	//tmproot指向了父镜像层的root
+	//将所有位于下层的内容都硬链接到“下层目录”中
 	if err = copyDir(parentRootDir, tmpRootDir, copyHardlink); err != nil {
 		return 0, err
 	}
 
 	options := &archive.TarOptions{UIDMaps: d.uidMaps, GIDMaps: d.gidMaps}
 	//最终调用applyLayerHandler，实现在docker\docker\pkg\chrootarchive\diff_unix.go
-	//
+	//为何去覆盖父层呢
 	if size, err = graphdriver.ApplyUncompressedLayer(tmpRootDir, diff, options); err != nil {
 		return 0, err
 	}
